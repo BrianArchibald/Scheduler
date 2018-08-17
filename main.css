@@ -96,9 +96,16 @@ body {
 /*  Feature Section  */
 
 .features {
+	max-width: 900px;
+	margin: auto;
+	margin-bottom: 20vh;
+}
+
+.feature-examples {
 	display: flex;
-	flex-direction: column;
-	align-items: center;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
 	max-width: 900px;
     margin: auto;
 }
@@ -106,6 +113,7 @@ body {
 .feature-header-text {
 	font-size: 40px;
 	font-weight: 300;
+	text-align: center;
 }
 .feature-containers {
 	max-width: 350px;
@@ -117,9 +125,34 @@ body {
 	height: auto;
 	width: 100%;
 }
+.feature-title {
+	text-align: center;
+}
 .create-schedule {
-	margin-left: -35vh;
+	margin-right: 22vh;
 }
 .set-time {
-	margin-right: -35vh;
+	margin-right: 22vh;
+}
+
+/* Additional Features */
+
+.additional-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	max-width: 900px;
+	justify-content: center;
+	margin: auto;
+}
+.additional-feature {
+	max-width: 350px;
+	padding: 5vh;
+
+}
+.additional-feature p{
+	text-align: center;
+}
+.fa {
+	margin-left: 47%;
 }
