@@ -186,3 +186,92 @@ body {
 	margin-left: 13px;
 	color: white;
 }
+
+/* Sign Up Page */
+#wrapper-signup {
+	
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.header-signup {
+	width: 400px;
+	text-align: center;
+	
+}
+.signup-header-text {
+	font-size: 28px;
+	font-weight: 300;
+}
+.signup-boxes {
+	width: 400px;
+	margin-top: 30px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+.signup-form {
+	display: flex;
+	flex-direction: column;
+	width: 290px;
+
+}
+.signup-bottom-text {
+	text-align: center;
+	font-size: 13px;
+}
+.signup-inputs{
+	width: 92%;
+	padding: 9px;
+	margin: 10px;
+	align-self: center;
+}
+.signup-button {
+	background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    margin: 20px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+}
+.signup-button:hover {
+	background-color: #77d97b;
+}
+
+/* Booking Page */
+
+.booking-wrapper {
+	max-width: 700px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.booking-button {
+	width: 110px;
+	height: 40px;
+	background-color: transparent;
+	cursor: pointer;
+	text-align: center;
+	font-size: 16px;
+	border: 1px solid rgb(204, 204, 204);
+	border-radius: 2px;
+	margin: 5px;
+
+}
+
+.booking-time {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+#DropDownTimezone {
+	width: 200px;
+}
