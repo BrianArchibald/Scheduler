@@ -7,6 +7,10 @@ body {
 }
 
 /* Nav Bar */
+.fa-cubes {
+	font-size: 40px;
+	color: #4c6896;
+}
 .nav-container {
 	height: 80px;
 	display: flex;
@@ -40,8 +44,8 @@ body {
 	justify-items: center;
 	list-style: none;
 	text-decoration: none;	
-	font-size: 15px;
-	grid-gap: 10px;
+	font-size: 14px;
+	grid-gap: 8px;
 }
 .nav-list-items {
 	color: #40454f;
@@ -52,12 +56,12 @@ body {
 }
 #nav-sign-up {
 	padding: 7px;
-	border: 1px solid #40454f;
+	border: 1px solid #4c6896;
 	border-radius: 5px;
 }
 #nav-sign-up:hover {
 	padding: 7px;
-	border: 2px solid #8c9199;
+	border: 2px solid #4c6896;
 	border-radius: 5px;
 }
 .mobile-nav-menu {
@@ -65,8 +69,12 @@ body {
 }
 
 /* Landing Page */
+.full-width-landing {
+	background-color: #f6f9fc;
 
+}
 .landing-page {
+	
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-gap: 70px;
@@ -78,29 +86,77 @@ body {
 .landing-left {
 	max-width: 350px;
 	max-height: 350px;
-	box-shadow: 0 8px 15px rgba(0,0,0,.1);
+	box-shadow: 5px 10px 15px rgba(0,0,0,.1);
     border-radius: 2px;
 }
-.landing-photo-container img{
-	height: auto;
+.landing-photo-container {
+	height: 100%;
 	width: 100%;
 }
+
+.landing-photo-container img{
+	object-fit: cover;
+	width: 350px;
+	height: 350px;
+	border-radius: 2px;
+}
+.landing-signup {
+	text-align: center;
+	line-height: 30px;
+}
 .landing-signup-header {
-	font-size: 35px;
+	font-size: 44px;
+	font-weight: 400;
+	color:  #47525D;
 }
 .landing-signup-text {
 	font-size: 17px;
+	color:  #47525D;
+}
+.landing-button {
+
+    background-color: #4c6896;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    cursor: pointer;
+}
+.landing-button:hover {
+	background-color: #658dce;
+}
+.google-signup {
+	background-color: #4c6896;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    cursor: pointer;
+}
+.google-signup:hover {
+	background-color: #658dce;
+
 }
 
 
-/*  Feature Section  */
 
+/*  Feature Section  */
 .features {
 	max-width: 900px;
 	margin: auto;
 	margin-bottom: 20vh;
 }
-
+.feature-header {
+	margin-top: 10vh;
+}
 .feature-examples {
 	display: flex;
 	flex-direction: row;
@@ -118,15 +174,24 @@ body {
 .feature-containers {
 	max-width: 350px;
 	max-height: 350px;
-	box-shadow: 0 8px 15px rgba(0,0,0,.1);
+	box-shadow: 5px 10px 15px rgba(0,0,0,.1);
+	border-radius: 2px;
 	margin-bottom: 15vh;
 }
-.feature-containers img {
-	height: auto;
+.feature-container-photo {
+	height: 100%;
 	width: 100%;
+}
+.feature-containers img {
+	object-fit: cover;
+	width: 350px;
+	height: 350px;
+	border-radius: 2px;
 }
 .feature-title {
 	text-align: center;
+	margin-bottom: 4vh;
+    font-size: 19px;
 }
 .create-schedule {
 	margin-right: 22vh;
@@ -136,7 +201,9 @@ body {
 }
 
 /* Additional Features */
-
+.full-width-additional {
+	background-color: #f6f9fc;
+}
 .additional-container {
 	display: flex;
 	flex-direction: row;
