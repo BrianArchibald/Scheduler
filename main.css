@@ -5,6 +5,9 @@
 body {
 	margin: 0;
 }
+ul {
+	list-style: none;
+}
 
 /* Nav Bar */
 .fa-cubes {
@@ -430,4 +433,39 @@ body {
 	align-items: center;
 	font-size: 16px;
 	
+}
+
+/* Main Page */
+
+.nav-container-main {
+	height: 80px;
+	display: flex;
+	justify-content: center;
+	box-shadow: 0 2px 4px 0 rgba(108, 108, 108, 0.15);
+	width: 100%;
+	right: 0;
+	left: 0;
+	top: 0;
+	position: sticky;
+	background-color: #fff;
+}
+.main-content-wrapper{
+	max-width: 1000px;
+	margin: auto;
+	padding-top: 10vh;
+}
+.link-list-container a:link, .scheduled-meetings-container a:link {
+	text-decoration: none;
+	color: #40454f;
+}
+.main-meeting-links	{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	border-bottom: 1px solid #cacaca;
+	padding-bottom: 2vh;
+}
+.scheduled-li-container {
+	display: grid;
+	grid-template-columns: .1fr .2fr .7fr;
 }
