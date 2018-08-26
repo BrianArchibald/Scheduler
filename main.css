@@ -125,7 +125,7 @@ body {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 5px 12px 0 rgba(0,0,0,0.2), 0 4px 15px 0 rgba(0,0,0,0.19);
     cursor: pointer;
 }
 .landing-button:hover {
@@ -140,7 +140,7 @@ body {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 5px 12px 0 rgba(0,0,0,0.2), 0 4px 15px 0 rgba(0,0,0,0.19);
     cursor: pointer;
 }
 .google-signup:hover {
@@ -264,11 +264,14 @@ body {
 }
 
 /* Sign Up Page */
+.signup-body {
+	margin: 0;
+	background-color: #f6f9fc;
+}
 #wrapper-signup {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	background-color: #f6f9fc;
 }
 .header-signup {
 	width: 400px;
@@ -322,7 +325,7 @@ body {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 5px 12px 0 rgba(0,0,0,0.2), 0 4px 15px 0 rgba(0,0,0,0.19);
     cursor: pointer;
     margin-top: 2vh;
 }
@@ -342,15 +345,21 @@ body {
     width: 100%;
     font-size: 16px;
     cursor: pointer;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 5px 12px 0 rgba(0,0,0,0.2), 0 4px 15px 0 rgba(0,0,0,0.19);
 }
 .signup-button:hover {
 	background-color: #658dce;
 }
 .footer-container-signup {
-	height: 70px
-	width: 100%;
-	background-color: #4c6896;
+	color: #4c6896;
+    margin-top: 5vh;
+    font-size: 14px;
+    letter-spacing: .2px;
+}
+.terms-conditions a:link{
+	text-decoration: none;
+	color: #786a00;
+
 }
 
 /* Booking Page */
