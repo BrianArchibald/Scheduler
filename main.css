@@ -113,6 +113,7 @@ body {
 .landing-signup-text {
 	font-size: 17px;
 	color:  #47525D;
+	font-weight: 400;
 }
 .landing-button {
 
@@ -215,7 +216,7 @@ body {
 .additional-feature {
 	max-width: 350px;
 	padding: 5vh;
-
+	text-align: center;
 }
 .additional-feature p{
 	text-align: center;
@@ -249,23 +250,29 @@ body {
 	text-decoration: none;
 	color: white;
 }
+.footer-items a:link:hover {
+	color: #babbbc;
+}
 .fab {
 	font-size: 20px;
 	margin-left: 13px;
 	color: white;
 }
 
+.fab:hover {
+	color: #babbbc;
+}
+
 /* Sign Up Page */
 #wrapper-signup {
-	
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	background-color: #f6f9fc;
 }
 .header-signup {
 	width: 400px;
 	text-align: center;
-	
 }
 .signup-header-text {
 	font-size: 28px;
@@ -279,6 +286,7 @@ body {
 	align-items: center;
 	border: 1px solid #ccc;
 	border-radius: 3px;
+	background-color: white;
 }
 .signup-form {
 	display: flex;
@@ -290,14 +298,40 @@ body {
 	text-align: center;
 	font-size: 13px;
 }
+.timezone p {
+	font-size: 14px;
+	margin-right: 18px;
+}
+#DropDownTimezone-signup {
+	width: 200px;
+	margin: 10px 0;
+	color: #6d6d6d;
+}
 .signup-inputs{
 	width: 92%;
 	padding: 9px;
 	margin: 10px;
 	align-self: center;
 }
+.signupbox-top .google-signup {
+	background-color: #4c6896;
+    border: none;
+    color: white;
+    padding: 3px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    cursor: pointer;
+    margin-top: 2vh;
+}
+.signupbox-top .google-signup:hover {
+	background-color: #658dce;
+}
+
 .signup-button {
-	background-color: #4CAF50;
+	background-color: #4c6896;;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -308,9 +342,15 @@ body {
     width: 100%;
     font-size: 16px;
     cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 .signup-button:hover {
-	background-color: #77d97b;
+	background-color: #658dce;
+}
+.footer-container-signup {
+	height: 70px
+	width: 100%;
+	background-color: #4c6896;
 }
 
 /* Booking Page */
@@ -349,6 +389,7 @@ body {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	justify-content: flex-end;
 }
 .timezone-selector {
 	margin-left: 10px;
@@ -379,8 +420,5 @@ body {
 	grid-template-columns: .2fr .8fr;
 	align-items: center;
 	font-size: 16px;
-	
-}
-.confirm-details {
 	
 }
