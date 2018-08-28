@@ -449,6 +449,9 @@ ul {
 	position: sticky;
 	background-color: #fff;
 }
+#main-home {
+	margin-left: 18px;
+}
 .main-content-wrapper{
 	max-width: 1000px;
 	margin: auto;
@@ -476,7 +479,7 @@ ul {
 .link-li-container {
 	display: grid;
 	grid-template-columns: .1fr .2fr .7fr;
-	margin: 4vh 0;
+	margin: 4vh 3.5vh 4vh 0;
 	border-bottom: 1px solid #cacaca;
 	padding-bottom: 2vh;
 }
@@ -491,7 +494,7 @@ ul {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	margin: 4vh 0;
+	margin: 4vh 3.5vh 4vh 0;
 	border-bottom: 1px solid #cacaca;
 	padding-bottom: 2vh;
 }
