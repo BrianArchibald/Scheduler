@@ -458,6 +458,14 @@ ul {
 	text-decoration: none;
 	color: #40454f;
 }
+.link-option-container {
+	justify-self: end;
+
+}
+.ind-link-options {
+	font-size: 16px;
+
+}
 .main-meeting-links	{
 	display: flex;
 	flex-direction: row;
@@ -465,7 +473,25 @@ ul {
 	border-bottom: 1px solid #cacaca;
 	padding-bottom: 2vh;
 }
-.scheduled-li-container {
+.link-li-container {
 	display: grid;
 	grid-template-columns: .1fr .2fr .7fr;
+	margin: 4vh 0;
+	border-bottom: 1px solid #cacaca;
+	padding-bottom: 2vh;
+}
+.scheduled-header {
+	margin-top: 8vh;
+	border-bottom: 1px solid #cacaca;
+}
+.scheduled-title {
+	margin-bottom: 5vh;
+}
+.scheduled-meetings-list {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin: 4vh 0;
+	border-bottom: 1px solid #cacaca;
+	padding-bottom: 2vh;
 }
