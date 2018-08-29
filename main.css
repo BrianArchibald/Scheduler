@@ -224,9 +224,6 @@ ul {
 .additional-feature p{
 	text-align: center;
 }
-.fa {
-	margin-left: 47%;
-}
 
 /* Footer */
 
@@ -497,4 +494,36 @@ ul {
 	margin: 4vh 3.5vh 4vh 0;
 	border-bottom: 1px solid #cacaca;
 	padding-bottom: 2vh;
+}
+
+/*   Media Queries   */
+
+@media screen and (max-width: 933px) {
+	.main-nav {
+		display: grid;
+    	grid-template-columns: 1fr 1fr;
+	}
+	.fa-cubes {
+		margin-left: 5vh;
+	}
+	.landing-signup-header {
+		line-height: 1.1em;
+		margin-top: 0;
+	}
+}
+
+@media screen and (max-width: 783px) {
+	.landing-left {
+		margin-left: 3vh;
+	}
+	.landing-signup-header {
+	    font-size: 40px;
+	    
+	}
+	.feature-containers {
+        margin: 2vh 8vh 8vh 8vh;
+	}
+	.additional-feature {
+		padding: 3vh 3vh 0 3vh;
+	}
 }
