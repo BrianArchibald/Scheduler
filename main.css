@@ -498,7 +498,7 @@ ul {
 
 /*   Media Queries   */
 
-@media screen and (max-width: 933px) {
+@media screen and (max-width: 1013px) {
 	.main-nav {
 		display: grid;
     	grid-template-columns: 1fr 1fr;
@@ -509,6 +509,19 @@ ul {
 	.landing-signup-header {
 		line-height: 1.1em;
 		margin-top: 0;
+	}
+	.main-meeting-links {
+    	margin: 0 5vh;
+	}
+	.link-li-container {
+		margin: 4vh 5.5vh 4vh 0;
+	}
+	.scheduled-header {
+		margin-left: 5vh;
+		margin-right: 5vh;
+	}
+	.scheduled-meetings-list {
+	    margin: 4vh 5.5vh 4vh 0;
 	}
 }
 
@@ -526,4 +539,22 @@ ul {
 	.additional-feature {
 		padding: 3vh 3vh 0 3vh;
 	}
+}
+@media screen and (max-width: 393px) {
+	.main-meeting-links {
+	    display: flex;
+	    flex-direction: column;
+	    align-items: center;
+	}
+	.main-links-title {
+	    margin-top: -6vh;
+	    margin-bottom: 4vh;
+	}
+	.create-link {
+		margin-bottom: 4vh;
+	}
+	.link-li-container {
+    margin: 4vh 5vh 4vh 0;
+	}
+	
 }
