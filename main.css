@@ -69,6 +69,52 @@ ul {
 }
 .mobile-nav-menu {
 	display: none;
+
+	grid-template-columns: 3fr 2fr;
+	z-index: 100;
+	
+	align-items: center;
+	align-self: center;
+	max-width: 900px;
+	width: 100%;
+}
+.fa-bars {
+	font-size: 20px;
+	text-align: right;
+	color: #4c6896;
+}
+.mobile-nav-icon {
+	margin-right: 5vh;
+}
+
+/*  Mobile Nav */
+.mobile-nav {
+	display: none;
+	position: fixed;
+	width: 100%;
+	top: 0px;
+	z-index: 100;
+}
+.mobile-list {
+	background: #629238;
+	padding-top: 0px;
+	z-index: 100;
+    margin: 0px;
+    list-style-type: none;
+    font-family: Open Sans, sans-serif;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-align: center;
+    opacity: .85;
+}
+.nav-list-mobile {
+	text-decoration: none;
+	color: white;
+	padding: 8px 0px;
+    font-size: 16px;
+    border-bottom: solid 1px rgb(255, 255, 255, 0.85);
+    margin-left: -6vh;
 }
 
 /* Landing Page */
@@ -539,13 +585,17 @@ ul {
 	.additional-feature {
 		padding: 3vh 3vh 0 3vh;
 	}
-	.create-schedule, .set-time {
-    	margin-right: 0;
+}
+@media screen and (max-width: 697px) {
+	.mobile-nav-menu {
+		display: inline-block;
+		text-align: right;
 	}
-	.additional-feature {
-		padding: 1vh 5vh;
+	.nav-menu {
+		display: none;
 	}
 }
+
 @media screen and (max-width: 393px) {
 	.main-meeting-links {
 	    display: flex;
@@ -562,5 +612,5 @@ ul {
 	.link-li-container {
     margin: 4vh 5vh 4vh 0;
 	}
-
+	
 }
