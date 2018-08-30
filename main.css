@@ -539,6 +539,12 @@ ul {
 	.additional-feature {
 		padding: 3vh 3vh 0 3vh;
 	}
+	.create-schedule, .set-time {
+    	margin-right: 0;
+	}
+	.additional-feature {
+		padding: 1vh 5vh;
+	}
 }
 @media screen and (max-width: 393px) {
 	.main-meeting-links {
@@ -556,5 +562,5 @@ ul {
 	.link-li-container {
     margin: 4vh 5vh 4vh 0;
 	}
-	
+
 }
