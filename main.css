@@ -96,7 +96,7 @@ ul {
 	z-index: 100;
 }
 .mobile-list {
-	background: #629238;
+	background: #4c6896;
 	padding-top: 0px;
 	z-index: 100;
     margin: 0px;
@@ -115,6 +115,12 @@ ul {
     font-size: 16px;
     border-bottom: solid 1px rgb(255, 255, 255, 0.85);
     margin-left: -6vh;
+}
+.nav-active {
+	text-decoration: none;
+}
+#mobile-nav-signup {
+	color: #ffda4d;
 }
 
 /* Landing Page */
@@ -260,7 +266,6 @@ ul {
 	max-width: 900px;
 	justify-content: center;
 	margin: auto;
-	padding: 8vh 0;
 }
 .additional-feature {
 	max-width: 350px;
@@ -268,6 +273,14 @@ ul {
 	text-align: center;
 }
 .additional-feature p{
+	text-align: center;
+}
+
+/* Pricing Section */
+.full-width-pricing {
+	margin-bottom: 8vh;
+}
+.pricing-text {
 	text-align: center;
 }
 
@@ -576,11 +589,13 @@ ul {
 		margin-left: 3vh;
 	}
 	.landing-signup-header {
-	    font-size: 40px;
-	    
+	    font-size: 40px;  
 	}
 	.feature-containers {
         margin: 2vh 8vh 8vh 8vh;
+	}
+	.create-schedule, .set-time {
+		margin-right: 0;
 	}
 	.additional-feature {
 		padding: 3vh 3vh 0 3vh;
@@ -593,6 +608,16 @@ ul {
 	}
 	.nav-menu {
 		display: none;
+	}
+	.landing-page {
+		grid-template-columns: 1fr;
+		padding: 11vh 0 15vh 0;
+	}
+	.landing-left {
+		justify-self: center;
+	}
+	.landing-right {
+		grid-row-start: 1;
 	}
 }
 

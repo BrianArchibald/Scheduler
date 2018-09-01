@@ -1,5 +1,5 @@
 const nav = document.querySelector('.nav-container-main');
-const mobileNavIcon = document.querySelector('.moblie-nav-icon');
+const mobileNavIcon = document.querySelector('.mobile-nav-icon');
 const mobileNavList = document.querySelector('#mobile-nav');
 const closeMenu = document.querySelector('#close-menu');
 
@@ -10,7 +10,7 @@ function changeMobileNav() {
     mobileNavList.style.display = "block";
   } else {
     mobileNavIcon.style.display = "inline-block";
-    nav.style.display = "grid";
+    nav.style.display = "flex";
     mobileNavList.style.display = "none";
   }
 }

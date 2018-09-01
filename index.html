@@ -10,7 +10,8 @@
 </head>
 <body>
 	<div id="wrapper">
-		<div class="nav-container">
+		<!-- <div class="nav-container"> -->
+		<div class="nav-container-main">
 			<nav class="main-nav">
 				<div class="nav-logo">
 					<a href="index.html">
@@ -26,7 +27,7 @@
 							<a class="nav-menu-link nav-list-items" href="#">PRICING</a>	
 						</li>
 						<li>
-							<a class="nav-menu-link nav-list-items" id="nav-sign-up"" href="#">SIGN UP</a>
+							<a class="nav-menu-link nav-list-items" id="nav-sign-up" href="#">SIGN UP</a>
 						</li>
 						<li>
 							<a class="nav-menu-link nav-list-items" href="#">SIGN IN</a>	
@@ -34,10 +35,44 @@
 					</ul>	
 				</div>
 				<div class="mobile-nav-menu">
-				<p>Mobile Menu</p>
+					<a class="mobile-nav-icon">
+						<i class="fa fa-bars" id="menu-icon" aria-hidden="true"></i> 
+					</a>
 				</div>
 			</nav>
 		</div>
+		<!-- Mobile Nav -->
+		<nav class="mobile-nav" id="mobile-nav">
+				<div class="mobile-menu" id="close-menu">
+					<ul class="mobile-list" id="mobile-list">
+						<li>
+							<a class="nav-active">
+								<div class="nav-list-mobile" class="close-menu">Close Menu</div>
+							</a>
+						</li>
+						<li>
+							<a class="nav-active" href="signup.html">
+								<div class="nav-list-mobile" id="mobile-nav-signup" class="close-menu">Sign Up</div>
+							</a>
+						</li>
+						<li>
+							<a class="nav-active" href="#">
+								<div class="nav-list-mobile" class="close-menu">Sign In</div>
+							</a>
+						</li>
+						<li>
+							<a class="nav-active" href="#">
+								<div class="nav-list-mobile" class="close-menu">Features</div>
+							</a>
+						</li>
+						<li>
+							<a class="nav-active" href="#">
+								<div class="nav-list-mobile" class="close-menu">Pricing</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav> 
 
 		<div class="full-width-landing">
 			<div class="landing-page">
@@ -97,6 +132,9 @@
 		</div> <!-- End of Features -->
 
 		<div class="full-width-additional">
+			<div class="feature-header">
+				<h2 class="feature-header-text">Features</h2>
+			</div>
 			<div class="additional-container">
 				<div class="additional-feature">
 					<h1><i class="fa fa-tasks"></i></h1>
@@ -125,7 +163,17 @@
 			</div>
 		</div> <!-- End of Additional Container -->
 
-		
+		<div class="full-width-pricing">
+			<div class="feature-header">
+				<h2 class="feature-header-text">Pricing</h2>
+			</div>
+			<div class="pricing">
+				<p class="pricing-text">All premium features are free at this time while in Beta.</p>
+				<p class="pricing-text">No monthly fees.</p>
+				<p class="pricing-text">Unlimited meetings.</p>
+				<p class="pricing-text">Unlimited meeting recipients.</p>
+			</div>
+		</div>
 		<div class="footer text-center">
 		    <div class="footer-container">
 		      <ul class="footer-items">
@@ -151,5 +199,6 @@
 		</div> 
 		
 	</div> <!--  End of Wrapper -->
+	<script type="text/javascript" src="index.js"></script>
 </body>
 </html>
