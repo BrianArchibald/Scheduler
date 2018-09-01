@@ -214,6 +214,9 @@ ul {
 .feature-header {
 	margin-top: 10vh;
 }
+.feature-section {
+	padding-top: 10vh;
+}
 .feature-examples {
 	display: flex;
 	flex-direction: row;
