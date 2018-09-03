@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="http://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler.css" 
     	type="text/css"> 
 
-    <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+    <script type="text/javascript" src="dhtmlx_scheduler_firestore.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
     <script>
       // Initialize Firebase
@@ -20,7 +22,19 @@
         messagingSenderId: "1041934999578"
       };
       firebase.initializeApp(config);
+
+
+// Initialize Cloud Firestore through Firebase
+    var db = firebase.firestore();
+    db.settings({ timestampsInSnapshots:true });
+
+    scheduler.firebase(db.collection("events"));
+    scheduler.firebaseStop();
     </script>
+
+
+
+
 	<script src="http://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler.js" 
     	type="text/javascript"></script>
 </head>
@@ -48,7 +62,12 @@
     }   
 </style>
 <script type="text/javascript">
-	scheduler.init('scheduler_here', new Date(),"month");
+
+	scheduler.init('scheduler_here', new Date(),"week");
+    //scheduler.load("apiUrl");
+ 
+    //var dp = new dataProcessor("apiUrl");
+    //dp.init(scheduler);
 </script>
 </body>
 </html>
