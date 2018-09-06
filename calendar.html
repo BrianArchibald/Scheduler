@@ -39,12 +39,12 @@
             <script>
             // Initialize Firebase
             var config = {
-            apiKey: "AIzaSyDJFbbPR1n6if3yX1giV8KvW_Pyq88aBKk",
-            authDomain: "calendar-c07dd.firebaseapp.com",
-            databaseURL: "https://calendar-c07dd.firebaseio.com",
-            projectId: "calendar-c07dd",
-            storageBucket: "calendar-c07dd.appspot.com",
-            messagingSenderId: "1041934999578"
+                apiKey: "AIzaSyDJFbbPR1n6if3yX1giV8KvW_Pyq88aBKk",
+                authDomain: "calendar-c07dd.firebaseapp.com",
+                databaseURL: "https://calendar-c07dd.firebaseio.com",
+                projectId: "calendar-c07dd",
+                storageBucket: "calendar-c07dd.appspot.com",
+                messagingSenderId: "1041934999578"
             };
             firebase.initializeApp(config);
             // Initialize Cloud Firestore through Firebase
@@ -52,7 +52,7 @@
             db.settings({ timestampsInSnapshots:true });
             scheduler.init('scheduler_here', new Date(),"week");
             scheduler.firebase(db.collection("events"));
-            
             </script>
+            <!--<script type="text/javascript" src="calendar.js"></script>-->
         </body>
     </html>

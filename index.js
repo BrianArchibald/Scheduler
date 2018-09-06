@@ -16,3 +16,4 @@ function changeMobileNav() {
 }
 mobileNavIcon.addEventListener('click', changeMobileNav);
 closeMenu.addEventListener('click', changeMobileNav);
+
