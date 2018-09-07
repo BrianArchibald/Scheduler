@@ -433,8 +433,11 @@ ul {
 	align-items: center;
 	margin: auto;
 }
+.booking-title, .booking-duration {
+	margin-bottom: 20px;
+}
 .booking-location {
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: 300;
 }
 
@@ -472,7 +475,7 @@ ul {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	margin-bottom: 20px;
+	margin-bottom: 60px;
 	border: 1px solid rgb(221, 221, 221);
 	border-radius: 2px;
 }
@@ -482,20 +485,23 @@ ul {
 	font-size: 13px;
 	background-color: rgb(238, 238, 238);
 }
+.booking-date-header {
+	margin-bottom: -40px;
+}
 .day-arrows {
 	display: flex;
 	flex-direction: row;
 	margin-bottom: 12px;
+}
+.day-arrows a:link {
+	color: #7d7d7d;
 }
 .fa-arrow-left .fa-arrow-right {
 	font-size: 16px;
 	color: blue;
 }
 .fa-arrow-left {
-	margin-right: 50%;
-}
-.fa-arrow-left {
-	text-align: right;
+	margin-right: 545px;
 }
 .booking-day-button {
 	background-color: white;
