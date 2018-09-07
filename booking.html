@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Booking Page</title>
 	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 </head>
 <body>
@@ -21,10 +22,75 @@
 			<button class="booking-time-button booking-button">90 min</button>
 			<button class="booking-time-button booking-button">120 min</button>
 		</div>
-		<div class="booking-date">
+		<div class="booking-date-header">
 			<h3>Date of Meeting</h1>
 		</div>
+		<div class="day-arrows">
+				<a href="#">
+				<i class="fas fa-arrow-left"></i>
+				</a>
+				<a href="#">
+				<i class="fas fa-arrow-right"></i>
+				</a>
+		</div>
+		<div class="booking-calendar">
+			<div class="booking-day">
+				<div class="booking-day-title">Mon</div>
+				<button class="booking-day-button">
+					<div class="booking-day-button-month">Sep</div>
+					<div class="booking-day-dayOfMonth">21</div>
+				</button>
+			</div>
+			<div class="booking-day">
+				<div class="booking-day-title">Tue</div>
+				<button class="booking-day-button">
+					<div class="booking-day-button-month">Sep</div>
+					<div class="booking-day-dayOfMonth">22</div>
+				</button>
+			</div>
+			<div class="booking-day">
+				<div class="booking-day-title">Wed</div>
+				<button class="booking-day-button">
+					<div class="booking-day-button-month">Sep</div>
+					<div class="booking-day-dayOfMonth">23</div>
+				</button>
+			</div>
+			<div class="booking-day">
+				<div class="booking-day-title">Thur</div>
+				<button class="booking-day-button">
+					<div class="booking-day-button-month">Sep</div>
+					<div class="booking-day-dayOfMonth">24</div>
+				</button>
+			</div>
+			<div class="booking-day">
+				<div class="booking-day-title">Fri</div>
+				<button class="booking-day-button">
+					<div class="booking-day-button-month">Sep</div>
+					<div class="booking-day-dayOfMonth">25</div>
+				</button>
+			</div>
+			<div class="booking-day">
+				<div class="booking-day-title">Sat</div>
+				<button class="booking-day-button">
+					<div class="booking-day-button-month">Sep</div>
+					<div class="booking-day-dayOfMonth">26</div>
+				</button>
+			</div>
+			<div class="booking-day">
+				<div class="booking-day-title">Sun</div>
+				<button class="booking-day-button">
+					<div class="booking-day-button-month">Sep</div>
+					<div class="booking-day-dayOfMonth">27</div>
+				</button>
+			</div>
+		</div>
+
+		<div class="booking-time-header">
+			<div class="booking-time-title">
+			<h3>Meeting Time</h3>
+			</div>
 		<div class="timezone">
+			<h5>Time Zone</h5>
 			<select name="DropDownTimezone" id="DropDownTimezone">
 			      <option value="-12.0">(GMT -12:00) Eniwetok, Kwajalein</option>
 			      <option value="-11.0">(GMT -11:00) Midway Island, Samoa</option>
@@ -59,7 +125,8 @@
 			      <option value="12.0">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</option>
 			</select>
 		</div>
-		
+		</div>
+
 		<div class="booking-time">
 			<button class="booking-time-selector booking-button">8:00am</button>
 			<button class="booking-time-selector booking-button">8:30am</button>

@@ -433,6 +433,10 @@ ul {
 	align-items: center;
 	margin: auto;
 }
+.booking-location {
+	font-size: 14px;
+	font-weight: 300;
+}
 
 .booking-button {
 	width: 110px;
@@ -442,16 +446,74 @@ ul {
 	text-align: center;
 	font-size: 16px;
 	border: 1px solid rgb(204, 204, 204);
-	border-radius: 2px;
+	border-radius: 3px;
 	margin: 5px;
-
 }
-
+.booking-time-button {
+	width: 120px;
+	height: 50px;
+	font-size: 18px;
+}
 .booking-time {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	width: 600px;
+}
+.booking-time-header{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.booking-time-title {
+	margin-right: 50px;
+}
+.booking-calendar {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-bottom: 20px;
+	border: 1px solid rgb(221, 221, 221);
+	border-radius: 2px;
+}
+.booking-day-title {
+	text-align: center;
+	padding: 12px;
+	font-size: 13px;
+	background-color: rgb(238, 238, 238);
+}
+.day-arrows {
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 12px;
+}
+.fa-arrow-left .fa-arrow-right {
+	font-size: 16px;
+	color: blue;
+}
+.fa-arrow-left {
+	margin-right: 50%;
+}
+.fa-arrow-left {
+	text-align: right;
+}
+.booking-day-button {
+	background-color: white;
+	cursor: pointer;
+	width: 71px; 
+	height: 71px;
+	border: none;
+	margin: 6px;
+}
+.booking-day-button:active {
+
+}
+.booking-day-button-month {
+	font-size: 13px;
+}
+.booking-day-dayOfMonth {
+	font-weight: 400;
+    font-size: 17px;
 }
 #DropDownTimezone {
 	width: 200px;
@@ -461,6 +523,10 @@ ul {
 	flex-direction: row;
 	align-items: center;
 	justify-content: flex-end;
+}
+.timezone h5 {
+	margin-right: 10px;
+	font-weight: 400;
 }
 .timezone-selector {
 	margin-left: 10px;
