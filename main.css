@@ -302,6 +302,7 @@ ul {
 .footer-items, .social-links {
 	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
 	list-style: none;
 }
 .footer-items li {
@@ -435,10 +436,20 @@ ul {
 }
 .booking-title, .booking-duration {
 	margin-bottom: 20px;
+	font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    color: #4c6896;
 }
 .booking-location {
-	font-size: 12px;
-	font-weight: 300;
+	font-size: 16px;
+    font-weight: 400;
+    color: #4c6896;
+    
+}
+.booking-location p {
+	padding-bottom: 5px;
+	border-bottom: 1px solid rgb(225, 231, 234);
 }
 
 .booking-button {
@@ -461,7 +472,8 @@ ul {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	width: 600px;
+	justify-content: center;
+	max-width: 600px;
 }
 .booking-time-header{
 	display: flex;
@@ -470,11 +482,14 @@ ul {
 }
 .booking-time-title {
 	margin-right: 50px;
+	color: #4c6896;
+	
+	
 }
 .booking-calendar {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	flex-wrap: wrap;
 	margin-bottom: 60px;
 	border: 1px solid rgb(221, 221, 221);
 	border-radius: 2px;
@@ -487,6 +502,7 @@ ul {
 }
 .booking-date-header {
 	margin-bottom: -40px;
+	color: #4c6896;
 }
 .day-arrows {
 	display: flex;
@@ -523,16 +539,21 @@ ul {
 }
 #DropDownTimezone {
 	width: 200px;
+	font-size: 12px;
+	border: none;
+	color: #4c6896;
 }
 .timezone {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: flex-end;
+	color: #4c6896;
 }
 .timezone h5 {
-	margin-right: 10px;
-	font-weight: 400;
+	margin-right: 5px;
+	font-weight: 700;
+	font-size: 12px;
 }
 .timezone-selector {
 	margin-left: 10px;
@@ -693,6 +714,27 @@ ul {
 	}
 	.landing-right {
 		grid-row-start: 1;
+	}
+}
+@media screen and (max-width: 595px) {
+	.booking-calendar {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+	.fa-arrow-left {
+    margin-right: 220px;
+	}
+	.booking-duration {
+    text-align: center;
+	}
+	.booking-time-header {
+    display: grid;
+    grid-template-rows: 1fr;
+	}
+	.booking-time-title {
+    text-align: center;
+    margin-right: 0;
+    margin-bottom: -20px;
 	}
 }
 
