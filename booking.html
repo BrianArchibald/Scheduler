@@ -167,7 +167,14 @@
 		db.collection("events").get().then(function (data) {
 			data.forEach(function (doc) {
 				// doc.data() is never undefined for query doc snapshots
+				console.log(doc.data().end_date);
+				console.log(doc.data().end_date.toDate());
 				console.log(doc.data().end_date.toDate().getMonth());
+				console.log(doc.data().end_date.toDate().getYear());
+				console.log(doc.data().end_date.toDate().getDay());
+
+				console.log(doc.data().end_date.toDate().getMinutes());
+				console.log(doc.data().end_date.toDate().getHours());
 			});
 		});
 	</script>
