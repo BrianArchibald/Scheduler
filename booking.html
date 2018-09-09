@@ -167,14 +167,36 @@
 		db.collection("events").get().then(function (data) {
 			data.forEach(function (doc) {
 				// doc.data() is never undefined for query doc snapshots
-				console.log(doc.data().end_date);
 				console.log(doc.data().end_date.toDate());
-				console.log(doc.data().end_date.toDate().getMonth());
-				console.log(doc.data().end_date.toDate().getYear());
-				console.log(doc.data().end_date.toDate().getDay());
+				console.log(doc.data().end_date.toDate().getMonth(), "month");
+				console.log(doc.data().end_date.toDate().getYear(), "year");
+				console.log(doc.data().end_date.toDate().getDay(), "day");
 
-				console.log(doc.data().end_date.toDate().getMinutes());
-				console.log(doc.data().end_date.toDate().getHours());
+				console.log(doc.data().end_date.toDate().getMinutes(), "mins");
+				console.log(doc.data().end_date.toDate().getHours(), "hours");
+
+
+
+
+				/// using where to get only db collection that meet certain criteria
+
+				// db.collection("cities").where("capital", "==", true)
+    // 			.get()
+    // 			.then(function(querySnapshot) {
+    //     		querySnapshot.forEach(function(doc) {
+    //         	// doc.data() is never undefined for query doc snapshots
+    //        		 console.log(doc.id, " => ", doc.data());
+    //     		});
+    // 		})
+    // 			.catch(function(error) {
+    //     		console.log("Error getting documents: ", error);
+    // 		});
+
+
+
+
+
+
 			});
 		});
 	</script>
