@@ -147,5 +147,29 @@
 		</div>
 
 	</div>
+	<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
+	<script>
+
+		var config = {
+			apiKey: "AIzaSyDJFbbPR1n6if3yX1giV8KvW_Pyq88aBKk",
+			authDomain: "calendar-c07dd.firebaseapp.com",
+			databaseURL: "https://calendar-c07dd.firebaseio.com",
+			projectId: "calendar-c07dd",
+			storageBucket: "calendar-c07dd.appspot.com",
+			messagingSenderId: "1041934999578"
+		};
+		firebase.initializeApp(config);
+		// Initialize Cloud Firestore through Firebase
+		var db = firebase.firestore();
+		db.settings({ timestampsInSnapshots: true });
+
+		db.collection("events").get().then(function (data) {
+			data.forEach(function (doc) {
+				// doc.data() is never undefined for query doc snapshots
+				console.log(doc.data().end_date.toDate().getMonth());
+			});
+		});
+	</script>
 </body>
 </html>
