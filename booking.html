@@ -164,33 +164,54 @@
 		var db = firebase.firestore();
 		db.settings({ timestampsInSnapshots: true });
 
+		const meetingTimes = [];
+
 		db.collection("events").get().then(function (data) {
 			data.forEach(function (doc) {
 				// doc.data() is never undefined for query doc snapshots
-				console.log(doc.data().end_date.toDate());
-				console.log(doc.data().end_date.toDate().getMonth(), "month");
-				console.log(doc.data().end_date.toDate().getYear(), "year");
-				console.log(doc.data().end_date.toDate().getDay(), "day");
 
-				console.log(doc.data().end_date.toDate().getMinutes(), "mins");
-				console.log(doc.data().end_date.toDate().getHours(), "hours");
+			console.log(doc.data().end_date.toDate());
+			console.log(doc.data().end_date.toDate().getMonth(), "month");
+			console.log(doc.data().end_date.toDate().getYear(), "year");
+			console.log(doc.data().end_date.toDate().getDay(), "end day - this isn't correct");
+			console.log(doc.data().start_date.toDate().getDay(), "start day - this isn't correct");
+			console.log(doc.data().end_date.toDate().getMinutes(), "mins");
+			console.log(doc.data().end_date.toDate().getHours(), "hours");
+			console.log(doc.data().start_date.toDate().getMinutes(), "start mins");
+			console.log(doc.data().start_date.toDate().getHours(), "start hours");
 
+
+			const meetingTimes = [];
+			meetingTimes.push(doc.data().end_date.toDate().getYear());
+			meetingTimes.push(doc.data().end_date.toDate().getMonth());
+			meetingTimes.push(doc.data().start_date.toDate().getDay());
+			meetingTimes.push(doc.data().start_date.toDate().getMinutes());
+			meetingTimes.push(doc.data().start_date.toDate().getHours());
+			meetingTimes.push(doc.data().end_date.toDate().getDay());
+			meetingTimes.push(doc.data().end_date.toDate().getMinutes());
+			meetingTimes.push(doc.data().end_date.toDate().getHours());
+
+			console.log(meetingTimes);
 
 
 
 				/// using where to get only db collection that meet certain criteria
+				// going to add a click event to the day button,
+				// and use "this", then with click event run the function below with .where
+				// dont need array above, use below to populate HTML on page.  
+				// where date == click event date ex..
 
-				// db.collection("cities").where("capital", "==", true)
-    // 			.get()
-    // 			.then(function(querySnapshot) {
-    //     		querySnapshot.forEach(function(doc) {
-    //         	// doc.data() is never undefined for query doc snapshots
-    //        		 console.log(doc.id, " => ", doc.data());
-    //     		});
-    // 		})
-    // 			.catch(function(error) {
-    //     		console.log("Error getting documents: ", error);
-    // 		});
+				db.collection("events").where("capital", "==", true)
+    			.get()
+    			.then(function(querySnapshot) {
+        		querySnapshot.forEach(function(doc) {
+            	// doc.data() is never undefined for query doc snapshots
+           		 console.log(doc.id, " => ", doc.data());
+        		});
+    		})
+    			.catch(function(error) {
+        		console.log("Error getting documents: ", error);
+    		});
 
 
 
