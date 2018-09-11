@@ -486,7 +486,7 @@ ul {
 	
 	
 }
-.booking-calendar {
+#booking-calendar {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -717,7 +717,7 @@ ul {
 	}
 }
 @media screen and (max-width: 595px) {
-	.booking-calendar {
+	#booking-calendar {
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
 	}

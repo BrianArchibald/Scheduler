@@ -147,6 +147,8 @@
 		</div>
 
 	</div>
+
+
 	<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
 	<script>
@@ -166,31 +168,17 @@
 
 		db.collection("events").get().then(function (data) {
 			data.forEach(function (doc) {
-				// doc.data() is never undefined for query doc snapshots
+			// doc.data() is never undefined for query doc snapshots
 
-			console.log(doc.data().end_date.toDate());
-			console.log(doc.data().end_date.toDate().getMonth(), "month");
-			console.log(doc.data().end_date.toDate().getYear(), "year");
-			console.log(doc.data().end_date.toDate().getDay(), "end day - this isn't correct");
-			console.log(doc.data().start_date.toDate().getDay(), "start day - this isn't correct");
-			console.log(doc.data().end_date.toDate().getMinutes(), "mins");
-			console.log(doc.data().end_date.toDate().getHours(), "hours");
-			console.log(doc.data().start_date.toDate().getMinutes(), "start mins");
-			console.log(doc.data().start_date.toDate().getHours(), "start hours");
-
-
-			// const meetingTimes = [];
-			// meetingTimes.push(doc.data().end_date.toDate().getYear());
-			// meetingTimes.push(doc.data().end_date.toDate().getMonth());
-			// meetingTimes.push(doc.data().start_date.toDate().getDay());
-			// meetingTimes.push(doc.data().start_date.toDate().getMinutes());
-			// meetingTimes.push(doc.data().start_date.toDate().getHours());
-			// meetingTimes.push(doc.data().end_date.toDate().getDay());
-			// meetingTimes.push(doc.data().end_date.toDate().getMinutes());
-			// meetingTimes.push(doc.data().end_date.toDate().getHours());
-
-			// console.log(meetingTimes);
-
+			// console.log(doc.data().end_date.toDate());
+			// console.log(doc.data().end_date.toDate().getMonth(), "month");
+			// console.log(doc.data().end_date.toDate().getYear(), "year");
+			// console.log(doc.data().end_date.toDate().getDay(), "end day - this isn't correct");
+			// console.log(doc.data().start_date.toDate().getDay(), "start day - this isn't correct");
+			// console.log(doc.data().end_date.toDate().getMinutes(), "mins");
+			// console.log(doc.data().end_date.toDate().getHours(), "hours");
+			// console.log(doc.data().start_date.toDate().getMinutes(), "start mins");
+			// console.log(doc.data().start_date.toDate().getHours(), "start hours");
 
 
 				/// using where to get only db collection that meet certain criteria
@@ -199,17 +187,19 @@
 				// dont need array above, use below to populate HTML on page.  
 				// where date == click event date ex..
 
-				db.collection("events").where("capital", "==", true)
-    			.get()
-    			.then(function(querySnapshot) {
-        		querySnapshot.forEach(function(doc) {
-            	// doc.data() is never undefined for query doc snapshots
-           		 console.log(doc.id, " => ", doc.data());
-        		});
-    		})
-    			.catch(function(error) {
-        		console.log("Error getting documents: ", error);
-    		});
+
+
+				// db.collection("events").where("capital", "==", true)
+    // 			.get()
+    // 			.then(function(querySnapshot) {
+    //     		querySnapshot.forEach(function(doc) {
+    //         	// doc.data() is never undefined for query doc snapshots
+    //        		 console.log(doc.id, " => ", doc.data());
+    //     		});
+    // 		})
+    		// 	.catch(function(error) {
+      //   		console.log("Error getting documents: ", error);
+    		// });
 
 
 
@@ -240,7 +230,6 @@
 			//let mm = today.getMonth()+1; 
 			let yyyy = today.getFullYear();
 			let weekday = today.getDay();
-
 			// if(dd<10) {
 			//     dd = '0'+dd
 			// } 
@@ -250,14 +239,26 @@
 			today = mm + '/' + dd + '/' + yyyy;
 			console.log("today is " + today + " and it is " + weekday);
 
+			function getDayOfWeek() {
+		    let d = new Date();
+		    let weekDay = new Array(7);
+		    weekday[0] = "Sunday";
+		    weekday[1] = "Monday";
+		    weekday[2] = "Tuesday";
+		    weekday[3] = "Wednesday";
+		    weekday[4] = "Thursday";
+		    weekday[5] = "Friday";
+		    weekday[6] = "Saturday";
+
+		    let newDay = weekday[d.getDay()];
+		    document.getElementById("demo").innerHTML = n;
 
 
 			// load the days of the week onload to current week
 
 			let weekHtml = "";
 
-			//run weekHtml 7 times to populate the week calendar
-
+			//run weekHtml 7 times to populate the week calendar - need to do this
 
 			weekHtml +=
 				`
@@ -269,7 +270,7 @@
 						</button>
 				</div>
 				`
-
+			document.getElementsByClassName("booking-day").innerHTML = weekHtml
 	</script>
 </body>
 </html>
