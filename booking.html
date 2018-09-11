@@ -33,7 +33,7 @@
 				<i class="fas fa-arrow-right"></i>
 				</a>
 		</div>
-		<div class="booking-calendar">
+		<div id="booking-calendar">
 			<div class="booking-day">
 				<div class="booking-day-title">Mon</div>
 				<button class="booking-day-button">
@@ -164,8 +164,6 @@
 		var db = firebase.firestore();
 		db.settings({ timestampsInSnapshots: true });
 
-		const meetingTimes = [];
-
 		db.collection("events").get().then(function (data) {
 			data.forEach(function (doc) {
 				// doc.data() is never undefined for query doc snapshots
@@ -181,17 +179,17 @@
 			console.log(doc.data().start_date.toDate().getHours(), "start hours");
 
 
-			const meetingTimes = [];
-			meetingTimes.push(doc.data().end_date.toDate().getYear());
-			meetingTimes.push(doc.data().end_date.toDate().getMonth());
-			meetingTimes.push(doc.data().start_date.toDate().getDay());
-			meetingTimes.push(doc.data().start_date.toDate().getMinutes());
-			meetingTimes.push(doc.data().start_date.toDate().getHours());
-			meetingTimes.push(doc.data().end_date.toDate().getDay());
-			meetingTimes.push(doc.data().end_date.toDate().getMinutes());
-			meetingTimes.push(doc.data().end_date.toDate().getHours());
+			// const meetingTimes = [];
+			// meetingTimes.push(doc.data().end_date.toDate().getYear());
+			// meetingTimes.push(doc.data().end_date.toDate().getMonth());
+			// meetingTimes.push(doc.data().start_date.toDate().getDay());
+			// meetingTimes.push(doc.data().start_date.toDate().getMinutes());
+			// meetingTimes.push(doc.data().start_date.toDate().getHours());
+			// meetingTimes.push(doc.data().end_date.toDate().getDay());
+			// meetingTimes.push(doc.data().end_date.toDate().getMinutes());
+			// meetingTimes.push(doc.data().end_date.toDate().getHours());
 
-			console.log(meetingTimes);
+			// console.log(meetingTimes);
 
 
 
@@ -219,7 +217,59 @@
 
 
 			});
+
 		});
+
+			const dayCalendar = document.getElementById('booking-calendar');
+			//const dayButtons = document.getElementsByClassName('booking-day');
+			const timeButtons = document.getElementsByClassName('booking-time');
+
+			dayCalendar.addEventListener('click', dayBtnClicked);
+			
+
+			function dayBtnClicked (event) {
+				console.log("clicked");
+				console.log(event.target);	
+			}
+		
+			// get the current date/time
+			let today = new Date(),
+				locale = "en-us",
+				mm = today.toLocaleString(locale, {month: "short"});
+			let dd = today.getDate();
+			//let mm = today.getMonth()+1; 
+			let yyyy = today.getFullYear();
+			let weekday = today.getDay();
+
+			// if(dd<10) {
+			//     dd = '0'+dd
+			// } 
+			// if(mm<10) {
+			//     mm = '0'+mm
+			// } 
+			today = mm + '/' + dd + '/' + yyyy;
+			console.log("today is " + today + " and it is " + weekday);
+
+
+
+			// load the days of the week onload to current week
+
+			let weekHtml = "";
+
+			//run weekHtml 7 times to populate the week calendar
+
+
+			weekHtml +=
+				`
+				<div class="booking-day">
+					<div class="booking-day-title">Mon</div>
+						<button class="booking-day-button">
+							<div class="booking-day-button-month">${mm}</div>
+							<div class="booking-day-dayOfMonth">${dd}</div>
+						</button>
+				</div>
+				`
+
 	</script>
 </body>
 </html>
