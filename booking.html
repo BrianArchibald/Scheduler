@@ -218,11 +218,7 @@
 
 
 
-
-
-
 			});
-			
 
 		});
 
@@ -246,9 +242,19 @@
 
 
 				// 2 call db for that date
-				// let currentDateReq = db.collection('events');
-				// let query = currentDateReq.where('')
 
+				// let currentDateReq = db.collection('events');
+				// let query = currentDateReq.where('start_date', "==", ??date clicked??)
+					// .get()
+					// .then(function(querySnapshot) {
+				 //        querySnapshot.forEach(function(doc) {
+				 //            // doc.data() is never undefined for query doc snapshots
+				 //            console.log(doc.id, " => ", doc.data());
+				 //        });
+				 //    })
+				 //    .catch(function(error) {
+				 //        console.log("Error getting documents: ", error);
+				 //    });
 
 
 				// 3 determine all start and end times for that date
@@ -295,8 +301,6 @@
 			// load the days of the week onload to current week
 			// 
 
-
-
 			let weekHtml = "";
 
 			//run weekHtml 7 times to populate the week calendar - need to do this
@@ -310,8 +314,15 @@
 							<div class="booking-day-dayOfMonth">${dd}</div>
 						</button>
 				</div>
-				`
+				`;
 			document.getElementsByClassName("booking-day").innerHTML = weekHtml
+
+
+
+
+
+
+			
 	</script>
 </body>
 </html>
