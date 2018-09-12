@@ -166,25 +166,40 @@
 		var db = firebase.firestore();
 		db.settings({ timestampsInSnapshots: true });
 
+		let entireStartDate = '';
+
 		db.collection("events").get().then(function (data) {
 			data.forEach(function (doc) {
 			// doc.data() is never undefined for query doc snapshots
 
+
 			// console.log(doc.data().end_date.toDate());
 			// console.log(doc.data().end_date.toDate().getMonth(), "month");
 			// console.log(doc.data().end_date.toDate().getYear(), "year");
-			// console.log(doc.data().end_date.toDate().getDay(), "end day - this isn't correct");
-			// console.log(doc.data().start_date.toDate().getDay(), "start day - this isn't correct");
-			// console.log(doc.data().end_date.toDate().getMinutes(), "mins");
-			// console.log(doc.data().end_date.toDate().getHours(), "hours");
-			// console.log(doc.data().start_date.toDate().getMinutes(), "start mins");
-			// console.log(doc.data().start_date.toDate().getHours(), "start hours");
+			console.log(doc.data().end_date.toDate().getDay(), "day of week start ");
+			console.log(doc.data().start_date.toDate().getDay(), "day of week end ");
+			console.log(doc.data().start_date.toDate(), "start date");
+			console.log(doc.data().end_date.toDate(), "end date");
+			console.log(doc.data().end_date.toDate().toISOString(), "Iso string");
+
+			
+			
 
 
-				/// using where to get only db collection that meet certain criteria
+			let startDate = doc.data().end_date.toDate().toString().slice(7, 10);
+			let endDate = doc.data().start_date.toDate().toString().slice(7, 10);
+			console.log(startDate + " =start date" , endDate + " =end date");
+			
+			console.log(doc.data().start_date.toDate().getMinutes(), "start mins");
+			console.log(doc.data().start_date.toDate().getHours(), "start hours");
+			console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
+			console.log(doc.data().end_date.toDate().getHours(), " end hours");
+			
+
+
+				// using where to get only db collection that meet certain criteria
 				// going to add a click event to the day button,
 				// and use "this", then with click event run the function below with .where
-				// dont need array above, use below to populate HTML on page.  
 				// where date == click event date ex..
 
 
@@ -207,8 +222,11 @@
 
 
 			});
+			
 
 		});
+
+
 
 			const dayCalendar = document.getElementById('booking-calendar');
 			//const dayButtons = document.getElementsByClassName('booking-day');
@@ -219,9 +237,28 @@
 
 			function dayBtnClicked (event) {
 				console.log("clicked");
-				console.log(event.target);	
+				console.log(event.target);
+				// populate time buttons for the day that was clicked
+
+				// 1 figure out what date was clicked
+				//		it could be the day, month, or number
+
+
+
+				// 2 call db for that date
+				// let currentDateReq = db.collection('events');
+				// let query = currentDateReq.where('')
+
+
+
+				// 3 determine all start and end times for that date
+
+				// 4 create html buttons for times between start and end times
+
+
+			
 			}
-		
+
 			// get the current date/time
 			let today = new Date(),
 				locale = "en-us",
@@ -240,21 +277,25 @@
 			console.log("today is " + today + " and it is " + weekday);
 
 			function getDayOfWeek() {
-		    let d = new Date();
-		    let weekDay = new Array(7);
-		    weekday[0] = "Sunday";
-		    weekday[1] = "Monday";
-		    weekday[2] = "Tuesday";
-		    weekday[3] = "Wednesday";
-		    weekday[4] = "Thursday";
-		    weekday[5] = "Friday";
-		    weekday[6] = "Saturday";
+			    let d = new Date();
+			    let weekDay = new Array(7);
+			    weekday[0] = "Sun";
+			    weekday[1] = "Mon";
+			    weekday[2] = "Tue";
+			    weekday[3] = "Wed";
+			    weekday[4] = "Thur";
+			    weekday[5] = "Fri";
+			    weekday[6] = "Sat";
 
 		    let newDay = weekday[d.getDay()];
-		    document.getElementById("demo").innerHTML = n;
-
+		    //document.getElementsByClass("booking-day-title")[0].innerHTML = newDay;
+		    console.log(newDay);
+			}
 
 			// load the days of the week onload to current week
+			// 
+
+
 
 			let weekHtml = "";
 
