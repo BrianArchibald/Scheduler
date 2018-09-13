@@ -180,9 +180,20 @@
 			console.log(doc.data().start_date.toDate().getDay(), "day of week end ");
 			console.log(doc.data().start_date.toDate(), "start date");
 			console.log(doc.data().end_date.toDate(), "end date");
-			console.log(doc.data().end_date.toDate().toISOString(), "Iso string");
+			console.log(doc.data().start_date.toDate().toISOString(), "Iso string start date");
+			console.log(doc.data().end_date.toDate().toISOString(), "Iso string end date");
 
-			
+			let isoDateStart = doc.data().start_date.toDate().toISOString();
+			let isoDateEnd = doc.data().end_date.toDate().toISOString();
+			let milliseconds = ((new Date(isoDateEnd)) - (new Date(isoDateStart)));
+
+			let totalMinutes = milliseconds / (60000);
+			let totalScheduleBoxes = totalMinutes / 30;
+			console.log(totalMinutes, "totalMinutes");
+			console.log(totalScheduleBoxes, "total Boxes");
+
+
+
 			
 
 
@@ -248,7 +259,7 @@
 					// .get()
 					// .then(function(querySnapshot) {
 				 //        querySnapshot.forEach(function(doc) {
-				 //            // doc.data() is never undefined for query doc snapshots
+				 //            //  doc.data() is never undefined for query doc snapshots
 				 //            console.log(doc.id, " => ", doc.data());
 				 //        });
 				 //    })
@@ -259,7 +270,21 @@
 
 				// 3 determine all start and end times for that date
 
+
+
 				// 4 create html buttons for times between start and end times
+
+				// 1st button = start hour + start min
+					// of start min > 0 && < 30 (
+					// 	1st button = start hour + start min = 30)
+					
+				// 	if start min > 30 (
+				// 		1st button = start hour + 1 + start min = 0)
+
+				// following buttons are 1st button + 30 mins
+
+				// last button - if last button is < end date (last button = none)
+
 
 
 			

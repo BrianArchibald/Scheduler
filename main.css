@@ -559,6 +559,17 @@ ul {
 	margin-left: 10px;
 }
 
+/* Booking Page Modal */
+
+.pre-confirm-modal {
+	max-width: 550px;
+	margin: auto;
+}
+.pre-confirm-title-text {
+	text-align: center;
+}
+
+
 /* Confirmation Page */
 .confirm-title {
 	text-align: center;
