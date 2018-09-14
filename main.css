@@ -564,18 +564,53 @@ ul {
 .pre-confirm-modal {
 	max-width: 550px;
 	margin: auto;
+	margin-top: 20vh;
 }
 .pre-confirm-title-text {
+	padding-bottom: 10px;
+	font-size: 18px;
 	text-align: center;
+	border-bottom: 1px solid #adacac;
+}
+.pre-confirm-time {
+	color: #004fd2;
+}
+.pre-confirm-time, .pre-confirm-header-text {
+	text-align: center;
+	margin: 20px 0;
+}
+.pre-confirm-header-text {
+	font-size: 14px;
+}
+.pre-confirm-buttons {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+.pre-confirm-buttons button {
+	width: 150px;
+}
+#pre-confirm-cancel-button {
+	background-color: #d4d4d4;
+	margin-left: 15px
 }
 
 
 /* Confirmation Page */
 .confirm-title {
 	text-align: center;
-	margin: 18vh 0;
+	font-size: 18px;
+	margin: 10vh 0;
+	color: #004fd2;
 }
-
+.scheduled-title {
+	font-size: 16px;
+}
+.confirm-details .fas {
+	font-size: 14px;
+	color: #004fd2;
+	text-align: center;
+}
 .confirmation-info-container {
 	display: flex;
 	flex-direction: column;
