@@ -143,10 +143,34 @@
 			<button class="booking-time-selector booking-button">3:00pm</button>
 			<button class="booking-time-selector booking-button">3:30pm</button>
 			<button class="booking-time-selector booking-button">4:00pm</button>
-
 		</div>
-
 	</div>
+
+	<!-- Modal Window after all selections are made -->
+
+	<div class="pre-confirm-modal" id="booking-modal">
+		<div class="pre-confirm-title">
+			<p class="pre-confirm-title-text">Confirm Your Meeting with <span id="meeting-owener">Brian</span></p>
+		</div>
+		<div class="pre-confirm-time">
+			September 21, 2018 8:30 AM.
+		</div>
+		<div class="pre-confirm-header-text">
+			Both you and <span id="meeting-owener">Brian</span> will get a confirmation email with all the details after you click submit.
+		</div>
+		<div class="pre-confirm-inputs">
+			<input type="text" class="signup-inputs" placeholder="Name" name="first-name" required>
+			<input type="text" class="signup-inputs" placeholder="Email" name="email" required>
+		</div>
+		<div class="pre-confirm-buttons">
+			<button type="submit" class="signup-button">Submit</button>
+			<button type="cancel" class="signup-button" id="pre-confirm-cancel-button">Cancel</button> 
+		</div>
+	</div>
+
+
+
+
 
 
 	<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase-app.js"></script>
@@ -247,12 +271,12 @@
 				console.log(event.target);
 				// populate time buttons for the day that was clicked
 
-				// 1 figure out what date was clicked
+// 1 figure out what date was clicked
 				//		it could be the day, month, or number
 
 
 
-				// 2 call db for that date
+// 2 call db for that date
 
 				// let currentDateReq = db.collection('events');
 				// let query = currentDateReq.where('start_date', "==", ??date clicked??)
@@ -268,11 +292,9 @@
 				 //    });
 
 
-				// 3 determine all start and end times for that date
+// 3 determine all start and end times for that date
 
-
-
-				// 4 create html buttons for times between start and end times
+// 4 create html buttons for times between start and end times
 
 				// 1st button = start hour + start min
 					// of start min > 0 && < 30 (
@@ -284,7 +306,8 @@
 				// following buttons are 1st button + 30 mins
 
 				// last button - if last button is < end date (last button = none)
-
+				// use for loop to get all the buttons 
+				// for(let = startDate; i < endDate; i + 30)
 
 
 			
@@ -322,8 +345,7 @@
 		    //document.getElementsByClass("booking-day-title")[0].innerHTML = newDay;
 		    console.log(newDay);
 			}
-
-			// load the days of the week onload to current week
+// 1  load the days of the week onload to current week
 			// 
 
 			let weekHtml = "";
@@ -340,14 +362,9 @@
 						</button>
 				</div>
 				`;
-			document.getElementsByClassName("booking-day").innerHTML = weekHtml
-
-
-
-
-
-
-			
+			document.getElementsByClassName("booking-day").innerHTML = weekHtml	
+				
 	</script>
+	<script type="text/javascript" src="booking.js"></script>
 </body>
 </html>

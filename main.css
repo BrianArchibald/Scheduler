@@ -562,9 +562,17 @@ ul {
 /* Booking Page Modal */
 
 .pre-confirm-modal {
+	display: none;
+	position: fixed;
+	z-index: 999;
+	left: 0;
+	top: 0;
 	max-width: 550px;
 	margin: auto;
 	margin-top: 20vh;
+	overflow: auto;
+	background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
 }
 .pre-confirm-title-text {
 	padding-bottom: 10px;
