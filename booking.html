@@ -194,21 +194,35 @@
 		db.settings({ timestampsInSnapshots: true });
 
 		let entireStartDate = '';
+		//setting the data in the db
+		db.collection("events").set({
+		    startDate: start_date.toDate().toString().slice(7, 10),
+		    endDate: end_date.toDate().toString().slice(7, 10),
+		    month: end_date.toDate().getMonth(),
+		    year: "some year"
+		})
+		.then(function() {
+		    console.log("Document successfully written!");
+		})
+		.catch(function(error) {
+		    console.error("Error writing document: ", error);
+		});
+
 
 		db.collection("events").get().then(function (data) {
 			data.forEach(function (doc) {
 				// doc.data() is never undefined for query doc snapshots
 
 
-				// console.log(doc.data().end_date.toDate());
-				// console.log(doc.data().end_date.toDate().getMonth(), "month");
-				// console.log(doc.data().end_date.toDate().getYear(), "year");
-				// console.log(doc.data().end_date.toDate().getDay(), "day of week start ");
-				// console.log(doc.data().start_date.toDate().getDay(), "day of week end ");
-				// console.log(doc.data().start_date.toDate(), "start date");
-				// console.log(doc.data().end_date.toDate(), "end date");
-				// console.log(doc.data().start_date.toDate().toISOString(), "Iso string start date");
-				// console.log(doc.data().end_date.toDate().toISOString(), "Iso string end date");
+				console.log(doc.data().end_date.toDate());
+				console.log(doc.data().end_date.toDate().getMonth(), "month");
+				console.log(doc.data().end_date.toDate().getYear(), "year");
+				console.log(doc.data().end_date.toDate().getDay(), "day of week start ");
+				console.log(doc.data().start_date.toDate().getDay(), "day of week end ");
+				console.log(doc.data().start_date.toDate(), "start date");
+				console.log(doc.data().end_date.toDate(), "end date");
+				console.log(doc.data().start_date.toDate().toISOString(), "Iso string start date");
+				console.log(doc.data().end_date.toDate().toISOString(), "Iso string end date");
 
 				let isoDateStart = doc.data().start_date.toDate().toISOString();
 				let isoDateEnd = doc.data().end_date.toDate().toISOString();
@@ -216,18 +230,18 @@
 
 				let totalMinutes = milliseconds / (60000);
 				let totalScheduleBoxes = totalMinutes / 30;
-				// console.log(totalMinutes, "totalMinutes");
-				// console.log(totalScheduleBoxes, "total Boxes");
+				console.log(totalMinutes, "totalMinutes");
+				console.log(totalScheduleBoxes, "total Boxes");
 
 
-				let startDate = doc.data().end_date.toDate().toString().slice(7, 10);
-				let endDate = doc.data().start_date.toDate().toString().slice(7, 10);
-				// console.log(startDate + " =start date", endDate + " =end date");
+				let endDate = doc.data().end_date.toDate().toString().slice(7, 10);
+				let startDate = doc.data().start_date.toDate().toString().slice(7, 10);
+				console.log(startDate + " =start date", endDate + " =end date");
 
-				// console.log(doc.data().start_date.toDate().getMinutes(), "start mins");
-				// console.log(doc.data().start_date.toDate().getHours(), "start hours");
-				// console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
-				// console.log(doc.data().end_date.toDate().getHours(), " end hours");
+				console.log(doc.data().start_date.toDate().getMinutes(), "start mins");
+				console.log(doc.data().start_date.toDate().getHours(), "start hours");
+				console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
+				console.log(doc.data().end_date.toDate().getHours(), " end hours");
 
 
 				// using where to get only db collection that meet certain criteria
@@ -300,86 +314,45 @@
 			// last button - if last button is < end date (last button = none)
 			// use for loop to get all the buttons 
 			// for(let = startDate; i < endDate; i + 30)
-
 		}
 
-	
-		
-		// 1  load the days of the week onload to current week
-
-		// Create a function
-		// Run loop 7 times
-		// Calculate date and other stuff
-		// append the html in the weekHtml string
-		// at the end of the loop, change the inner html of the booking-calendar
 		let weekHtml = "";
+		const monthNames = ["Jan", "Feb", "Mar", "Apr", "May","Jun","Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
+
+		let d = new Date();
+		let weekday = new Array(7);
+			weekday[0] = "Sun";
+			weekday[1] = "Mon";
+			weekday[2] = "Tue";
+			weekday[3] = "Wed";
+			weekday[4] = "Thur";
+			weekday[5] = "Fri";
+			weekday[6] = "Sat";
+
+		let newDay = weekday[d.getDay()];
+		let currentYear = new Date().getFullYear();	
 		
 		window.onload = function initWeekCalendar () {
-
-		
 			for (let i = 0; i < 7; i++) {
-
-				let d = new Date();
-				let weekday = new Array(7);
-				weekday[0] = "Sun";
-				weekday[1] = "Mon";
-				weekday[2] = "Tue";
-				weekday[3] = "Wed";
-				weekday[4] = "Thur";
-				weekday[5] = "Fri";
-				weekday[6] = "Sat";
-
-				let newDay = weekday[d.getDay()];
 				
-				//document.getElementsByClass("booking-day-title")[0].innerHTML = newDay;
-				console.log(newDay, "newDay");
-
-
-
-			// 	let today = new Date(),
-			// 	locale = "en-us",
-			// 	mm = today.toLocaleString(locale, { month: "short" });
-			// let dd = today.getDate();
-			// let yyyy = today.getFullYear();
-			// let weekday = today.getDay(); 
-			// today = mm + '/' + dd + '/' + yyyy;
-			// console.log("today is " + today + " and it is " + weekday);
-
-			// console.log(today, "today");
-
-
-
 			Date.prototype.addDays = function(days) {
-			    var date = new Date(this.valueOf());
+			    let date = new Date(this.valueOf());
 			    date.setDate(date.getDate() + days);
 			    return date;
 			}
-
-			var date = new Date();
-
-			//console.log(date.addDays(i), "proto");
-			console.log(date.addDays(i).getDate());
-			var dayOfWeek = weekday[date.addDays(i).getDay()];
-
-			var monthDay = date.addDays(i).getMonth();
-			
-			//console.log(mm, "this is mm");
-				
-			var monthNames = ["Jan", "Feb", "Mar", "Apr", "May","Jun","Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
-			console.log(monthNames[monthDay]);
+			let date = new Date();
+			let dayOfWeek = weekday[date.addDays(i).getDay()];
+			let dayOfMonth = date.addDays(i).getMonth();
 				
 				weekHtml +=
-					`
-						<div class="booking-day">
+						`<div class="booking-day">
 							<div class="booking-day-title">${dayOfWeek}</div>
-								<button class="booking-day-button" data-date=${'data'}>
-									<div class="booking-day-button-month">${monthNames[monthDay]}</div>
+								<button class="booking-day-button" data-date=${date.addDays(i).getDate()} data-month=${monthNames[dayOfMonth]} data-year=${currentYear}>
+									<div class="booking-day-button-month">${monthNames[dayOfMonth]}</div>
 									<div class="booking-day-dayOfMonth">${date.addDays(i).getDate()}</div>
 								</button>
-						</div>
-						`;
+						</div>`;
 			}
-			console.log(weekHtml, 'test')
 			document.getElementById("booking-calendar").innerHTML = weekHtml;
 		}
 	</script>
