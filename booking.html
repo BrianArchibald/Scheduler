@@ -19,11 +19,11 @@
 		<div class="booking-location">
 			<p>Location:<span id="location"> Skype</span></p>
 		</div>
-		<div class="booking-duration">
-			<button class="booking-time-button booking-button">30 min</button>
-			<button class="booking-time-button booking-button">60 min</button>
-			<button class="booking-time-button booking-button">90 min</button>
-			<button class="booking-time-button booking-button">120 min</button>
+		<div class="booking-duration" id="booking-duration-container">
+			<button class="booking-time-button booking-button" id="30-min-button" onclick="addActiveClass()">30 min</button>
+			<button class="booking-time-button booking-button" id="60-min-button">60 min</button>
+			<button class="booking-time-button booking-button" id="90-min-button">90 min</button>
+			<button class="booking-time-button booking-button" id="120-min-button">120 min</button>
 		</div>
 		<div class="booking-date-header">
 			<h3>Date of Meeting
@@ -194,20 +194,8 @@
 		db.settings({ timestampsInSnapshots: true });
 
 		let entireStartDate = '';
-		//setting the data in the db
-		db.collection("events").set({
-		    startDate: start_date.toDate().toString().slice(7, 10),
-		    endDate: end_date.toDate().toString().slice(7, 10),
-		    month: end_date.toDate().getMonth(),
-		    year: "some year"
-		})
-		.then(function() {
-		    console.log("Document successfully written!");
-		})
-		.catch(function(error) {
-		    console.error("Error writing document: ", error);
-		});
-
+		
+		
 
 		db.collection("events").get().then(function (data) {
 			data.forEach(function (doc) {
@@ -242,27 +230,28 @@
 				console.log(doc.data().start_date.toDate().getHours(), "start hours");
 				console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
 				console.log(doc.data().end_date.toDate().getHours(), " end hours");
-
-
+			});
+		});
 				// using where to get only db collection that meet certain criteria
 				// going to add a click event to the day button,
 				// and use "this", then with click event run the function below with .where
 				// where date == click event date ex..
 
+				db.collection("events").where("start_date", "==", true)
+							.get()
+							.then(function(querySnapshot) {
+				    		querySnapshot.forEach(function(doc) {
+				        	// doc.data() is never undefined for query doc snapshots
+				       		 console.log(doc.id, " => ", doc.data());
+				    		});
+						})
+					.catch(function(error) {
+				  		console.log("Error getting documents: ", error);
+				});
 
-				// db.collection("events").where("capital", "==", true)
-				// 			.get()
-				// 			.then(function(querySnapshot) {
-				//     		querySnapshot.forEach(function(doc) {
-				//         	// doc.data() is never undefined for query doc snapshots
-				//        		 console.log(doc.id, " => ", doc.data());
-				//     		});
-				// 		})
-				// 	.catch(function(error) {
-				//   		console.log("Error getting documents: ", error);
-				// });
-			});
-		});
+
+
+
 
 		const dayCalendar = document.getElementById('booking-calendar');
 		//const dayButtons = document.getElementsByClassName('booking-day');
@@ -274,7 +263,7 @@
 		function dayBtnClicked(event) {
 			console.log("clicked");
 			console.log(event.target);
-			console.log(event.target.getAttribute('data-date'));
+			
 			// populate time buttons for the day that was clicked
 
 			// 1 figure out what date was clicked
@@ -355,6 +344,30 @@
 			}
 			document.getElementById("booking-calendar").innerHTML = weekHtml;
 		}
+
+		// add class list to buttons clicked
+		// const bookingTimes = document.getElementById('booking-duration-container');
+
+		// bookingTimes.addEventListener('click', (event) => {
+		//   const isButton = event.target.nodeName === 'BUTTON';
+		//   if (!isButton) {
+		//     return;
+		//   } 
+		// 	  const durationButtonClicked = event.target.id;
+				
+		// 	  console.log(durationButtonClicked, "dbc");
+		// 	  //durationButtonClicked.classList.add("active-button");
+
+		// 	  console.log(event.target.id);
+			
+		// })
+		function addActiveClass (elem) {
+			elem.className+='active-button';
+			console.log(elem);
+		}
+
+
+
 	</script>
 	<script type="text/javascript" src="booking.js"></script>
 </body>
