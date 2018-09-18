@@ -20,10 +20,10 @@
 			<p>Location:<span id="location"> Skype</span></p>
 		</div>
 		<div class="booking-duration" id="booking-duration-container">
-			<button class="booking-time-button booking-button" id="30-min-button" onclick="addActiveClass()">30 min</button>
-			<button class="booking-time-button booking-button" id="60-min-button">60 min</button>
-			<button class="booking-time-button booking-button" id="90-min-button">90 min</button>
-			<button class="booking-time-button booking-button" id="120-min-button">120 min</button>
+			<button class="booking-time-button booking-button" id="30-min-button" onclick="addActiveClass(this)">30 min</button>
+			<button class="booking-time-button booking-button" id="60-min-button" onclick="addActiveClass(this)">60 min</button>
+			<button class="booking-time-button booking-button" id="90-min-button" onclick="addActiveClass(this)">90 min</button>
+			<button class="booking-time-button booking-button" id="120-min-button" onclick="addActiveClass(this)">120 min</button>
 		</div>
 		<div class="booking-date-header">
 			<h3>Date of Meeting
@@ -38,55 +38,7 @@
 			</a>
 		</div>
 		<div id="booking-calendar">
-			<div class="booking-day">
-				<div class="booking-day-title">Mon</div>
-				<button class="booking-day-button">
-					<div class="booking-day-button-month">Sep</div>
-					<div class="booking-day-dayOfMonth">21</div>
-				</button>
-			</div>
-			<div class="booking-day">
-				<div class="booking-day-title">Tue</div>
-				<button class="booking-day-button" data-date="2018-09-22">
-					<div class="booking-day-button-month">Sep</div>
-					<div class="booking-day-dayOfMonth">22</div>
-				</button>
-			</div>
-			<div class="booking-day">
-				<div class="booking-day-title">Wed</div>
-				<button class="booking-day-button">
-					<div class="booking-day-button-month">Sep</div>
-					<div class="booking-day-dayOfMonth">23</div>
-				</button>
-			</div>
-			<div class="booking-day">
-				<div class="booking-day-title">Thur</div>
-				<button class="booking-day-button">
-					<div class="booking-day-button-month">Sep</div>
-					<div class="booking-day-dayOfMonth">24</div>
-				</button>
-			</div>
-			<div class="booking-day">
-				<div class="booking-day-title">Fri</div>
-				<button class="booking-day-button">
-					<div class="booking-day-button-month">Sep</div>
-					<div class="booking-day-dayOfMonth">25</div>
-				</button>
-			</div>
-			<div class="booking-day">
-				<div class="booking-day-title">Sat</div>
-				<button class="booking-day-button">
-					<div class="booking-day-button-month">Sep</div>
-					<div class="booking-day-dayOfMonth">26</div>
-				</button>
-			</div>
-			<div class="booking-day">
-				<div class="booking-day-title">Sun</div>
-				<button class="booking-day-button">
-					<div class="booking-day-button-month">Sep</div>
-					<div class="booking-day-dayOfMonth">27</div>
-				</button>
-			</div>
+
 		</div>
 
 		<div class="booking-time-header">
@@ -336,7 +288,7 @@
 				weekHtml +=
 						`<div class="booking-day">
 							<div class="booking-day-title">${dayOfWeek}</div>
-								<button class="booking-day-button" data-date=${date.addDays(i).getDate()} data-month=${monthNames[dayOfMonth]} data-year=${currentYear}>
+								<button class="booking-day-button" onclick="addActiveClass(this)" data-date=${date.addDays(i).getDate()} data-month=${monthNames[dayOfMonth]} data-year=${currentYear}>
 									<div class="booking-day-button-month">${monthNames[dayOfMonth]}</div>
 									<div class="booking-day-dayOfMonth">${date.addDays(i).getDate()}</div>
 								</button>
@@ -349,21 +301,34 @@
 		// const bookingTimes = document.getElementById('booking-duration-container');
 
 		// bookingTimes.addEventListener('click', (event) => {
-		//   const isButton = event.target.nodeName === 'BUTTON';
-		//   if (!isButton) {
-		//     return;
-		//   } 
-		// 	  const durationButtonClicked = event.target.id;
+		//   // const isButton = event.target.nodeName === 'BUTTON';
+		//   // if (!isButton) {
+		//   //   return;
+		//   // } 
+		// 	  const durationButtonItem = event.target.id;
 				
-		// 	  console.log(durationButtonClicked, "dbc");
-		// 	  //durationButtonClicked.classList.add("active-button");
+		// 	  console.log(durationButtonItem, "dbc");
+		// 	  durationButtonItem.classList.add("active-button");
+		// 	  //durationButtonItem.style.border = "1px solid orange";
 
 		// 	  console.log(event.target.id);
 			
 		// })
-		function addActiveClass (elem) {
-			elem.className+='active-button';
-			console.log(elem);
+		function addActiveClass (el) {
+			//only allows one element to have active class ....but its only the first element
+			if (document.querySelectorAll('#booking-duration-container .active-button').length > 0) {
+				// remove active-button class from other elements
+				let allElements = document.getElementsByClassName("active-button");
+				console.log(allElements);
+				for (var i = 0, len = allElements.length; i < len; i++) {
+				    let element = allElements[i];
+				    console.log(element);
+				    element.style.classList.remove("active-button");
+			}
+		}
+			el.className+=' active-button';
+			console.log(el);
+
 		}
 
 
