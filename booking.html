@@ -236,9 +236,8 @@
 		//const dayButtons = document.getElementsByClassName('booking-day');
 		const timeButtons = document.getElementsByClassName('booking-time');
 
+
 		dayCalendar.addEventListener('click', dayBtnClicked);
-
-
 		function dayBtnClicked(event) {
 			console.log("clicked");
 			console.log(event.target);
@@ -417,7 +416,10 @@
 
 
 		$(".booking-day-button").click(function() {
+
 			let clicked = $(this);
+
+			console.log("clicked cal");
 			
 			  if (clicked.hasClass('active-button')) {
 			    $('.booking-day-button').removeClass('disabled'); //enable all again  
