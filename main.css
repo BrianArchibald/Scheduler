@@ -465,11 +465,57 @@ ul {
 }
 
 
+
+/*
+
+
+
+.booking-list {
+	list-style: none;
+	display: flex;
+	flex-direction: row;
+}
+
+.booking-input {
+    visibility: hidden;
+}
+label {
+    cursor: pointer;
+    text-align: center;
+    margin-right: 15px;
+}
+.booking-input:checked + label {
+    color: rgb(0, 88, 255);
+	border-color: rgb(66, 133, 244);
+	transition: all 0.2s ease 0s;
+	
+
+}
+.booking-time-button {
+	width: 120px;
+	height: 50px;
+	font-size: 18px;
+	font-weight: 400;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.booking-day {
+	display: flex;
+	flex-direction: column;
+}
+
+*/
+
+
 .booking-time-button {
 	width: 120px;
 	height: 50px;
 	font-size: 18px;
 }
+
 .booking-time {
 	display: flex;
 	flex-direction: row;
@@ -496,6 +542,7 @@ ul {
 	border: 1px solid rgb(221, 221, 221);
 	border-radius: 2px;
 }
+
 .booking-day-title {
 	text-align: center;
 	padding: 12px;
@@ -506,6 +553,7 @@ ul {
 	margin-bottom: -40px;
 	color: #4c6896;
 }
+
 .day-arrows {
 	display: flex;
 	flex-direction: row;
@@ -539,6 +587,9 @@ ul {
 	font-weight: 400;
     font-size: 17px;
 }
+.booking-day-button.active-button {
+	border: 1px solid  rgb(66, 133, 244);
+}
 #DropDownTimezone {
 	width: 200px;
 	font-size: 12px;
@@ -562,7 +613,7 @@ ul {
 }
 
 .active-button {
-	color: rgb(66, 133, 244);
+	color: rgb(0, 88, 255);
 	border-color: rgb(66, 133, 244);
 	transition: all 0.2s ease 0s;
 }
