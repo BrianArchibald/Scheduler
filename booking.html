@@ -232,16 +232,44 @@
 
 
 
-		const dayCalendar = document.getElementById('booking-calendar');
+		//const dayCalendar = document.getElementById('booking-calendar');
 		//const dayButtons = document.getElementsByClassName('booking-day');
-		const timeButtons = document.getElementsByClassName('booking-time');
+		//const timeButtons = document.getElementsByClassName('booking-time');
 
 
-		dayCalendar.addEventListener('click', dayBtnClicked);
-		function dayBtnClicked(event) {
-			console.log("clicked");
-			console.log(event.target);
+		// dayCalendar.addEventListener('click', (event) => {
+		//   // const isButton = event.target.nodeName === 'BUTTON';
+		//   // if (!isButton) {
+		//   //   return;
+		//   // } 
+		//   	console.log(event);
+		//   	console.log(event.target.id);
+		// 	  let dayButton = event.target.id;
+				
+			 
+		// 	  dayButton.classList.add("active-button");
+		// 	  //durationButtonItem.style.border = "1px solid orange";
+
+		// 	  console.log(event.target.id);
 			
+		// });
+		
+			
+
+			//bookingTimes.addEventListener('click', (event) => {
+		//   // const isButton = event.target.nodeName === 'BUTTON';
+		//   // if (!isButton) {
+		//   //   return;
+		//   // } 
+		// 	  const durationButtonItem = event.target.id;
+				
+		// 	  console.log(durationButtonItem, "dbc");
+		// 	  durationButtonItem.classList.add("active-button");
+		// 	  //durationButtonItem.style.border = "1px solid orange";
+
+		// 	  console.log(event.target.id);
+			
+		// })
 			// populate time buttons for the day that was clicked
 
 			// 1 figure out what date was clicked
@@ -281,7 +309,7 @@
 			// last button - if last button is < end date (last button = none)
 			// use for loop to get all the buttons 
 			// for(let = startDate; i < endDate; i + 30)
-		}
+		
 
 		let weekHtml = "";
 		const monthNames = ["Jan", "Feb", "Mar", "Apr", "May","Jun","Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
@@ -314,9 +342,9 @@
 				weekHtml +=
 						`<div class="booking-day">
 		 					<div class="booking-day-title">${dayOfWeek}</div>
-		 						<button class="booking-day-button" data-date=${date.addDays(i).getDate()} data-month=${monthNames[dayOfMonth]} data-year=${currentYear}>
+		 						<button class="booking-day-button" data-date=${date.addDays(i).getDate()} data-month=${monthNames[dayOfMonth]} data-year=${currentYear} onclick="addActiveClass(this)">
 		 							<div class="booking-day-button-month">${monthNames[dayOfMonth]}</div>
-		 							<div class="booking-day-dayOfMonth">${date.addDays(i).getDate()}</div>
+		  							<div class="booking-day-dayOfMonth">${date.addDays(i).getDate()}</div>
 		 						</button>
 		 				</div>`;
 
@@ -325,28 +353,10 @@
 		}
 
 
-
-		// <ul class="booking-list">
-		// 	    <li class="booking-time-button booking-button">
-		// 	        <input type='radio' value='30' name='radio' class="booking-input" id='30min'/>
-		// 	        <label for='30min'>30 min</label>
-		// 	    </li>
-		// 	    <li class="booking-time-button booking-button">
-		// 	        <input type='radio' value='60' name='radio' class="booking-input"  id='60min'/>
-		// 	        <label for='60min'>60 min</label>
-		// 	    </li>
-		// 	    <li class="booking-time-button booking-button">
-		// 	        <input type='radio' value='90' name='radio' class="booking-input"  id='90min'/>
-		// 	        <label for='90min'>90 min</label>
-		// 	    </li>
-		// 	    <li class="booking-time-button booking-button">
-		// 	        <input type='radio' value='120' name='radio' class="booking-input"  id='120min'/>
-		// 	        <label for='120min'>120 min</label>
-		// 	    </li>
-		// 	</ul>
+		// <div class="booking-day-button-month">${monthNames[dayOfMonth]}</div>
+		//  							<div class="booking-day-dayOfMonth">${date.addDays(i).getDate()}</div>
 
 
-		// 
 
 		// add class list to buttons clicked
 		// const bookingTimes = document.getElementById('booking-duration-container');
@@ -367,23 +377,24 @@
 		// })
 
 
-		// //addding class of active to buttons once clicked
-		// function addActiveClass (el) {
-		// 	//only allows one element to have active class ....but its only the first element
-		// 	if (document.querySelectorAll('#booking-duration-container .active-button').length > 0) {
-		// 		// remove active-button class from other elements
-		// 		let allElements = document.getElementsByClassName("active-button");
-		// 		console.log(allElements);
-		// 		for (var i = 0, len = allElements.length; i < len; i++) {
-		// 		    let element = allElements[i];
-		// 		    console.log(element);
-		// 		    element.style.classList.remove("active-button");
-		// 	}
-		// }
-		// 	el.className+=' active-button';
-		// 	console.log(el);
+		//addding class of active to buttons once clicked
+		function addActiveClass (el) {
+			
+			//only allows one element to have active class ....but its only the first element
+			if (document.querySelectorAll('#booking-duration-container .active-button').length > 0) {
+				// remove active-button class from other elements
+				let allElements = document.getElementsByClassName("active-button");
+				console.log(allElements);
+				for (var i = 0, len = allElements.length; i < len; i++) {
+				    let element = allElements[i];
+				    console.log(element);
+				    element.style.classList.remove("active-button");
+			}
+		}
+			el.className+=' active-button';
+			console.log(el);
 
-		// }
+		}
 
 
 		$(".booking-time-button").click(function() {
@@ -400,23 +411,25 @@
 			  }
 			});
 
-			$(".booking-time-selector").click(function() {
-			let clicked = $(this);
+		$(".booking-time-selector").click(function() {
+		let clicked = $(this);
 
-			  if (clicked.hasClass('active-button')) {
-			    $('.booking-time-selector').removeClass('disabled'); //enable all again  
-			    clicked.removeClass('active-button');
-			  } else {
-			   $('.booking-time-selector').removeClass('active-button');
-			    clicked.addClass('active-button');
-			    clicked.removeClass('disabled');
-			    $('.booking-time-selector').not(clicked).addClass('disabled'); //disable everything except clicked element
-			  }
-			});
+		  if (clicked.hasClass('active-button')) {
+		    $('.booking-time-selector').removeClass('disabled'); //enable all again  
+		    clicked.removeClass('active-button');
+		  } else {
+		   $('.booking-time-selector').removeClass('active-button');
+		    clicked.addClass('active-button');
+		    clicked.removeClass('disabled');
+		    $('.booking-time-selector').not(clicked).addClass('disabled'); //disable everything except clicked element
+		  }
+		});
 
 
 		$(".booking-day-button").click(function() {
-
+			$('div').each(function (index) {
+				console.log(index + ":" + $(this).text())
+			});
 			let clicked = $(this);
 
 			console.log("clicked cal");
@@ -431,6 +444,11 @@
 			    $('.booking-day-button').not(clicked).addClass('disabled'); //disable everything except clicked element
 			  }
 			});
+
+		// $(".booking-day").find(".button").click(function () {
+	 //        alert("hi there");
+	 //        return false;
+		// });
 
 
 
