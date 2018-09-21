@@ -181,34 +181,34 @@
 				// doc.data() is never undefined for query doc snapshots
 
 
-				console.log(doc.data().end_date.toDate());
-				console.log(doc.data().end_date.toDate().getMonth(), "month");
-				console.log(doc.data().end_date.toDate().getYear(), "year");
-				console.log(doc.data().end_date.toDate().getDay(), "day of week start ");
-				console.log(doc.data().start_date.toDate().getDay(), "day of week end ");
-				console.log(doc.data().start_date.toDate(), "start date");
-				console.log(doc.data().end_date.toDate(), "end date");
-				console.log(doc.data().start_date.toDate().toISOString(), "Iso string start date");
-				console.log(doc.data().end_date.toDate().toISOString(), "Iso string end date");
+				// console.log(doc.data().end_date.toDate());
+				// console.log(doc.data().end_date.toDate().getMonth(), "month");
+				// console.log(doc.data().end_date.toDate().getYear(), "year");
+				// console.log(doc.data().end_date.toDate().getDay(), "day of week start ");
+				// console.log(doc.data().start_date.toDate().getDay(), "day of week end ");
+				// console.log(doc.data().start_date.toDate(), "start date");
+				// console.log(doc.data().end_date.toDate(), "end date");
+				// console.log(doc.data().start_date.toDate().toISOString(), "Iso string start date");
+				// console.log(doc.data().end_date.toDate().toISOString(), "Iso string end date");
 
-				let isoDateStart = doc.data().start_date.toDate().toISOString();
-				let isoDateEnd = doc.data().end_date.toDate().toISOString();
-				let milliseconds = ((new Date(isoDateEnd)) - (new Date(isoDateStart)));
+				// let isoDateStart = doc.data().start_date.toDate().toISOString();
+				// let isoDateEnd = doc.data().end_date.toDate().toISOString();
+				// let milliseconds = ((new Date(isoDateEnd)) - (new Date(isoDateStart)));
 
-				let totalMinutes = milliseconds / (60000);
-				let totalScheduleBoxes = totalMinutes / 30;
-				console.log(totalMinutes, "totalMinutes");
-				console.log(totalScheduleBoxes, "total Boxes");
+				// let totalMinutes = milliseconds / (60000);
+				// let totalScheduleBoxes = totalMinutes / 30;
+				// console.log(totalMinutes, "totalMinutes");
+				// console.log(totalScheduleBoxes, "total Boxes");
 
 
-				let endDate = doc.data().end_date.toDate().toString().slice(7, 10);
-				let startDate = doc.data().start_date.toDate().toString().slice(7, 10);
-				console.log(startDate + " =start date", endDate + " =end date");
+				// let endDate = doc.data().end_date.toDate().toString().slice(7, 10);
+				// let startDate = doc.data().start_date.toDate().toString().slice(7, 10);
+				// console.log(startDate + " =start date", endDate + " =end date");
 
-				console.log(doc.data().start_date.toDate().getMinutes(), "start mins");
-				console.log(doc.data().start_date.toDate().getHours(), "start hours");
-				console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
-				console.log(doc.data().end_date.toDate().getHours(), " end hours");
+				// console.log(doc.data().start_date.toDate().getMinutes(), "start mins");
+				// console.log(doc.data().start_date.toDate().getHours(), "start hours");
+				// console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
+				// console.log(doc.data().end_date.toDate().getHours(), " end hours");
 			});
 		});
 				// using where to get only db collection that meet certain criteria
@@ -216,20 +216,57 @@
 				// and use "this", then with click event run the function below with .where
 				// where date == click event date ex..
 
-				db.collection("events").where("start_date", "==", true)
-							.get()
-							.then(function(querySnapshot) {
-				    		querySnapshot.forEach(function(doc) {
-				        	// doc.data() is never undefined for query doc snapshots
-				       		 console.log(doc.id, " => ", doc.data());
-				    		});
-						})
+				// db.collection("events").where("start_date", "==", true)
+				// 			.get()
+				// 			.then(function(querySnapshot) {
+				//     		querySnapshot.forEach(function(doc) {
+				//         	// doc.data() is never undefined for query doc snapshots
+				//        		 console.log(doc.id, " => ", doc.data());
+				//     		});
+				// 		})
+				// 	.catch(function(error) {
+				//   		console.log("Error getting documents: ", error);
+				// });
+
+
+					let start = new Date('2017-01-01');
+					console.log(start);
+			        let end = new Date('2019-01-01');
+			        console.log(end);
+
+			        this.db.collection('events') //, ref => ref)
+			            .where('start_date', '>', start)
+			            .where('start_date', '<', end)
+				            .get()
+								.then(function(querySnapshot) {
+						    		querySnapshot.forEach(function(doc) {
+						        	// doc.data() is never undefined for query doc snapshots
+						       		 console.log(doc.id, " => ", doc.data());
+						       		 
+						       		 console.log(doc.data().start_date, "start time wo todate");
+						       		 console.log(doc.data().start_date.toDate().getHours(), "start hours");
+						       		 console.log(doc.data().start_date.toDate().getMinutes(), "start mins");
+									
+						       		 console.log(doc.data().end_date, "end time wo todate");
+						       		 console.log(doc.data().end_date.toDate().getHours(), " end hours");
+						       		 console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
+									
+						       		 let x = doc.data().start_date.seconds;
+						       		 console.log(x, "x");
+						       		 let y = doc.data().end_date.seconds;
+						       		 console.log(y, "y");
+						       		 let z = y - x;
+						       		 console.log(z, "z"); 
+						       		
+									
+						       		 
+
+					    		});
+					})
 					.catch(function(error) {
 				  		console.log("Error getting documents: ", error);
-				});
-
-
-
+					});
+			       
 
 
 		//const dayCalendar = document.getElementById('booking-calendar');
