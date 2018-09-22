@@ -336,9 +336,11 @@
 			}
 			let date = new Date();
 			let dayOfWeek = weekday[date.addDays(i).getDay()];
-			let dayOfMonth = date.addDays(i).getMonth();
-				
-				weekHtml +=
+			let dayOfMonth = (date.addDays(i).getMonth() + 1);
+				console.log(dayOfMonth);
+				console.log(dayOfWeek);
+
+						weekHtml +=
 						`<div class="booking-day">
 		 					<div class="booking-day-title">${dayOfWeek}</div>
 		 						<button class="booking-day-button" data-date=${date.addDays(i).getDate()} data-month=${dayOfMonth} data-year=${currentYear} onclick="addActiveClass(this)">
@@ -399,6 +401,7 @@
 			//let calData = "";
 					//let start = "";
 					//let start = new Date(calData);
+					
 					console.log(start , "calData");
 			        // let end = new Date('2019-01-01');
 			        // console.log(end);
@@ -452,17 +455,17 @@
 			});
 
 		$(".booking-time-selector").click(function() {
-		let clicked = $(this);
+			let clicked = $(this);
 
-		  if (clicked.hasClass('active-button')) {
-		    $('.booking-time-selector').removeClass('disabled'); //enable all again  
-		    clicked.removeClass('active-button');
-		  } else {
-		   $('.booking-time-selector').removeClass('active-button');
-		    clicked.addClass('active-button');
-		    clicked.removeClass('disabled');
-		    $('.booking-time-selector').not(clicked).addClass('disabled'); //disable everything except clicked element
-		  }
+			  if (clicked.hasClass('active-button')) {
+			    $('.booking-time-selector').removeClass('disabled'); //enable all again  
+			    clicked.removeClass('active-button');
+			  } else {
+			   $('.booking-time-selector').removeClass('active-button');
+			    clicked.addClass('active-button');
+			    clicked.removeClass('disabled');
+			    $('.booking-time-selector').not(clicked).addClass('disabled'); //disable everything except clicked element
+			  }
 		});
 
 
