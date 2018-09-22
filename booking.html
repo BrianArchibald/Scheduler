@@ -228,45 +228,7 @@
 				//   		console.log("Error getting documents: ", error);
 				// });
 
-
-					let start = new Date('2017-01-01');
-					console.log(start);
-			        let end = new Date('2019-01-01');
-			        console.log(end);
-
-			        this.db.collection('events') //, ref => ref)
-			            .where('start_date', '>', start)
-			            .where('start_date', '<', end)
-				            .get()
-								.then(function(querySnapshot) {
-						    		querySnapshot.forEach(function(doc) {
-						        	// doc.data() is never undefined for query doc snapshots
-						       		 console.log(doc.id, " => ", doc.data());
-						       		 
-						       		 console.log(doc.data().start_date, "start time wo todate");
-						       		 console.log(doc.data().start_date.toDate().getHours(), "start hours");
-						       		 console.log(doc.data().start_date.toDate().getMinutes(), "start mins");
-									
-						       		 console.log(doc.data().end_date, "end time wo todate");
-						       		 console.log(doc.data().end_date.toDate().getHours(), " end hours");
-						       		 console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
-									
-						       		 let x = doc.data().start_date.seconds;
-						       		 console.log(x, "x");
-						       		 let y = doc.data().end_date.seconds;
-						       		 console.log(y, "y");
-						       		 let z = y - x;
-						       		 console.log(z, "z"); 
-						       		
-									
-						       		 
-
-					    		});
-					})
-					.catch(function(error) {
-				  		console.log("Error getting documents: ", error);
-					});
-			       
+					
 
 
 		//const dayCalendar = document.getElementById('booking-calendar');
@@ -379,7 +341,7 @@
 				weekHtml +=
 						`<div class="booking-day">
 		 					<div class="booking-day-title">${dayOfWeek}</div>
-		 						<button class="booking-day-button" data-date=${date.addDays(i).getDate()} data-month=${monthNames[dayOfMonth]} data-year=${currentYear} onclick="addActiveClass(this)">
+		 						<button class="booking-day-button" data-date=${date.addDays(i).getDate()} data-month=${dayOfMonth} data-year=${currentYear} onclick="addActiveClass(this)">
 		 							<div class="booking-day-button-month">${monthNames[dayOfMonth]}</div>
 		  							<div class="booking-day-dayOfMonth">${date.addDays(i).getDate()}</div>
 		 						</button>
@@ -389,12 +351,11 @@
 			document.getElementById("booking-calendar").innerHTML = weekHtml;
 		}
 
-
-		// <div class="booking-day-button-month">${monthNames[dayOfMonth]}</div>
-		//  							<div class="booking-day-dayOfMonth">${date.addDays(i).getDate()}</div>
+		
 
 
 
+		
 		// add class list to buttons clicked
 		// const bookingTimes = document.getElementById('booking-duration-container');
 
@@ -413,7 +374,8 @@
 			
 		// })
 
-
+		
+		
 		//addding class of active to buttons once clicked
 		function addActiveClass (el) {
 			
@@ -431,6 +393,47 @@
 			el.className+=' active-button';
 			console.log(el);
 
+
+			let calData = el.dataset.year + "-" + el.dataset.month + "-" + el.dataset.date;
+			let start = new Date(calData);
+			//let calData = "";
+					//let start = "";
+					//let start = new Date(calData);
+					console.log(start , "calData");
+			        // let end = new Date('2019-01-01');
+			        // console.log(end);
+
+
+			        
+			        this.db.collection('events') //, ref => ref)
+			            .where('start_date', '==', start)
+			            // .where('start_date', '>', start)
+			            // .where('start_date', '<', end)
+				            .get()
+								.then(function(querySnapshot) {
+						    		querySnapshot.forEach(function(doc) {
+						        	// doc.data() is never undefined for query doc snapshots
+						       		 console.log(doc.id, " => ", doc.data());
+						       		 
+						       		 console.log(doc.data().start_date, "start time wo todate");
+						       		 console.log(doc.data().start_date.toDate().getHours(), "start hours");
+						       		 console.log(doc.data().start_date.toDate().getMinutes(), "start mins");
+									
+						       		 console.log(doc.data().end_date, "end time wo todate");
+						       		 console.log(doc.data().end_date.toDate().getHours(), " end hours");
+						       		 console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
+									
+						       		 let x = doc.data().start_date.seconds;
+						       		 console.log(x, "x");
+						       		 let y = doc.data().end_date.seconds;
+						       		 console.log(y, "y");
+						       		 let z = y - x;
+						       		 console.log(z, "z"); 
+					    		});
+					})
+					.catch(function(error) {
+				  		console.log("Error getting documents: ", error);
+					});	       
 		}
 
 
