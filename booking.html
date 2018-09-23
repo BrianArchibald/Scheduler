@@ -336,14 +336,15 @@
 			}
 			let date = new Date();
 			let dayOfWeek = weekday[date.addDays(i).getDay()];
-			let dayOfMonth = (date.addDays(i).getMonth() + 1);
+			//let dayOfMonth = (date.addDays(i).getMonth() + 1);
+			let dayOfMonth = date.addDays(i).getMonth();
 				console.log(dayOfMonth);
 				console.log(dayOfWeek);
 
 						weekHtml +=
 						`<div class="booking-day">
 		 					<div class="booking-day-title">${dayOfWeek}</div>
-		 						<button class="booking-day-button" data-date=${date.addDays(i).getDate()} data-month=${dayOfMonth} data-year=${currentYear} onclick="addActiveClass(this)">
+		 						<button class="booking-day-button" data-date=${date.addDays(i).getDate()} data-month=${dayOfMonth} data-year=${currentYear} onclick="activeClass(this)">
 		 							<div class="booking-day-button-month">${monthNames[dayOfMonth]}</div>
 		  							<div class="booking-day-dayOfMonth">${date.addDays(i).getDate()}</div>
 		 						</button>
@@ -353,7 +354,7 @@
 			document.getElementById("booking-calendar").innerHTML = weekHtml;
 		}
 
-		
+		//onclick="addActiveClass(this)"
 
 
 
@@ -390,8 +391,8 @@
 				    let element = allElements[i];
 				    console.log(element);
 				    element.style.classList.remove("active-button");
+				}
 			}
-		}
 			el.className+=' active-button';
 			console.log(el);
 
@@ -406,9 +407,7 @@
 			        // let end = new Date('2019-01-01');
 			        // console.log(end);
 
-
-			        
-			        this.db.collection('events') //, ref => ref)
+			        this.db.collection('events') 
 			            .where('start_date', '==', start)
 			            // .where('start_date', '>', start)
 			            // .where('start_date', '<', end)
@@ -416,6 +415,7 @@
 								.then(function(querySnapshot) {
 						    		querySnapshot.forEach(function(doc) {
 						        	// doc.data() is never undefined for query doc snapshots
+						        	
 						       		 console.log(doc.id, " => ", doc.data());
 						       		 
 						       		 console.log(doc.data().start_date, "start time wo todate");
@@ -468,25 +468,49 @@
 			  }
 		});
 
+		//$(document).ready(function()  {
 
-		$(".booking-day-button").click(function() {
-			$('div').each(function (index) {
-				console.log(index + ":" + $(this).text())
-			});
-			let clicked = $(this);
-
-			console.log("clicked cal");
+			function activeClass(el) {
+			//$(".booking-day-button").click(function() {   //.on("click" need to use for dynamic HTML
 			
-			  if (clicked.hasClass('active-button')) {
-			    $('.booking-day-button').removeClass('disabled'); //enable all again  
-			    clicked.removeClass('active-button');
-			  } else {
-			   $('.booking-day-button').removeClass('active-button');
-			    clicked.addClass('active-button');
-			    clicked.removeClass('disabled');
-			    $('.booking-day-button').not(clicked).addClass('disabled'); //disable everything except clicked element
-			  }
-			});
+				// $(".booking-day .booking-day-button").removeClass("active-button");
+				// $(this).addClass("active-button");
+				let clicked = $(el);
+				console.log(clicked);
+
+				
+				  if (clicked.hasClass('active-button')) {
+				    $('.booking-day-button').removeClass('disabled'); //enable all again  
+				    clicked.removeClass('active-button');
+				  	} else {
+				   $('.booking-day-button').removeClass('active-button');
+				    clicked.addClass('active-button');
+				    clicked.removeClass('disabled');
+				    $('.booking-day-button').not(clicked).addClass('disabled'); //disable everything except clicked element
+					}
+
+			//});
+			}
+		//});
+		
+		
+			// $('div').each(function (index) {
+			// 	console.log(index + ":" + $(this).text())
+			// });
+			// let clicked = $(this);
+
+			// console.log("clicked cal");
+			
+			//   if (clicked.hasClass('active-button')) {
+			//     $('.booking-day-button').removeClass('disabled'); //enable all again  
+			//     clicked.removeClass('active-button');
+			//   } else {
+			//    $('.booking-day-button').removeClass('active-button');
+			//     clicked.addClass('active-button');
+			//     clicked.removeClass('disabled');
+			//     $('.booking-day-button').not(clicked).addClass('disabled'); //disable everything except clicked element
+			//   }
+			
 
 		// $(".booking-day").find(".button").click(function () {
 	 //        alert("hi there");
