@@ -170,37 +170,37 @@
 		// Initialize Cloud Firestore through Firebase
 		var db = firebase.firestore();
 		db.settings({ timestampsInSnapshots: true });
-		let entireStartDate = '';
+		//let entireStartDate = '';
 		
 		
-		db.collection("events").get().then(function (data) {
-			data.forEach(function (doc) {
-				// doc.data() is never undefined for query doc snapshots
-				// console.log(doc.data().end_date.toDate());
-				// console.log(doc.data().end_date.toDate().getMonth(), "month");
-				// console.log(doc.data().end_date.toDate().getYear(), "year");
-				// console.log(doc.data().end_date.toDate().getDay(), "day of week start ");
-				// console.log(doc.data().start_date.toDate().getDay(), "day of week end ");
-				// console.log(doc.data().start_date.toDate(), "start date");
-				// console.log(doc.data().end_date.toDate(), "end date");
-				// console.log(doc.data().start_date.toDate().toISOString(), "Iso string start date");
-				// console.log(doc.data().end_date.toDate().toISOString(), "Iso string end date");
-				// let isoDateStart = doc.data().start_date.toDate().toISOString();
-				// let isoDateEnd = doc.data().end_date.toDate().toISOString();
-				// let milliseconds = ((new Date(isoDateEnd)) - (new Date(isoDateStart)));
-				// let totalMinutes = milliseconds / (60000);
-				// let totalScheduleBoxes = totalMinutes / 30;
-				// console.log(totalMinutes, "totalMinutes");
-				// console.log(totalScheduleBoxes, "total Boxes");
-				// let endDate = doc.data().end_date.toDate().toString().slice(7, 10);
-				// let startDate = doc.data().start_date.toDate().toString().slice(7, 10);
-				// console.log(startDate + " =start date", endDate + " =end date");
-				// console.log(doc.data().start_date.toDate().getMinutes(), "start mins");
-				// console.log(doc.data().start_date.toDate().getHours(), "start hours");
-				// console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
-				// console.log(doc.data().end_date.toDate().getHours(), " end hours");
-			});
-		});
+		// db.collection("events").get().then(function (data) {
+		// 	data.forEach(function (doc) {
+		// 		// doc.data() is never undefined for query doc snapshots
+		// 		// console.log(doc.data().end_date.toDate());
+		// 		// console.log(doc.data().end_date.toDate().getMonth(), "month");
+		// 		// console.log(doc.data().end_date.toDate().getYear(), "year");
+		// 		// console.log(doc.data().end_date.toDate().getDay(), "day of week start ");
+		// 		// console.log(doc.data().start_date.toDate().getDay(), "day of week end ");
+		// 		// console.log(doc.data().start_date.toDate(), "start date");
+		// 		// console.log(doc.data().end_date.toDate(), "end date");
+		// 		// console.log(doc.data().start_date.toDate().toISOString(), "Iso string start date");
+		// 		// console.log(doc.data().end_date.toDate().toISOString(), "Iso string end date");
+		// 		// let isoDateStart = doc.data().start_date.toDate().toISOString();
+		// 		// let isoDateEnd = doc.data().end_date.toDate().toISOString();
+		// 		// let milliseconds = ((new Date(isoDateEnd)) - (new Date(isoDateStart)));
+		// 		// let totalMinutes = milliseconds / (60000);
+		// 		// let totalScheduleBoxes = totalMinutes / 30;
+		// 		// console.log(totalMinutes, "totalMinutes");
+		// 		// console.log(totalScheduleBoxes, "total Boxes");
+		// 		// let endDate = doc.data().end_date.toDate().toString().slice(7, 10);
+		// 		// let startDate = doc.data().start_date.toDate().toString().slice(7, 10);
+		// 		// console.log(startDate + " =start date", endDate + " =end date");
+		// 		// console.log(doc.data().start_date.toDate().getMinutes(), "start mins");
+		// 		// console.log(doc.data().start_date.toDate().getHours(), "start hours");
+		// 		// console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
+		// 		// console.log(doc.data().end_date.toDate().getHours(), " end hours");
+		// 	});
+		// });
 				// using where to get only db collection that meet certain criteria
 				// going to add a click event to the day button,
 				// and use "this", then with click event run the function below with .where
@@ -250,33 +250,42 @@
 		// 	  console.log(event.target.id);
 			
 		// })
-			// populate time buttons for the day that was clicked
+
+
+
+
+			///////////////////               populate time buttons for the day that was clicked
+
 			// 1 figure out what date was clicked
-			//		it could be the day, month, or number
+			//	
 			// 2 call db for that date
-			// let currentDateReq = db.collection('events');
-			// let query = currentDateReq.where('start_date', "==", ??date clicked??)
-			// .get()
-			// .then(function(querySnapshot) {
-			//        querySnapshot.forEach(function(doc) {
-			//            //  doc.data() is never undefined for query doc snapshots
-			//            console.log(doc.id, " => ", doc.data());
-			//        });
-			//    })
-			//    .catch(function(error) {
-			//        console.log("Error getting documents: ", error);
-			//    });
+
 			// 3 determine all start and end times for that date
+
 			// 4 create html buttons for times between start and end times
+
 			// 1st button = start hour + start min
-			// of start min > 0 && < 30 (
+
+
+			// if start min > 0 && < 30 (
 			// 	1st button = start hour + start min = 30)
 			// 	if start min > 30 (
 			// 		1st button = start hour + 1 + start min = 0)
 			// following buttons are 1st button + 30 mins
+
 			// last button - if last button is < end date (last button = none)
+
 			// use for loop to get all the buttons 
-			// for(let = startDate; i < endDate; i + 30)
+
+			// for(let i = startDate; i < endDate; i + 30)
+
+
+
+			//  let buttonHtml = ""
+			//	buttonHtml +=
+			//		<button class="booking-time-selector booking-button">8:00am</button>
+
+					
 		
 		let weekHtml = "";
 		const monthNames = ["Jan", "Feb", "Mar", "Apr", "May","Jun","Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
@@ -294,104 +303,30 @@
 		
 		window.onload = function initWeekCalendar () {
 			for (let i = 0; i < 7; i++) {
-				
-			Date.prototype.addDays = function(days) {
-			    let date = new Date(this.valueOf());
-			    date.setDate(date.getDate() + days);
-			    return date;
-			}
-			let date = new Date();
-			let dayOfWeek = weekday[date.addDays(i).getDay()];
-			//let dayOfMonth = (date.addDays(i).getMonth() + 1);
-			let dayOfMonth = date.addDays(i).getMonth();
-				console.log(dayOfMonth);
-				
-						weekHtml +=
-						`<div class="booking-day">
-		 					<div class="booking-day-title">${dayOfWeek}</div>
-		 						<button class="booking-day-button" data-date=${date.addDays(i).getDate()} data-month=${dayOfMonth} data-year=${currentYear} onclick="activeClass(this)">
-		 							<div class="booking-day-button-month">${monthNames[dayOfMonth]}</div>
-		  							<div class="booking-day-dayOfMonth">${date.addDays(i).getDate()}</div>
-		 						</button>
-		 				</div>`;
+					
+				Date.prototype.addDays = function(days) {
+				    let date = new Date(this.valueOf());
+				    date.setDate(date.getDate() + days);
+				    return date;
+				}
+				let date = new Date();
+				let dayOfWeek = weekday[date.addDays(i).getDay()];
+				//let dayOfMonth = (date.addDays(i).getMonth() + 1);
+				let dayOfMonth = date.addDays(i).getMonth();
+					
+					weekHtml +=
+					`<div class="booking-day">
+	 					<div class="booking-day-title">${dayOfWeek}</div>
+	 						<button class="booking-day-button" data-date=${date.addDays(i).getDate()} data-month=${dayOfMonth} data-year=${currentYear} onclick="activeClass(this)">
+	 							<div class="booking-day-button-month">${monthNames[dayOfMonth]}</div>
+	  							<div class="booking-day-dayOfMonth">${date.addDays(i).getDate()}</div>
+	 						</button>
+	 				</div>`;
 			}
 			document.getElementById("booking-calendar").innerHTML = weekHtml;
 		}
-		//onclick="addActiveClass(this)"
-		
-		// add class list to buttons clicked
-		// const bookingTimes = document.getElementById('booking-duration-container');
-		// bookingTimes.addEventListener('click', (event) => {
-		//   // const isButton = event.target.nodeName === 'BUTTON';
-		//   // if (!isButton) {
-		//   //   return;
-		//   // } 
-		// 	  const durationButtonItem = event.target.id;
-				
-		// 	  console.log(durationButtonItem, "dbc");
-		// 	  durationButtonItem.classList.add("active-button");
-		// 	  //durationButtonItem.style.border = "1px solid orange";
-		// 	  console.log(event.target.id);
-			
-		// })
-		
-		
-		//addding class of active to buttons once clicked
-		function addActiveClass (el) {
-			
-			//only allows one element to have active class ....but its only the first element
-			if (document.querySelectorAll('#booking-duration-container .active-button').length > 0) {
-				// remove active-button class from other elements
-				let allElements = document.getElementsByClassName("active-button");
-				console.log(allElements);
-				for (var i = 0, len = allElements.length; i < len; i++) {
-				    let element = allElements[i];
-				    console.log(element);
-				    element.style.classList.remove("active-button");
-				}
-			}
-			el.className+=' active-button';
-			console.log(el);
-			let calData = el.dataset.year + "-" + el.dataset.month + "-" + el.dataset.date;
-			let start = new Date(calData);
-			//let calData = "";
-					//let start = "";
-					//let start = new Date(calData);
-					
-					console.log(start , "calData");
-			        // let end = new Date('2019-01-01');
-			        // console.log(end);
-			        this.db.collection('events')    /// !! I need to have the < > as my start date is exact and db is not exact
-			            //.where('start_date', '==', start)
-			            .where('start_date', '>', start)
-			            // .where('start_date', '<', end)
-				            .get()
-								.then(function(querySnapshot) {
-						    		querySnapshot.forEach(function(doc) {
-						        	// doc.data() is never undefined for query doc snapshots
-						        	
-						       		 console.log(doc.id, " => ", doc.data());
-						       		 
-						       		 console.log(doc.data().start_date, "start time wo todate");
-						       		 console.log(doc.data().start_date.toDate().getHours(), "start hours");
-						       		 console.log(doc.data().start_date.toDate().getMinutes(), "start mins");
-									
-						       		 console.log(doc.data().end_date, "end time wo todate");
-						       		 console.log(doc.data().end_date.toDate().getHours(), " end hours");
-						       		 console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
-									
-						       		 let x = doc.data().start_date.seconds;
-						       		 console.log(x, "x");
-						       		 let y = doc.data().end_date.seconds;
-						       		 console.log(y, "y");
-						       		 let z = y - x;
-						       		 console.log(z, "z"); 
-					    		});
-					})
-					.catch(function(error) {
-				  		console.log("Error getting documents: ", error);
-					});	       
-		}
+
+		// add active class to button clicked
 		$(".booking-time-button").click(function() {
 			let clicked = $(this);
 			  if (clicked.hasClass('active-button')) {
@@ -404,6 +339,7 @@
 			    $('.booking-time-button').not(clicked).addClass('disabled'); //disable everything except clicked element
 			  }
 			});
+		// add active class to button clicked
 		$(".booking-time-selector").click(function() {
 			let clicked = $(this);
 			  if (clicked.hasClass('active-button')) {
@@ -416,15 +352,10 @@
 			    $('.booking-time-selector').not(clicked).addClass('disabled'); //disable everything except clicked element
 			  }
 		});
-		//$(document).ready(function()  {
+		
 			function activeClass(el) {
-			//$(".booking-day-button").click(function() {   //.on("click" need to use for dynamic HTML
-			
-				// $(".booking-day .booking-day-button").removeClass("active-button");
-				// $(this).addClass("active-button");
 				let clicked = $(el);
-				console.log(clicked);
-				
+				// add active class to button clicked
 				  if (clicked.hasClass('active-button')) {
 				    $('.booking-day-button').removeClass('disabled'); //enable all again  
 				    clicked.removeClass('active-button');
@@ -434,31 +365,47 @@
 				    clicked.removeClass('disabled');
 				    $('.booking-day-button').not(clicked).addClass('disabled'); //disable everything except clicked element
 					}
-			//});
+
+				let fixedMonth = parseInt(el.dataset.month) + 1;
+				let dayPlusOne = parseInt(el.dataset.date) + 1;
+				let calData = el.dataset.year + "-" + fixedMonth + "-" + el.dataset.date;
+				let calDataPlusDay = el.dataset.year + "-" + fixedMonth   + "-" + dayPlusOne;
+				let start = new Date(calData);
+				let end = new Date(calDataPlusDay);
+
+		      	console.log(start, "start");
+		        console.log(end, "end");
+		        //get day from db of the day clicked
+		        this.db.collection('events')  
+		            .where('start_date', '>', start)
+		            .where('start_date', '<', end)
+			            .get()
+							.then(function(querySnapshot) {
+					    		querySnapshot.forEach(function(doc) {
+					        	// doc.data() is never undefined for query doc snapshots
+					        	
+					       		 console.log(doc.id, " => ", doc.data());
+					       		 
+					       		 console.log(doc.data().start_date, "start time wo todate");
+					       		 console.log(doc.data().start_date.toDate().getHours(), "start hours");
+					       		 console.log(doc.data().start_date.toDate().getMinutes(), "start mins");
+								
+					       		 console.log(doc.data().end_date, "end time wo todate");
+					       		 console.log(doc.data().end_date.toDate().getHours(), " end hours");
+					       		 console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
+								
+					       		 let x = doc.data().start_date.seconds;
+					       		 console.log(x, "x start date seconds");
+					       		 let y = doc.data().end_date.seconds;
+					       		 console.log(y, "y end date seconds");
+					       		 let z = y - x;
+					       		 console.log(z, "z total seconds of meeting"); 
+				    		});
+				})
+				.catch(function(error) {
+			  		console.log("Error getting documents: ", error);
+				});	       
 			}
-		//});
-		
-		
-			// $('div').each(function (index) {
-			// 	console.log(index + ":" + $(this).text())
-			// });
-			// let clicked = $(this);
-			// console.log("clicked cal");
-			
-			//   if (clicked.hasClass('active-button')) {
-			//     $('.booking-day-button').removeClass('disabled'); //enable all again  
-			//     clicked.removeClass('active-button');
-			//   } else {
-			//    $('.booking-day-button').removeClass('active-button');
-			//     clicked.addClass('active-button');
-			//     clicked.removeClass('disabled');
-			//     $('.booking-day-button').not(clicked).addClass('disabled'); //disable everything except clicked element
-			//   }
-			
-		// $(".booking-day").find(".button").click(function () {
-	 //        alert("hi there");
-	 //        return false;
-		// });
 	</script>
 	<script type="text/javascript" src="booking.js"></script>
 
