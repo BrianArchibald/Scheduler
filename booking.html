@@ -111,10 +111,23 @@
 		</div>
 
 		<div class="booking-time">
-			<button class="booking-time-selector booking-button">8:00am</button>
+
 
 			
 
+			<select id="start-time">
+			  <option value="8:00">8:00</option>
+			  <option value="8:30">8:30</option>
+			</select>
+
+
+
+			<select id="end-time">
+			  <option value="8:00">8:00</option>
+			  <option value="8:30">8:30</option>
+			</select>
+			<!--
+			<button class="booking-time-selector booking-button">8:00am</button>
 			<button class="booking-time-selector booking-button">8:30am</button>
 			<button class="booking-time-selector booking-button">9:00am</button>
 			<button class="booking-time-selector booking-button">9:30am</button>
@@ -129,6 +142,7 @@
 			<button class="booking-time-selector booking-button">3:00pm</button>
 			<button class="booking-time-selector booking-button">3:30pm</button>
 			<button class="booking-time-selector booking-button">4:00pm</button>
+		-->
 		</div>
 	</div>
 
@@ -375,6 +389,8 @@
 
 		      	console.log(start, "start");
 		        console.log(end, "end");
+
+		        
 		        //get day from db of the day clicked
 		        this.db.collection('events')  
 		            .where('start_date', '>', start)
@@ -383,7 +399,8 @@
 							.then(function(querySnapshot) {
 					    		querySnapshot.forEach(function(doc) {
 					        	// doc.data() is never undefined for query doc snapshots
-					        	
+					        	// const startTimes = [];
+		        				// const endTimes = [];
 					       		 console.log(doc.id, " => ", doc.data());
 					       		 
 					       		 console.log(doc.data().start_date, "start time wo todate");
@@ -394,18 +411,45 @@
 					       		 console.log(doc.data().end_date.toDate().getHours(), " end hours");
 					       		 console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
 								
-					       		 let x = doc.data().start_date.seconds;
-					       		 console.log(x, "x start date seconds");
-					       		 let y = doc.data().end_date.seconds;
-					       		 console.log(y, "y end date seconds");
-					       		 let z = y - x;
-					       		 console.log(z, "z total seconds of meeting"); 
+					       		 let startTimes = doc.data().start_date.seconds;
+					       		 console.log(startTimes, "x start date seconds");
+					       		 let endTimes = doc.data().end_date.seconds;
+					       		 console.log(endTimes, "y end date seconds");
+					       		  
+					       		  // run function to populate drop down times
+					       		 populateTimes(startTimes, endTimes);
 				    		});
 				})
 				.catch(function(error) {
 			  		console.log("Error getting documents: ", error);
 				});	       
 			}
+
+
+			function populateTimes (start, end) {
+				console.log(start, "start func");
+				console.log(end, "end func");
+
+
+				let endTimes = end - (start + 1800);
+				console.log(endTimes, "endTimes func");
+				// do {
+			//		
+			//		
+			// 		
+			//
+			//
+			//
+			//			startHtml +=
+			// 		`<option value="8:00">8:00</option>`;
+			// 
+			//
+			//
+				// } while (endTimes < end);
+
+			}
+			document.getElementById("start-time").innerHTML = startHtml;
+
 	</script>
 	<script type="text/javascript" src="booking.js"></script>
 
