@@ -425,28 +425,28 @@
 				});	       
 			}
 
-
+			let startHtml = "";
 			function populateTimes (start, end) {
 				console.log(start, "start func");
 				console.log(end, "end func");
+					
+				//let startTimes = start;
+				//let endTimes = end;
+				//let endTimes = end - (start + 1800);
+				//console.log(endTimes, "endTimes func");
+				 do {
+					
 
 
-				let endTimes = end - (start + 1800);
-				console.log(endTimes, "endTimes func");
-				// do {
-			//		
-			//		
-			// 		
-			//
-			//
-			//
-			//			startHtml +=
-			// 		`<option value="8:00">8:00</option>`;
-			// 
-			//
-			//
-				// } while (endTimes < end);
-
+				 	endTime = end - (start + 1800);
+				 	//endTime = endTimes + startTimes;
+				 	console.log(endTime);
+						startHtml +=
+						`<option class="start-items" value="${start}">${start}</option>`;
+			 
+			
+			
+				 } while (end < endTime);
 			}
 			document.getElementById("start-time").innerHTML = startHtml;
 
