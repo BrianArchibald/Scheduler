@@ -226,9 +226,7 @@
 			}
 			document.getElementById("booking-calendar").innerHTML = weekHtml;
 		}
-
-
-
+		let interval = {};
 				// add active class to button clicked
 		$(".booking-time-button").click(function() {
 			let clicked = $(this);
@@ -242,10 +240,8 @@
 			    $('.booking-time-button').not(clicked).addClass('disabled'); //disable everything except clicked element
 			  }
 			let interval = $(this).data("sec");
-
+			console.log(interval);
 			});
-
-		
 
 		// add active class to button clicked
 		// $(".booking-time-selector").click(function() {
@@ -283,9 +279,6 @@
 				let start = new Date(calData);
 				let end = new Date(calDataPlusDay);
 
-		      	// console.log(start, "start");
-		       //  console.log(end, "end");
-
 		        //get day from db of the day clicked
 		        this.db.collection('events')  
 		            .where('start_date', '>', start)
@@ -319,30 +312,29 @@
 				});	       
 			}
 
-			let interval = 1800;
+
+
+
+			
 			let startHtml = "";
 			function populateTimes (start, end) {
 
 				let startHtml = "";
-				 do {
-				 	start = start + interval;
-				 	endTime = end - start;
-				 	
-				 	// to change from unix timestamp to hours/mins
-					// let startFormatted = new Date(start * 1000);
-					// let hours = startFormatted.getHours();
-					// let minutes = "0" + startFormatted.getMinutes();
-					// let formattedTime = hours + ':' + minutes.substr(-2);
-					
-					var startFormatted = new Date(start * 1000);
-					let formattedTime = startFormatted.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+				if(interval) {
+					do {
+					 	start = start + interval;
+					 	endTime = end - start;
+						
+						var startFormatted = new Date(start * 1000);
+						let formattedTime = startFormatted.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
 
-						startHtml +=
-						`<button class="booking-time-selector booking-button data-hour-min=${formattedTime}>${formattedTime}</button>`;
+							startHtml +=
+							`<button class="booking-time-selector booking-button data-hour-min=${formattedTime}>${formattedTime}</button>`;
 
-				 } while (endTime > interval);
+					} while (endTime > interval);
 
-			document.getElementById("booking-time").innerHTML = startHtml;
+				document.getElementById("booking-time").innerHTML = startHtml;
+				}
 			}
 					
 
