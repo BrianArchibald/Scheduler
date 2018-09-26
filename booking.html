@@ -23,34 +23,14 @@
 		<div class="booking-location">
 			<p>Location:<span id="location"> Skype</span></p>
 		</div>
+		<div class="meeting-length">
+			<h3 class="meeting-length-title">Meeting Length</h3>
+		</div>
 		<div class="booking-duration" id="booking-duration-container">
-
-			<button class="booking-time-button booking-button" id="30-min-button">30 min</button>
-			<button class="booking-time-button booking-button" id="60-min-button">60 min</button>
-			<button class="booking-time-button booking-button" id="90-min-button">90 min</button>
-			<button class="booking-time-button booking-button" id="120-min-button">120 min</button>   
-
-			<!--
-			<ul class="booking-list">
-			    <li class="booking-time-button booking-button">
-			        <input type='radio' value='30' name='radio' class="booking-input" id='30min'/>
-			        <label for='30min'>30 min</label>
-			    </li>
-			    <li class="booking-time-button booking-button">
-			        <input type='radio' value='60' name='radio' class="booking-input"  id='60min'/>
-			        <label for='60min'>60 min</label>
-			    </li>
-			    <li class="booking-time-button booking-button">
-			        <input type='radio' value='90' name='radio' class="booking-input"  id='90min'/>
-			        <label for='90min'>90 min</label>
-			    </li>
-			    <li class="booking-time-button booking-button">
-			        <input type='radio' value='120' name='radio' class="booking-input"  id='120min'/>
-			        <label for='120min'>120 min</label>
-			    </li>
-			</ul> -->
-
-			
+			<button class="booking-time-button booking-button" id="30-min-button" data-sec="1800">30 min</button>
+			<button class="booking-time-button booking-button" id="60-min-button" data-sec="3600">60 min</button>
+			<button class="booking-time-button booking-button" id="90-min-button" data-sec="5400">90 min</button>
+			<button class="booking-time-button booking-button" id="120-min-button" data-sec="7200">120 min</button>   			
 		</div>
 		<div class="booking-date-header">
 			<h3>Date of Meeting
@@ -65,7 +45,6 @@
 			</a>
 		</div>
 		<div id="booking-calendar">
-
 		</div>
 
 		<div class="booking-time-header">
@@ -110,39 +89,7 @@
 			</div>
 		</div>
 
-		<div class="booking-time">
-
-
-			
-
-			<select id="start-time">
-			  <option value="8:00">8:00</option>
-			  <option value="8:30">8:30</option>
-			</select>
-
-
-
-			<select id="end-time">
-			  <option value="8:00">8:00</option>
-			  <option value="8:30">8:30</option>
-			</select>
-			<!--
-			<button class="booking-time-selector booking-button">8:00am</button>
-			<button class="booking-time-selector booking-button">8:30am</button>
-			<button class="booking-time-selector booking-button">9:00am</button>
-			<button class="booking-time-selector booking-button">9:30am</button>
-			<button class="booking-time-selector booking-button">10:00am</button>
-			<button class="booking-time-selector booking-button">11:30am</button>
-			<button class="booking-time-selector booking-button">12:00pm</button>
-			<button class="booking-time-selector booking-button">12:30pm</button>
-			<button class="booking-time-selector booking-button">1:00pm</button>
-			<button class="booking-time-selector booking-button">1:30pm</button>
-			<button class="booking-time-selector booking-button">2:00pm</button>
-			<button class="booking-time-selector booking-button">2:30pm</button>
-			<button class="booking-time-selector booking-button">3:00pm</button>
-			<button class="booking-time-selector booking-button">3:30pm</button>
-			<button class="booking-time-selector booking-button">4:00pm</button>
-		-->
+		<div class="booking-time" id="booking-time">
 		</div>
 	</div>
 
@@ -185,7 +132,6 @@
 		var db = firebase.firestore();
 		db.settings({ timestampsInSnapshots: true });
 		//let entireStartDate = '';
-		
 		
 		// db.collection("events").get().then(function (data) {
 		// 	data.forEach(function (doc) {
@@ -230,77 +176,7 @@
 				// 	.catch(function(error) {
 				//   		console.log("Error getting documents: ", error);
 				// });
-					
-		//const dayCalendar = document.getElementById('booking-calendar');
-		//const dayButtons = document.getElementsByClassName('booking-day');
-		//const timeButtons = document.getElementsByClassName('booking-time');
-		// dayCalendar.addEventListener('click', (event) => {
-		//   // const isButton = event.target.nodeName === 'BUTTON';
-		//   // if (!isButton) {
-		//   //   return;
-		//   // } 
-		//   	console.log(event);
-		//   	console.log(event.target.id);
-		// 	  let dayButton = event.target.id;
-				
-			 
-		// 	  dayButton.classList.add("active-button");
-		// 	  //durationButtonItem.style.border = "1px solid orange";
-		// 	  console.log(event.target.id);
-			
-		// });
-		
-			
-			//bookingTimes.addEventListener('click', (event) => {
-		//   // const isButton = event.target.nodeName === 'BUTTON';
-		//   // if (!isButton) {
-		//   //   return;
-		//   // } 
-		// 	  const durationButtonItem = event.target.id;
-				
-		// 	  console.log(durationButtonItem, "dbc");
-		// 	  durationButtonItem.classList.add("active-button");
-		// 	  //durationButtonItem.style.border = "1px solid orange";
-		// 	  console.log(event.target.id);
-			
-		// })
 
-
-
-
-			///////////////////               populate time buttons for the day that was clicked
-
-			// 1 figure out what date was clicked
-			//	
-			// 2 call db for that date
-
-			// 3 determine all start and end times for that date
-
-			// 4 create html buttons for times between start and end times
-
-			// 1st button = start hour + start min
-
-
-			// if start min > 0 && < 30 (
-			// 	1st button = start hour + start min = 30)
-			// 	if start min > 30 (
-			// 		1st button = start hour + 1 + start min = 0)
-			// following buttons are 1st button + 30 mins
-
-			// last button - if last button is < end date (last button = none)
-
-			// use for loop to get all the buttons 
-
-			// for(let i = startDate; i < endDate; i + 30)
-
-
-
-			//  let buttonHtml = ""
-			//	buttonHtml +=
-			//		<button class="booking-time-selector booking-button">8:00am</button>
-
-					
-		
 		let weekHtml = "";
 		const monthNames = ["Jan", "Feb", "Mar", "Apr", "May","Jun","Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
 		let d = new Date();
@@ -316,6 +192,17 @@
 		let currentYear = new Date().getFullYear();	
 		
 		window.onload = function initWeekCalendar () {
+			$(".fa-arrow-left").click(function() {
+			// need to have date - 7 days
+			console.log("clicked left");
+			})
+
+			$(".fa-arrow-right").click(function() {
+				// need to have date + 7 days
+				console.log("clicked right");
+			})
+
+
 			for (let i = 0; i < 7; i++) {
 					
 				Date.prototype.addDays = function(days) {
@@ -340,7 +227,9 @@
 			document.getElementById("booking-calendar").innerHTML = weekHtml;
 		}
 
-		// add active class to button clicked
+
+
+				// add active class to button clicked
 		$(".booking-time-button").click(function() {
 			let clicked = $(this);
 			  if (clicked.hasClass('active-button')) {
@@ -352,20 +241,27 @@
 			    clicked.removeClass('disabled');
 			    $('.booking-time-button').not(clicked).addClass('disabled'); //disable everything except clicked element
 			  }
+			let interval = $(this).data("sec");
+
 			});
+
+		
+
 		// add active class to button clicked
-		$(".booking-time-selector").click(function() {
-			let clicked = $(this);
-			  if (clicked.hasClass('active-button')) {
-			    $('.booking-time-selector').removeClass('disabled'); //enable all again  
-			    clicked.removeClass('active-button');
-			  } else {
-			   $('.booking-time-selector').removeClass('active-button');
-			    clicked.addClass('active-button');
-			    clicked.removeClass('disabled');
-			    $('.booking-time-selector').not(clicked).addClass('disabled'); //disable everything except clicked element
-			  }
-		});
+		// $(".booking-time-selector").click(function() {
+		// 	let clicked = $(this);
+
+		// 	console.log(clicked);
+		// 	  if (clicked.hasClass('active-button')) {
+		// 	    $('.booking-time-selector').removeClass('disabled'); //enable all again  
+		// 	    clicked.removeClass('active-button');
+		// 	  } else {
+		// 	   $('.booking-time-selector').removeClass('active-button');
+		// 	    clicked.addClass('active-button');
+		// 	    clicked.removeClass('disabled');
+		// 	    $('.booking-time-selector').not(clicked).addClass('disabled'); //disable everything except clicked element
+		// 	  }
+		// });
 		
 			function activeClass(el) {
 				let clicked = $(el);
@@ -387,10 +283,9 @@
 				let start = new Date(calData);
 				let end = new Date(calDataPlusDay);
 
-		      	console.log(start, "start");
-		        console.log(end, "end");
+		      	// console.log(start, "start");
+		       //  console.log(end, "end");
 
-		        
 		        //get day from db of the day clicked
 		        this.db.collection('events')  
 		            .where('start_date', '>', start)
@@ -399,22 +294,21 @@
 							.then(function(querySnapshot) {
 					    		querySnapshot.forEach(function(doc) {
 					        	// doc.data() is never undefined for query doc snapshots
-					        	// const startTimes = [];
-		        				// const endTimes = [];
-					       		 console.log(doc.id, " => ", doc.data());
+					        	
+					       		 // console.log(doc.id, " => ", doc.data());
 					       		 
-					       		 console.log(doc.data().start_date, "start time wo todate");
-					       		 console.log(doc.data().start_date.toDate().getHours(), "start hours");
-					       		 console.log(doc.data().start_date.toDate().getMinutes(), "start mins");
+					       		 // console.log(doc.data().start_date, "start time wo todate");
+					       		 // console.log(doc.data().start_date.toDate().getHours(), "start hours");
+					       		 // console.log(doc.data().start_date.toDate().getMinutes(), "start mins");
 								
-					       		 console.log(doc.data().end_date, "end time wo todate");
-					       		 console.log(doc.data().end_date.toDate().getHours(), " end hours");
-					       		 console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
+					       		 // console.log(doc.data().end_date, "end time wo todate");
+					       		 // console.log(doc.data().end_date.toDate().getHours(), " end hours");
+					       		 // console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
 								
 					       		 let startTimes = doc.data().start_date.seconds;
-					       		 console.log(startTimes, "x start date seconds");
+					       		 // console.log(startTimes, "x start date seconds");
 					       		 let endTimes = doc.data().end_date.seconds;
-					       		 console.log(endTimes, "y end date seconds");
+					       		 // console.log(endTimes, "y end date seconds");
 					       		  
 					       		  // run function to populate drop down times
 					       		 populateTimes(startTimes, endTimes);
@@ -425,30 +319,32 @@
 				});	       
 			}
 
+			let interval = 1800;
 			let startHtml = "";
 			function populateTimes (start, end) {
-				console.log(start, "start func");
-				console.log(end, "end func");
-					
-				//let startTimes = start;
-				//let endTimes = end;
-				//let endTimes = end - (start + 1800);
-				//console.log(endTimes, "endTimes func");
+
+				let startHtml = "";
 				 do {
+				 	start = start + interval;
+				 	endTime = end - start;
+				 	
+				 	// to change from unix timestamp to hours/mins
+					// let startFormatted = new Date(start * 1000);
+					// let hours = startFormatted.getHours();
+					// let minutes = "0" + startFormatted.getMinutes();
+					// let formattedTime = hours + ':' + minutes.substr(-2);
 					
+					var startFormatted = new Date(start * 1000);
+					let formattedTime = startFormatted.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
 
-
-				 	endTime = end - (start + 1800);
-				 	//endTime = endTimes + startTimes;
-				 	console.log(endTime);
 						startHtml +=
-						`<option class="start-items" value="${start}">${start}</option>`;
-			 
-			
-			
-				 } while (end < endTime);
+						`<button class="booking-time-selector booking-button data-hour-min=${formattedTime}>${formattedTime}</button>`;
+
+				 } while (endTime > interval);
+
+			document.getElementById("booking-time").innerHTML = startHtml;
 			}
-			document.getElementById("start-time").innerHTML = startHtml;
+					
 
 	</script>
 	<script type="text/javascript" src="booking.js"></script>
