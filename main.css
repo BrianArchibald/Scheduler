@@ -747,11 +747,38 @@ label {
 	padding-bottom: 2vh;
 }
 .link-li-container {
-	display: grid;
-	grid-template-columns: .1fr .2fr .7fr;
+	/*display: grid;
+	grid-template-columns: .1fr .2fr .7fr; */
+
+	display: flex;
+    justify-content: space-between;
 	margin: 4vh 3.5vh 4vh 0;
 	border-bottom: 1px solid #cacaca;
 	padding-bottom: 2vh;
+}
+.ind-link-text {
+	margin-left: -10vw;
+}
+.meeting-link-buttons {
+	visibility: hidden;
+}
+.meeting-link-buttons.buttons-not-hidden {
+	visibility: visible;
+}
+.meeting-buttons {
+	cursor: pointer;
+	color: #4c6896;
+	background-color: rgb(255, 255, 255);
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+    border-color: #4c6896;
+    padding: 5px 9px;
+    margin-left: 10px;
+
+}
+.meeting-link-buttons .delete-meeting {
+	margin-left: 40px;
 }
 .scheduled-header {
 	margin-top: 8vh;

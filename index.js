@@ -17,3 +17,10 @@ function changeMobileNav() {
 mobileNavIcon.addEventListener('click', changeMobileNav);
 closeMenu.addEventListener('click', changeMobileNav);
 
+
+$(".link-option-container").click(function () {
+	console.log("clicked");
+	
+	console.log(this);
+	$(this).toggleClass("buttons-not-hidden");
+})
