@@ -451,6 +451,10 @@ ul {
 	padding-bottom: 5px;
 	border-bottom: 1px solid rgb(225, 231, 234);
 }
+.meeting-length-title {
+	color: #4c6896;
+
+}
 
 .booking-button {
 	width: 110px;
@@ -765,6 +769,38 @@ label {
 	padding-bottom: 2vh;
 }
 
+
+/* Settings Page  */
+
+.settings-container {
+	max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    justify-content: start;
+
+}
+
+.settings-container .timezone {
+	justify-content: start;
+	margin-top: 15vh;
+}
+.settings-container .timezone h5 {
+	font-size: 16px;
+	margin-right: 10vh;
+}
+
+.calendar-integration {
+	color: #4c6896;
+	
+}
+.calendar-integration h5 {
+	font-size: 16px;
+}
+.settings-timezone-button .landing-button {
+	padding: 10px 23px;
+	margin: 3vh 0 10vh 0;
+}
 /*   Media Queries   */
 
 @media screen and (max-width: 1013px) {

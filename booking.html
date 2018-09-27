@@ -226,7 +226,7 @@
 			}
 			document.getElementById("booking-calendar").innerHTML = weekHtml;
 		}
-		let interval = {};
+		let interval = 1800;
 				// add active class to button clicked
 		$(".booking-time-button").click(function() {
 			let clicked = $(this);
@@ -240,7 +240,7 @@
 			    $('.booking-time-button').not(clicked).addClass('disabled'); //disable everything except clicked element
 			  }
 			let interval = $(this).data("sec");
-			console.log(interval);
+			
 			});
 
 		// add active class to button clicked
