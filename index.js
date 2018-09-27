@@ -18,7 +18,7 @@ mobileNavIcon.addEventListener('click', changeMobileNav);
 closeMenu.addEventListener('click', changeMobileNav);
 
 
-$(".link-option-container").click(function () {
+$(".link-edit-container").click(function () {
 	console.log("clicked");
 	
 	console.log(this);

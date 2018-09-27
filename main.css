@@ -747,22 +747,29 @@ label {
 	padding-bottom: 2vh;
 }
 .link-li-container {
-	/*display: grid;
-	grid-template-columns: .1fr .2fr .7fr; */
+	display: grid;
+    grid-template-columns: 2fr 3fr 3fr;
 
-	display: flex;
-    justify-content: space-between;
+	/*display: flex;
+    justify-content: space-between;*/
 	margin: 4vh 3.5vh 4vh 0;
 	border-bottom: 1px solid #cacaca;
 	padding-bottom: 2vh;
 }
+.link-edit-container {
+	display: grid;
+    grid-template-columns: 10fr 1fr;
+}
+#link-option-dots {
+	visibility: visible;
+}
 .ind-link-text {
 	margin-left: -10vw;
 }
-.meeting-link-buttons {
+.link-edit-container {
 	visibility: hidden;
 }
-.meeting-link-buttons.buttons-not-hidden {
+.link-edit-container.buttons-not-hidden {
 	visibility: visible;
 }
 .meeting-buttons {
