@@ -739,6 +739,9 @@ label {
 	font-size: 16px;
 
 }
+.in-link-options:hover {
+	cursor: pointer;
+}
 .main-meeting-links	{
 	display: flex;
 	flex-direction: row;
@@ -784,6 +787,28 @@ label {
     margin-left: 10px;
 
 }
+.booked-links {
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 60px;
+}
+.booked-extras {
+	font-size: 14px;
+	margin-top: 30px;
+    margin-right: 32px;
+}
+.cancel-booked {
+	height: 36px;
+	
+	color: grey;
+	border: 1px solid grey;
+	border-radius: 2px;
+
+	background-color: white;
+	margin-top: 20px;
+}
+
 .meeting-link-buttons .delete-meeting {
 	margin-left: 40px;
 }
