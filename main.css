@@ -733,14 +733,17 @@ label {
 }
 .link-option-container {
 	justify-self: end;
+	visibility: visible;
 
 }
 .ind-link-options {
 	font-size: 16px;
 
 }
-.in-link-options:hover {
+.ind-link-options:hover {
 	cursor: pointer;
+	color: #4c6896;
+
 }
 .main-meeting-links	{
 	display: flex;
@@ -765,12 +768,14 @@ label {
 }
 #link-option-dots {
 	visibility: visible;
+	margin-right: -58px;
 }
 .ind-link-text {
 	margin-left: -10vw;
 }
 .link-edit-container {
 	visibility: hidden;
+
 }
 .link-edit-container.buttons-not-hidden {
 	visibility: visible;
@@ -786,6 +791,9 @@ label {
     padding: 5px 9px;
     margin-left: 10px;
 
+}
+.booked-edit-container {
+	display: flex;
 }
 .booked-links {
 	display: flex;
