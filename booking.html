@@ -177,6 +177,12 @@
 				//   		console.log("Error getting documents: ", error);
 				// });
 
+
+		//flags to tell if all three buttons clicked to display modal
+		let durationClicked = false;
+		let dayClicked = false;
+		let meetingTimeClicked = false;
+
 		let weekHtml = "";
 		const monthNames = ["Jan", "Feb", "Mar", "Apr", "May","Jun","Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
 		let d = new Date();
@@ -240,23 +246,25 @@
 			    $('.booking-time-button').not(clicked).addClass('disabled'); //disable everything except clicked element
 			  }
 			interval = $(this).data("sec");
+			durationClicked = true;
 			});
 
-		// add active class to button clicked
-		// $(".booking-time-selector").click(function() {
-		// 	let clicked = $(this);
+		//add active class to button clicked
+		$(".booking-time-selector").click(function() {
+			let clicked = $(this);
 
-		// 	console.log(clicked);
-		// 	  if (clicked.hasClass('active-button')) {
-		// 	    $('.booking-time-selector').removeClass('disabled'); //enable all again  
-		// 	    clicked.removeClass('active-button');
-		// 	  } else {
-		// 	   $('.booking-time-selector').removeClass('active-button');
-		// 	    clicked.addClass('active-button');
-		// 	    clicked.removeClass('disabled');
-		// 	    $('.booking-time-selector').not(clicked).addClass('disabled'); //disable everything except clicked element
-		// 	  }
-		// });
+			console.log(clicked);
+			  if (clicked.hasClass('active-button')) {
+			    $('.booking-time-selector').removeClass('disabled'); //enable all again  
+			    clicked.removeClass('active-button');
+			  } else {
+			   $('.booking-time-selector').removeClass('active-button');
+			    clicked.addClass('active-button');
+			    clicked.removeClass('disabled');
+			    $('.booking-time-selector').not(clicked).addClass('disabled'); //disable everything except clicked element
+			  }
+			  meetingTimeClicked = true;
+		});
 
 			function activeClass(el) {
 				let clicked = $(el);
@@ -277,6 +285,8 @@
 				let calDataPlusDay = el.dataset.year + "-" + fixedMonth   + "-" + dayPlusOne;
 				let start = new Date(calData);
 				let end = new Date(calDataPlusDay);
+
+				dayClicked = true;
 
 		        //get day from db of the day clicked
 		        this.db.collection('events')  
@@ -303,8 +313,12 @@
 					       		 // console.log(doc.data().end_date.toDate().getHours(), " end hours");
 					       		 // console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
 								
-					       		 let startTimes = doc.data().start_date.seconds;
-					       		 // console.log(startTimes, "x start date seconds");
+					       		 let startTimes = doc.data().start_date.seconds - interval;
+
+					       		 console.log(startTimes, "x start date seconds");
+
+
+					       		 // console.log(interval, "interval");
 					       		 let endTimes = doc.data().end_date.seconds;
 					       		 // console.log(endTimes, "y end date seconds");
 					       		  
@@ -318,23 +332,19 @@
 			}
 
 
-
-
-			
-			// let startHtml = "";
 			function populateTimes (start, end) {
 				console.log(interval);
 				let startHtml = "";
 				if(interval) {
 					do {
-						// start needs to start at start not start plus interval !!
+						
 					 	start = start + interval;
 					 	console.log(start, "start")
 					 	endTime = end - start;
 						
-						var startFormatted = new Date(start * 1000);
-						console.log(startFormatted, "startFormatted");
-						let formattedTime = startFormatted.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+						let startFormatted = new Date(start * 1000);
+						//console.log(startFormatted, "startFormatted");
+						var formattedTime = startFormatted.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
 						console.log(formattedTime, "formattedTime");
 							startHtml +=
 							`<button class="booking-time-selector booking-button data-hour-min=${formattedTime}>${formattedTime}</button>`;
