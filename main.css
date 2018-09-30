@@ -803,18 +803,17 @@ label {
 }
 .booked-extras {
 	font-size: 14px;
-	margin-top: 30px;
-    margin-right: 32px;
+	margin-top: 2px;
+    margin-right: 50px;
 }
 .cancel-booked {
 	height: 36px;
-	
 	color: grey;
 	border: 1px solid grey;
 	border-radius: 2px;
-
 	background-color: white;
-	margin-top: 20px;
+	margin-top: -6px;
+    margin-right: 20px;
 }
 
 .meeting-link-buttons .delete-meeting {
