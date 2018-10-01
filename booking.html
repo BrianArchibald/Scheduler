@@ -291,6 +291,7 @@
 
 			function activeClass(el) {
 				let clicked = $(el);
+				document.getElementById("booking-time").innerHTML = "";
 				console.log(el, "el");
 				// add active class to button clicked
 				  if (clicked.hasClass('active-button')) {
@@ -318,8 +319,9 @@
 		            .where('start_date', '<', end)
 			            .get()
 							.then(function(querySnapshot) {
-
+								console.log(querySnapshot.docs.length);
 								if(!querySnapshot.docs.length){
+
 									document.getElementById("booking-time").innerHTML = 'No times available';
 									return;
 								}
@@ -327,7 +329,7 @@
 					    		querySnapshot.forEach(function(doc) {
 					        	// doc.data() is never undefined for query doc snapshots
 					        	
-					       		 // console.log(doc.id, " => ", doc.data());
+					       		 console.log(doc.id, " => ", doc.data());
 					       		 
 					       		 // console.log(doc.data().start_date, "start time wo todate");
 					       		 // console.log(doc.data().start_date.toDate().getHours(), "start hours");
@@ -345,9 +347,10 @@
 					       		 // console.log(interval, "interval");
 					       		 let endTimes = doc.data().end_date.seconds;
 					       		 // console.log(endTimes, "y end date seconds");
-					       		  
+					       		 
 					       		  // run function to populate drop down times
 					       		 populateTimes(startTimes, endTimes);
+
 				    		});
 				})
 				.catch(function(error) {
@@ -357,27 +360,32 @@
 
 
 			function populateTimes (start, end) {
-				console.log(interval);
-				let startHtml = "";
-				if(interval) {
-					do {
-						
-					 	start = start + interval;
-					 	console.log(start, "start")
-					 	endTime = end - start;
-						
-						let startFormatted = new Date(start * 1000);
-						//console.log(startFormatted, "startFormatted");
-						var formattedTime = startFormatted.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-						console.log(formattedTime, "formattedTime");
-							startHtml +=
-							`<button class="booking-time-selector booking-button" data-hour-min=${formattedTime} onclick="activeClassSpecificTime(this)">${formattedTime}</button>`;
 
-					} while (endTime > interval);
+				//if (items > 1) { 
+					//for (x = 0; x < items; x++) {
+						
+						let startHtml = "";
+						if(interval) {
+							do {
+								
+							 	start = start + interval;
+							 	console.log(start, "start")
+							 	endTime = end - start;
+								
+								let startFormatted = new Date(start * 1000);
+								//console.log(startFormatted, "startFormatted");
+								var formattedTime = startFormatted.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+								
+									startHtml +=
+									`<button class="booking-time-selector booking-button" data-hour-min=${formattedTime} onclick="activeClassSpecificTime(this)">${formattedTime}</button>`;
+									console.log(formattedTime, "formattedTime");
+							} while (endTime > interval);
 
-				document.getElementById("booking-time").innerHTML = startHtml;
+						document.getElementById("booking-time").innerHTML += startHtml;
+					}
 				}
-			}
+				//}
+			//}
 					
 
 	</script>
