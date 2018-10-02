@@ -232,7 +232,8 @@
 			}
 			document.getElementById("booking-calendar").innerHTML = weekHtml;
 		}
-
+		let startTimes = 0;
+		let endTimes = 0;
 		let interval = 1800;
 				// add active class to button clicked
 		$(".booking-time-button").click(function() {
@@ -248,6 +249,8 @@
 			  }
 			interval = $(this).data("sec");
 			durationClicked = true;
+			document.getElementById("booking-time").innerHTML = "";
+			populateTimes(startTimes,endTimes, interval);
 			});
 
 		//add active class to button clicked
@@ -271,7 +274,6 @@
 
 			function activeClassSpecificTime(el) {
 				let clicked = $(el);
-				console.log(el, "el");
 				// add active class to button clicked
 				  if (clicked.hasClass('active-button')) {
 				    $('.booking-time-selector').removeClass('disabled'); //enable all again  
@@ -294,7 +296,7 @@
 				//if(durationClicked && dayClicked && meetingTimeClicked) {
 					$('.pre-confirm-modal').css('display', 'grid');
 					$('.booking-wrapper').css('opacity', '.5');
-					//$('.pre-confirm-modal').show();
+					
 
 				//}
 			};
@@ -350,18 +352,18 @@
 					       		 // console.log(doc.data().end_date.toDate().getHours(), " end hours");
 					       		 // console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
 								
-					       		 let startTimes = doc.data().start_date.seconds - interval;
+					       		 startTimes = doc.data().start_date.seconds - interval;
 
 					       		 console.log(startTimes, "x start date seconds");
 
 
 					       		 // console.log(interval, "interval");
-					       		 let endTimes = doc.data().end_date.seconds;
+					       		 endTimes = doc.data().end_date.seconds;
 					       		 // console.log(endTimes, "y end date seconds");
 					       		 
 					       		  // run function to populate drop down times
 					       		 
-					       		 populateTimes(startTimes, endTimes);
+					       		 populateTimes(startTimes, endTimes, interval);
 					       		
 				    		});
 				})
@@ -373,20 +375,31 @@
 			// change times when timezone is changed
 			//$(".DropDownTimezone").change(function )
 
-			function populateTimes (start, end) {
-						let startHtml = "";
-						if(interval) {
-							do {
-							 	start = start + interval;
-							 	endTime = end - start;
-								let startFormatted = new Date(start * 1000);
-								let formattedTime = startFormatted.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+			function populateTimes (start, end, seconds) {
+
+						// var timeButtonActive = $('.booking-duration').find('.active-button');
+						// var dataSeconds = timeButtonActive.data("sec");
+
+						// if(!dataSeconds === undefined || !dataSeconds === "") {
+						// 	interval = dataSeconds;
+						// }
+
+						if (start != 0 && end != 0) {
+
+							let startHtml = "";
+							if(seconds) {
+								do {
+								 	start = start + seconds;
+								 	endTime = end - start;
+									let startFormatted = new Date(start * 1000);
+									let formattedTime = startFormatted.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+									
+										startHtml +=
+										`<button class="booking-time-selector booking-button" data-hour-min=${formattedTime} onclick="activeClassSpecificTime(this)">${formattedTime}</button>`;
 								
-									startHtml +=
-									`<button class="booking-time-selector booking-button" data-hour-min=${formattedTime} onclick="activeClassSpecificTime(this)">${formattedTime}</button>`;
-							
-							} while (endTime > interval);
-						document.getElementById("booking-time").innerHTML += startHtml;
+								} while (endTime > seconds);
+							document.getElementById("booking-time").innerHTML += startHtml;
+							}
 					}
 				}
 
