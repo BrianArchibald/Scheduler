@@ -131,8 +131,6 @@
 		// Initialize Cloud Firestore through Firebase
 		var db = firebase.firestore();
 		db.settings({ timestampsInSnapshots: true });
-		//let entireStartDate = '';
-		
 		// db.collection("events").get().then(function (data) {
 		// 	data.forEach(function (doc) {
 		// 		// doc.data() is never undefined for query doc snapshots
@@ -161,23 +159,7 @@
 		// 		// console.log(doc.data().end_date.toDate().getHours(), " end hours");
 		// 	});
 		// });
-				// using where to get only db collection that meet certain criteria
-				// going to add a click event to the day button,
-				// and use "this", then with click event run the function below with .where
-				// where date == click event date ex..
-				// db.collection("events").where("start_date", "==", true)
-				// 			.get()
-				// 			.then(function(querySnapshot) {
-				//     		querySnapshot.forEach(function(doc) {
-				//         	// doc.data() is never undefined for query doc snapshots
-				//        		 console.log(doc.id, " => ", doc.data());
-				//     		});
-				// 		})
-				// 	.catch(function(error) {
-				//   		console.log("Error getting documents: ", error);
-				// });
-
-
+				
 		//flags to tell if all three buttons clicked to display modal
 		let durationClicked = false;
 		let dayClicked = false;
@@ -234,7 +216,7 @@
 
 		let startTimes = 0;
 		let endTimes = 0;
-		let interval = 1800;
+		let interval = 0;
 				// add active class to button clicked
 		$(".booking-time-button").click(function() {
 			let clicked = $(this);
@@ -247,15 +229,23 @@
 			    clicked.removeClass('disabled');
 			    $('.booking-time-button').not(clicked).addClass('disabled'); //disable everything except clicked element
 			  }
-			interval = $(this).data("sec");
 
-			if($('.booking-time-button').hasClass('active-button')) {
+			  if($('.booking-time-button').hasClass('active-button')) {
 				durationClicked = true;
 				} else {
 				durationClicked = false;
-			}
+				}
+
+			interval = $(this).data("sec");
+			
+			console.log(interval, "interval on duration buttons");
+
+		
+			let adjustedstartTime = startTimes + interval;
+
+			console.log(adjustedstartTime, "adjstart"); 
 			document.getElementById("booking-time").innerHTML = "";
-			populateTimes(startTimes,endTimes, interval);
+			populateTimes(adjustedstartTime,endTimes, interval);
 			});
 
 		//add active class to button clicked
@@ -396,7 +386,7 @@
 										startHtml +=
 										`<button class="booking-time-selector booking-button" data-hour-min=${formattedTime} onclick="activeClassSpecificTime(this)">${formattedTime}</button>`;
 								
-								} while (endTime > seconds);
+								} while (endTime > seconds * 2);
 							document.getElementById("booking-time").innerHTML += startHtml;
 							}
 					}
