@@ -112,7 +112,7 @@
 		</div>
 		<div class="pre-confirm-buttons">
 			<button type="submit" class="signup-button">Submit</button>
-			<button type="cancel" class="signup-button" id="pre-confirm-cancel-button">Cancel</button>
+			<button type="cancel" class="signup-button confirm-modal-cancel-button" id="pre-confirm-cancel-button">Cancel</button>
 		</div>
 	</div>
 
@@ -209,7 +209,6 @@
 				console.log("clicked right");
 			})
 
-
 			for (let i = 0; i < 7; i++) {
 					
 				Date.prototype.addDays = function(days) {
@@ -232,6 +231,7 @@
 			}
 			document.getElementById("booking-calendar").innerHTML = weekHtml;
 		}
+
 		let startTimes = 0;
 		let endTimes = 0;
 		let interval = 1800;
@@ -248,7 +248,12 @@
 			    $('.booking-time-button').not(clicked).addClass('disabled'); //disable everything except clicked element
 			  }
 			interval = $(this).data("sec");
-			durationClicked = true;
+
+			if($('.booking-time-button').hasClass('active-button')) {
+				durationClicked = true;
+				} else {
+				durationClicked = false;
+			}
 			document.getElementById("booking-time").innerHTML = "";
 			populateTimes(startTimes,endTimes, interval);
 			});
@@ -256,9 +261,6 @@
 		//add active class to button clicked
 		$(".booking-time-selector").click(function() {
 			let clicked = $(this);
-			console.log(clicked, "clicked");
-
-			console.log(clicked);
 			  if (clicked.hasClass('active-button')) {
 			    $('.booking-time-selector').removeClass('disabled'); //enable all again  
 			    clicked.removeClass('active-button');
@@ -268,9 +270,13 @@
 			    clicked.removeClass('disabled');
 			    $('.booking-time-selector').not(clicked).addClass('disabled'); //disable everything except clicked element
 			  }
-			  meetingTimeClicked = true;
-		});
 
+			if($('.booking-time-selector').hasClass('active-button')) {
+				meetingTimeClicked = true;
+				} else {
+				meetingTimeClicked = false;
+			}		 
+		});
 
 			function activeClassSpecificTime(el) {
 				let clicked = $(el);
@@ -286,26 +292,24 @@
 					}
 					meetingTimeClicked = true;
 					runModal();
-				// if(durationClicked && dayClicked && meetingTimeClicked) {
-				// 	$('.pre-confirm-modal').css('display', 'grid');
-				// };
 			};
 
 			function runModal() {
-				console.log("modal ran");
-				//if(durationClicked && dayClicked && meetingTimeClicked) {
+				if(durationClicked && dayClicked && meetingTimeClicked) {
 					$('.pre-confirm-modal').css('display', 'grid');
-					$('.booking-wrapper').css('opacity', '.5');
-					
-
-				//}
+					$('.booking-wrapper').css('opacity', '.4');
+				}
 			};
 
+			$('.confirm-modal-cancel-button').click(function () {
+				$('.pre-confirm-modal').css('display', 'none');
+				$('.booking-wrapper').css('opacity', '1');
+			})
 
 			function activeClass(el) {
 				let clicked = $(el);
 				document.getElementById("booking-time").innerHTML = "";
-				console.log(el, "el");
+				//console.log(el, "el");
 				// add active class to button clicked
 				  if (clicked.hasClass('active-button')) {
 				    $('.booking-day-button').removeClass('disabled'); //enable all again  
@@ -317,6 +321,12 @@
 				    $('.booking-day-button').not(clicked).addClass('disabled'); //disable everything except clicked element
 					}
 
+					if($('.booking-day-button').hasClass('active-button')) {
+					dayClicked = true;
+						} else {
+					dayClicked = false;
+					}	
+
 				let fixedMonth = parseInt(el.dataset.month) + 1;
 				let dayPlusOne = parseInt(el.dataset.date) + 1;
 				let calData = el.dataset.year + "-" + fixedMonth + "-" + el.dataset.date;
@@ -324,43 +334,34 @@
 				let start = new Date(calData);
 				let end = new Date(calDataPlusDay);
 
-				dayClicked = true;
-
 		        //get day from db of the day clicked
 		        this.db.collection('events')  
 		            .where('start_date', '>', start)
 		            .where('start_date', '<', end)
 			            .get()
 							.then(function(querySnapshot) {
-								console.log(querySnapshot.docs.length);
+								//console.log(querySnapshot.docs.length);
 								if(!querySnapshot.docs.length){
-
 									document.getElementById("booking-time").innerHTML = 'No times available';
 									return;
 								}
 
 					    		querySnapshot.forEach(function(doc) {
 					        	// doc.data() is never undefined for query doc snapshots
-					        	
-					       		 console.log(doc.id, " => ", doc.data());
+					       		// console.log(doc.id, " => ", doc.data());
 					       		 
 					       		 // console.log(doc.data().start_date, "start time wo todate");
 					       		 // console.log(doc.data().start_date.toDate().getHours(), "start hours");
 					       		 // console.log(doc.data().start_date.toDate().getMinutes(), "start mins");
-								
 					       		 // console.log(doc.data().end_date, "end time wo todate");
 					       		 // console.log(doc.data().end_date.toDate().getHours(), " end hours");
 					       		 // console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
 								
 					       		 startTimes = doc.data().start_date.seconds - interval;
+					       		 console.log(startTimes, "start date seconds - interval");
 
-					       		 console.log(startTimes, "x start date seconds");
-
-
-					       		 // console.log(interval, "interval");
 					       		 endTimes = doc.data().end_date.seconds;
-					       		 // console.log(endTimes, "y end date seconds");
-					       		 
+
 					       		  // run function to populate drop down times
 					       		 
 					       		 populateTimes(startTimes, endTimes, interval);
@@ -377,12 +378,7 @@
 
 			function populateTimes (start, end, seconds) {
 
-						// var timeButtonActive = $('.booking-duration').find('.active-button');
-						// var dataSeconds = timeButtonActive.data("sec");
-
-						// if(!dataSeconds === undefined || !dataSeconds === "") {
-						// 	interval = dataSeconds;
-						// }
+						console.log(start, "start" , end, "end", seconds, "seconds");
 
 						if (start != 0 && end != 0) {
 
@@ -390,10 +386,13 @@
 							if(seconds) {
 								do {
 								 	start = start + seconds;
+								 	console.log(start, "start = Start plus seconds");
+								 	console.log(seconds, "seconds");
+
 								 	endTime = end - start;
 									let startFormatted = new Date(start * 1000);
 									let formattedTime = startFormatted.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-									
+									console.log(formattedTime);
 										startHtml +=
 										`<button class="booking-time-selector booking-button" data-hour-min=${formattedTime} onclick="activeClassSpecificTime(this)">${formattedTime}</button>`;
 								
