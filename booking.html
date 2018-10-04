@@ -181,15 +181,7 @@
 		
 		window.onload = function initWeekCalendar () {
 
-			$(".fa-arrow-left").click(function() {
-			// need to have date - 7 days
-			console.log("clicked left");
-			})
 
-			$(".fa-arrow-right").click(function() {
-				// need to have date + 7 days
-				console.log("clicked right");
-			})
 
 			for (let i = 0; i < 7; i++) {
 					
@@ -198,6 +190,8 @@
 				    date.setDate(date.getDate() + days);
 				    return date;
 				}
+
+
 				let date = new Date();
 				let dayOfWeek = weekday[date.addDays(i).getDay()];
 				let dayOfMonth = date.addDays(i).getMonth();
@@ -213,6 +207,29 @@
 			}
 			document.getElementById("booking-calendar").innerHTML = weekHtml;
 		}
+
+		var dateLeftArrow = undefined;
+		var dateRightArrow = undefined;
+		$(".fa-arrow-left").click(function() {
+			// need to have date - 7 days
+			Date.prototype.addDays = function(days) {
+				    let date = new Date(this.valueOf());
+				    date.setDate(date.getDate() + days);
+				    //return date;
+				    var dateLeftArrow = date.addDays(-7);
+				    return dateLeftArrow;
+				}
+			
+			initWeekCalendar();
+			console.log("clicked left");
+		})
+
+		$(".fa-arrow-right").click(function() {
+			// need to have date + 7 days
+			var dateRightArrow = date.addDays(7);
+			initWeekCalendar();
+			console.log("clicked right");
+		})
 
 		let startTimes = 0;
 		let endTimes = 0;
