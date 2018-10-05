@@ -297,6 +297,7 @@
 
 			function activeClassSpecificTime(el) {
 				let clicked = $(el);
+				console.log(el);
 				// add active class to button clicked
 				  if (clicked.hasClass('active-button')) {
 				    $('.booking-time-selector').removeClass('disabled'); //enable all again  
@@ -308,20 +309,25 @@
 				    $('.booking-time-selector').not(clicked).addClass('disabled'); //disable everything except clicked element
 					}
 					meetingTimeClicked = true;
-					runModal();
+					runModal(clicked.data("hour-min"));
 			};
 
-			function runModal() {
+			function runModal(data) {
 				if(durationClicked && dayClicked && meetingTimeClicked) {
+					$('.pre-confirm-modal .pre-confirm-time').text(data);
 					$('.pre-confirm-modal').css('display', 'grid');
 					$('.booking-wrapper').css('opacity', '.4');
 				}
-			};
+			}
 
 			$('.confirm-modal-cancel-button').click(function () {
 				$('.pre-confirm-modal').css('display', 'none');
 				$('.booking-wrapper').css('opacity', '1');
+
+
 			})
+
+
 
 			function activeClass(el) {
 				let clicked = $(el);
