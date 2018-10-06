@@ -271,6 +271,8 @@
 			console.log(adjustedstartTime, "adjstart"); 
 			document.getElementById("booking-time").innerHTML = "";
 			populateTimes(adjustedstartTime,endTimes, interval);
+			$('.booking-day-button').removeClass('active-button');
+            $('.booking-time').html('');
 			});
 
 		//add active class to button clicked
