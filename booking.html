@@ -93,7 +93,6 @@
 	</div>
 
 	<!-- Modal Window after all selections are made -->
-
 	<div class="pre-confirm-modal" id="booking-modal">
 		<div class="pre-confirm-title">
 			<p class="pre-confirm-title-text">Confirm Your Meeting with <span id="meeting-owner">Brian</span></p>
@@ -113,7 +112,7 @@
 			<button type="submit" class="signup-button">Submit</button>
 			<button type="cancel" class="signup-button confirm-modal-cancel-button" id="pre-confirm-cancel-button">Cancel</button>
 		</div>
-	</div>
+	</div> <!-- End of Modal Window -->
 
 	<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
@@ -163,7 +162,7 @@
 		let durationClicked = false;
 		let dayClicked = false;
 		let meetingTimeClicked = false;
-        var n = 0;
+        let n = 0;
 
 		const monthNames = ["Jan", "Feb", "Mar", "Apr", "May","Jun","Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
 		let d = new Date();
@@ -191,7 +190,6 @@
 				    return date;
 				}
 
-
 				let date = new Date();
 				let dayOfWeek = weekday[date.addDays(i).getDay()];
 				let dayOfMonth = date.addDays(i).getMonth();
@@ -208,18 +206,17 @@
 			document.getElementById("booking-calendar").innerHTML = weekHtml;
 		}
 
-		var dateLeftArrow = undefined;
-		var dateRightArrow = undefined;
+		let dateLeftArrow = undefined;
+		let dateRightArrow = undefined;
 		$(".fa-arrow-left").click(function() {
 			// need to have date - 7 days
 			Date.prototype.addDays = function(days) {
                 let date = new Date(this.valueOf());
                 date.setDate(date.getDate() + days);
                 //return date;
-                var dateLeftArrow = date.addDays(-7);
+                let dateLeftArrow = date.addDays(-7);
                 return dateLeftArrow;
             }
-			
 			initWeekCalendar(-1);
 			console.log("clicked left");
 		})
@@ -230,7 +227,7 @@
                 let date = new Date(this.valueOf());
                 date.setDate(date.getDate() + days);
                 //return date;
-                var dateRightArrow = date.addDays(7);
+                let dateRightArrow = date.addDays(7);
                 return dateRightArrow;
             }
 			initWeekCalendar(1);
@@ -242,9 +239,7 @@
 		let interval = 0;
         
         // add active class to button clicked
-
 		$(".booking-time-button").click(function() {
-
             let clicked = $(this);
 			  if (clicked.hasClass('active-button')) {
 			    $('.booking-time-button').removeClass('disabled'); //enable all again  
@@ -263,20 +258,13 @@
 				}
 
 			interval = $(this).data("sec");
-			
-			console.log(interval, "interval on duration buttons");
-
-		
 			let adjustedstartTime = startTimes + interval;
-
-			console.log(adjustedstartTime, "adjstart"); 
 			document.getElementById("booking-time").innerHTML = "";
 			populateTimes(adjustedstartTime,endTimes, interval);
 
 			if (  $('#booking-calendar .active-button').length )
 				activeClass(document.querySelector('#booking-calendar .active-button'), clicked );
-
-			});
+		});
 
 		//add active class to button clicked
 		$(".booking-time-selector").click(function() {
@@ -370,8 +358,7 @@
 
 					    		querySnapshot.forEach(function(doc) {
 					        	// doc.data() is never undefined for query doc snapshots
-					       		// console.log(doc.id, " => ", doc.data());
-					       		 
+					       		// console.log(doc.id, " => ", doc.data()); 
 					       		 // console.log(doc.data().start_date, "start time wo todate");
 					       		 // console.log(doc.data().start_date.toDate().getHours(), "start hours");
 					       		 // console.log(doc.data().start_date.toDate().getMinutes(), "start mins");
