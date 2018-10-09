@@ -1,45 +1,72 @@
-// let email = document.getElementById('signup-email').value;
-// let password = document.getElementById('signup-password').value;
-const firstName = document.getElementById('first-name').value;
-const lastName = document.getElementById('last-name').value;
 
-function completeSignUp () {
-	let email = document.getElementById('signup-email').value;
-	let password = document.getElementById('signup-password').value;
-	consol.log("ran", email, password);
-
-	firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-	  // Handle Errors here.
-	  var errorCode = error.code;
-	  var errorMessage = error.message;
-	  // ...
-	});
-}
-const submitButton = document.getElementById('signup-form');
-submitButton.addEventListener("submit", completeSignUp, false); 
+    var config = {
+      apiKey: "AIzaSyDJFbbPR1n6if3yX1giV8KvW_Pyq88aBKk",
+      authDomain: "calendar-c07dd.firebaseapp.com",
+      databaseURL: "https://calendar-c07dd.firebaseio.com",
+      projectId: "calendar-c07dd",
+      storageBucket: "calendar-c07dd.appspot.com",
+      messagingSenderId: "1041934999578"
+    };
+    firebase.initializeApp(config);
 
 
-function sendEmailVerification() {
-    firebase.auth().currentUser.sendEmailVerification().then(function() {
-       alert('Email Verification Sent!');
-    });
-}
 
-function sendPasswordReset() {
-    let email = document.getElementById('signup-email').value;
-    firebase.auth().sendPasswordResetEmail(email).then(function() {
-       alert('Password Reset Email Sent!');
-    }).catch(function(error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      if (errorCode == 'auth/invalid-email') {
-         alert(errorMessage);
-       } else if (errorCode == 'auth/user-not-found') {
-          alert(errorMessage);
-       }
-        console.log(error);
-     });
-}
+
+
+const txtEmail = document.getElementById('signup-email');
+const txtPassword = document.getElementById('signup-password');
+const firstName = document.getElementById('first-name');
+const lastName = document.getElementById('last-name');
+const signUpButton = document.getElementById('sign-up-button');
+
+// function completeSignUp () {
+// 	// let email = document.getElementById('signup-email').value;
+// 	// let password = document.getElementById('signup-password').value;
+// 	consol.log("ran", email, password);
+
+// 	firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+// 	  // Handle Errors here.
+// 	  var errorCode = error.code;
+// 	  var errorMessage = error.message;
+// 	  // ...
+// 	});
+// }
+//const submitButton = document.getElementById('signup-form');
+
+//Add login event
+signUpButton.addEventListener('click', e => {
+   console.log("clicked");
+  //Get email and password
+  const email = txtEmail.value;
+  const pass = txtPassword.value;
+  const auth = firebase.auth();
+  // Sign in
+  const promise = auth.signInWithEmailAndPassword(email, pass);
+  promise.catch(e = console.log(e.message));
+}); 
+
+
+// function sendEmailVerification() {
+//     firebase.auth().currentUser.sendEmailVerification().then(function() {
+//        alert('Email Verification Sent!');
+//     });
+// }
+
+// function sendPasswordReset() {
+//     let email = document.getElementById('signup-email').value;
+//     firebase.auth().sendPasswordResetEmail(email).then(function() {
+//        alert('Password Reset Email Sent!');
+//     }).catch(function(error) {
+//       var errorCode = error.code;
+//       var errorMessage = error.message;
+//       if (errorCode == 'auth/invalid-email') {
+//          alert(errorMessage);
+//        } else if (errorCode == 'auth/user-not-found') {
+//           alert(errorMessage);
+//        }
+//         console.log(error);
+//      });
+// }
 
 // /**
 //      * initApp handles setting up UI event listeners and registering Firebase auth listeners:
