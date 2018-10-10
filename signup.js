@@ -42,14 +42,22 @@ signUpButton.addEventListener('click', e => {
   const promise = auth.createUserWithEmailAndPassword(email, pass);
   promise.catch(e => console.log(e.message));
 }); 
-
+//Add a realtime listener for auth state changes
 firebase.auth().onAuthStateChanged(firebaseUser => {
   if(firebaseUser) {
   console.log(firebaseUser);
+  //send user when logged in to main.html
+  window.location = 'main.html';
+  // can add css to show hide/show logged in etc...
   } else {
     console.log('not logged in');
   }
 });
+
+
+
+
+
 
 // sign out user
 // btnLogout.addEventListener('click', e => {
