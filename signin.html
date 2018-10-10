@@ -6,6 +6,9 @@
 	<title>Sign In Page</title>
 	<link rel="stylesheet" type="text/css" href="main.css">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+	<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
 </head>
 
 <body class="signup-body">
@@ -22,13 +25,20 @@
 			</div>
 			<div class="signupbox-bottom">
 				<p class="signup-bottom-text">Or</p>
-
+				<div class="signup-form">
+					
+				    <input type="email" class="signup-inputs" id="signup-email" placeholder="Email" name="emailaddress" required> 
+				  	<input type="password" class="signup-inputs" id="signup-password" placeholder="Password" name="psw" minlength="8" required>
+				  	<button class="signin-button signup-button" id="sign-in-button">Sign Up</button>
+				</div>
+				<!--
 				<form class="signup-form">
 					<input type="email" class="signup-inputs" id="signup-email" placeholder="Email" name="emailaddress" required> 
 				  	<input type="password" class="signup-inputs" id="signup-password" placeholder="Password" name="psw" minlength="8" required>
 				  	<button type="submit" class="signup-button">Sign In</button>
 				    <p class="forgot-password">I forgot my password</p>
 				</form>
+			-->
 			</div>
 		</div>
 
@@ -40,6 +50,7 @@
 		    </div>
 		</div> <!-- End of Footer -->
 	</div>
+	<!--
 	<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
 	<script>
@@ -53,6 +64,7 @@
 		};
 		firebase.initializeApp(config);
 	</script>
-	<script type="javascript" src="signup.js"></script>
+-->
+	<script src="signin.js"></script>
 </body>
 </html>
