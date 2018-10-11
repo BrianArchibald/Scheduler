@@ -178,7 +178,7 @@ button {
     background-color: #4c6896;
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 13px 21px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -215,10 +215,10 @@ button {
 	margin: auto;
 }
 .feature-header {
-	margin-top: 10vh;
+	margin-top: 1vh;
 }
 .feature-section {
-	padding-top: 10vh;
+	padding-top: 1vh;
 }
 .feature-examples {
 	display: flex;
@@ -374,7 +374,9 @@ button {
 #DropDownTimezone-signup {
 	width: 200px;
 	margin: 10px 0;
-	color: #6d6d6d;
+	
+	border: none;
+	color: #4c6896;
 }
 .signup-inputs{
 	width: 92%;
@@ -417,14 +419,14 @@ button {
 	background-color: #658dce;
 }
 .footer-container-signup {
-	color: #4c6896;
+	color: #3e3f40;
     margin-top: 5vh;
     font-size: 14px;
     letter-spacing: .2px;
 }
 .terms-conditions a:link{
 	text-decoration: none;
-	color: #786a00;
+	color: #4c6896;
 
 }
 
@@ -873,6 +875,17 @@ label {
 	padding: 10px 23px;
 	margin: 3vh 0 10vh 0;
 }
+
+/*    Create Meeting Page   */
+
+.create-meeting-wrapper {
+	max-width: 750px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: auto;
+}
+
 /*   Media Queries   */
 
 @media screen and (max-width: 1013px) {
