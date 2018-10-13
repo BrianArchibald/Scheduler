@@ -7,17 +7,21 @@
 	<link rel="stylesheet" type="text/css" href="main.css">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+	<script
+	  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+	  crossorigin="anonymous"></script>
 </head>
 <body>
 	<div class="create-meeting-wrapper">
-		<div class="create-header">
-			<div class="create-cancel" id="create-cancel">Cancel</div>
-			<div class="create-save" id="create-save">Save</div>
-		</div>	
+		
 		<div class="create-title">
 			<p class="create-title-text">Create Your Meeting</p>
-			<button class="create-initial-buttons create-left-switch" id="create-details">Details</button>
+			<!--
+			<button class="create-initial-buttons create-left-switch active-button-create" id="create-details">Details</button>
+			
 			<button class="create-initial-buttons create-right-switch" id="create-availability">Availability</button>
+			-->
 		</div>
 		<div class="create-details">
 			<div class="create-meeting-title create-details-items">
@@ -34,10 +38,18 @@
 			</div>
 		</div>
 		<div class="create-duration">
-			<button class="create-duration-times" id="create-30">30min</button>
-			<button class="create-duration-times" id="create-60">60min</button>
-			<button class="create-duration-times" id="create-90">90min</button>
-			<button class="create-duration-times" id="create-120">120min</button>
+			<button class="create-duration-times" id="create-30" data-create-sec="1800">30min</button>
+			<button class="create-duration-times" id="create-60" data-create-sec="3600">60min</button>
+			<button class="create-duration-times" id="create-90" data-create-sec="5400">90min</button>
+			<button class="create-duration-times" id="create-120" data-create-sec="7200">120min</button>
+		</div>
+		<div class="create-footer">
+			<button class="create-cancel create-initial-buttons" id="create-cancel">Cancel</button>
+			<button class="create-save create-initial-buttons" id="create-save">Save</button>
+			
+		</div>	
+		<div class="create-end-text">
+			<p>Save and go to your calendar to finish.</p>
 		</div>
 	</div>
 	<script type="text/javascript" src="create.js"></script>

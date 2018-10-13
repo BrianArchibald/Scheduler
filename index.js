@@ -19,8 +19,13 @@ closeMenu.addEventListener('click', changeMobileNav);
 
 
 $(".link-edit-container").click(function () {
-	console.log("clicked");
-	
-	console.log(this);
-	$(this).toggleClass("buttons-not-hidden");
+  console.log("clicked");
+  
+  console.log(this);
+  $(this).toggleClass("buttons-not-hidden");
+})
+
+//Create Meeting click
+$('.create-link-button').click(function(){
+   window.location.href='createMeeting.html';
 })

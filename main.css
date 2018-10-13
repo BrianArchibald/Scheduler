@@ -178,7 +178,7 @@ button {
     background-color: #4c6896;
     border: none;
     color: white;
-    padding: 13px 21px;
+    padding: 10px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -878,24 +878,18 @@ label {
 
 /*    Create Meeting Page   */
 
-.create-header {
+.create-footer {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	margin-top: 6vh;
-	color: #0d69ff;;
-}
-.create-cancel {
-	margin-right: 27vw;
-}
-.create-cancel:hover, .create-save:hover {
-	color: #76a9fc;
-	cursor: pointer;
+	margin-top: 9vh;
+	margin-bottom: 1vh;
+	color: #0d69ff;
 }
 
 .create-title-text {
 	text-align: center;
-	margin: 6vh 0 10vh 0;
+	margin: 4vh 0 4vh 0;
 	font-size: 18px;
 	color: #5a5a5a;
 }
@@ -910,13 +904,7 @@ label {
     font-size: 14px;
 }
 .create-left-switch {
-	margin-right: -4px;
     border-right: none;
-    background-color: #759fff;
-    color: white;
-}
-.create-right-swithc {
-	margin-left: -4px;
 }
 
 .create-meeting-wrapper {
@@ -926,8 +914,10 @@ label {
 	align-items: center;
 	margin: auto;
 }
-
 .create-title {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	margin: 1vh 0vh;
 }
 .create-details-items {
@@ -942,7 +932,7 @@ label {
 	align-self: center;
 }
 .create-detail-text:focus {
-	border: red;
+	outline: none;
 }
 .create-detail-text {
 	margin: 2vh 0 2vh 4vh;
@@ -965,6 +955,29 @@ label {
     background-color: transparent;
     cursor: pointer;
 }
+.active-button-create {
+	background-color: #759fff;
+    color: white;
+}
+#create-save {
+	background-color: #759fff;
+    color: white;
+}
+#create-save:hover {
+	background-color: #8eaffb;
+}
+#create-cancel {
+	background-color: #d4d4d4;
+	color: white;
+}
+#scheduler-finished {
+	font-size: 16px;
+	position: relative;
+	
+	left: 65vw;
+	border: 1px solid grey;
+}
+
 
 /*   Media Queries   */
 
