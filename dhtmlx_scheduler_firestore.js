@@ -2,6 +2,7 @@
 
 	function init(scheduler){
 
+
 		var events;
 		var unsubscr;
 
@@ -84,6 +85,7 @@
 		}
 
 		function toFirebaseData(event){
+			
 			var res = {};
 			for (var key in event){
 				if (key !== "id" && key[0] !== "_"){

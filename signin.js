@@ -30,23 +30,7 @@
 
 const txtEmail = document.getElementById('signup-email');
 const txtPassword = document.getElementById('signup-password');
-// const firstName = document.getElementById('first-name');
-// const lastName = document.getElementById('last-name');
 const signInButton = document.getElementById('sign-in-button');
-
-// function completeSignUp () {
-// 	// let email = document.getElementById('signup-email').value;
-// 	// let password = document.getElementById('signup-password').value;
-// 	consol.log("ran", email, password);
-
-// 	firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-// 	  // Handle Errors here.
-// 	  var errorCode = error.code;
-// 	  var errorMessage = error.message;
-// 	  // ...
-// 	});
-// }
-//const submitButton = document.getElementById('signup-form');
 
 //Add login event
 signInButton.addEventListener('click', e => {  
@@ -61,7 +45,16 @@ signInButton.addEventListener('click', e => {
   promise.catch(e => console.log(e.message));
 }); 
 
-
-
+//Add a realtime listener for auth state changes
+firebase.auth().onAuthStateChanged(firebaseUser => {
+  if(firebaseUser) {
+  console.log(firebaseUser);
+  //send user when logged in to main.html
+  window.location = 'main.html';
+  // can add css to show hide/show logged in etc...
+  } else {
+    console.log('not logged in');
+  }
+});
 
 }());

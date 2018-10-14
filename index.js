@@ -2,6 +2,7 @@ const nav = document.querySelector('.nav-container-main');
 const mobileNavIcon = document.querySelector('.mobile-nav-icon');
 const mobileNavList = document.querySelector('#mobile-nav');
 const closeMenu = document.querySelector('#close-menu');
+//const signOut = document.getElementById('main-sign-out');
 
 function changeMobileNav() {
   if (nav.style.display != "none") {
@@ -17,15 +18,22 @@ function changeMobileNav() {
 mobileNavIcon.addEventListener('click', changeMobileNav);
 closeMenu.addEventListener('click', changeMobileNav);
 
-
+// Show/Hide Edit Buttons on Meeting Link
 $(".link-edit-container").click(function () {
-  console.log("clicked");
-  
-  console.log(this);
   $(this).toggleClass("buttons-not-hidden");
 })
 
 //Create Meeting click
 $('.create-link-button').click(function(){
    window.location.href='createMeeting.html';
+})
+
+//Sign Out User
+$('#main-sign-out').click(function(){
+  console.log('sign out clicked');
+  firebase.auth().signOut().then(function() {
+    console.log('sign out successful');
+  }).catch(function(error) {
+    console.log('error happened');
+  });
 })

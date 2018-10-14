@@ -938,11 +938,16 @@ label {
 	margin: 2vh 0 2vh 4vh;
 	border: none;
 }
+.create-duration-title {
+	margin-top: 8vh;
+}
+.create-duration-text, .create-end-text {
+	color: #5a5a5a;
+}
 .create-duration {
 	display: flex;
 	flex-direction: row;
 	text-align: center;
-	margin-top: 8vh;
 }
 .create-duration-times {
 	margin: 0 1vh;
