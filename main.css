@@ -787,6 +787,11 @@ label {
 .link-edit-container.buttons-not-hidden {
 	visibility: visible;
 }
+.meeting-link-buttons{
+	display: flex;
+	flex-direction: row;
+	margin-right: 20px;
+}
 .meeting-buttons {
 	cursor: pointer;
 	color: #4c6896;
@@ -1016,6 +1021,15 @@ label {
 	    margin: 4vh 5.5vh 4vh 0;
 	}
 }
+
+@media screen and (max-width: 976px) {
+	.booked-edit-container { 
+	    margin-top: 49px;
+	    margin-left: -106px;
+}
+	.scheduled-dots {
+		margin-bottom: 20px;
+	}
 
 @media screen and (max-width: 783px) {
 	.landing-left {
