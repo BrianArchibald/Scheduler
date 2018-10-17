@@ -1,19 +1,15 @@
+
 (function(){
 
 	function init(scheduler){
 
-
 		var events;
 		var unsubscr;
-
-		var userID = "Brian Test";
 
 		function init_saving(data){
 			events = [
 				scheduler.attachEvent("onEventChanged", function(eventId, event) {
 					if (scheduler._update_from_firebase) return;
-
-
 
 					save_start(eventId);
 					data.doc(eventId).update(toFirebaseData(event))
@@ -30,33 +26,6 @@
 						.then(save_end)
 						.catch(error_handler);
 				}),
-
-				// scheduler.setUserData(eventId, "holder", userID);
-				// 	if (scheduler._update_from_firebase) return;
-
-
-
-
-
-
-				// //trying to attach a user id to db 
-				// scheduler.attachEvent("onBeforeEventCreated", function (eventId, event){
-				// 	if (scheduler._update_from_firebase) return;
-
-				// 	let userId = "example user ID";
-				// 	console.log(event);
-
-
-
-				//     //any custom logic here
-
-				//     return true;
-				// }),
-
-
-
-
-
 				scheduler.attachEvent("onEventAdded", function(eventId, event) {
 					if (scheduler._update_from_firebase) return;
 
@@ -64,8 +33,8 @@
 
 					//////////////trying to get userID
 					scheduler.setUserData(eventId, "holder", userID);
-
-
+					console.log(userID);
+					
 
 					data.add(toFirebaseData(event))
 						.then(a => {

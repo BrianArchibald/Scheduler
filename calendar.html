@@ -61,7 +61,27 @@
             var db = firebase.firestore();
             db.settings({ timestampsInSnapshots:true });
             scheduler.init('scheduler_here', new Date(),"week");
-            scheduler.firebase(db.collection("events"));
+            //scheduler.firebase(db.collection("events"));
+
+            scheduler.firebase(db.collection("events")
+                .where('holder', '==', 'userID')
+                );
+            
+            
+            var userID;
+            firebase.auth().onAuthStateChanged(function(user) {
+              if (user) {
+                //signed in
+                console.log("signed in", user);
+                console.log("signed in", user.email);
+                userID = user.email;
+                console.log(userID, "userID");
+              } else {
+                // No user is signed in.
+                console.log("signed out", user);
+              }
+            });
+
             </script>
             <script type="text/javascript" src="calendar.js"></script>
         </body>

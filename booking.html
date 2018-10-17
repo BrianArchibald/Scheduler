@@ -348,9 +348,14 @@
 		        this.db.collection('events')  
 		            .where('start_date', '>', start)
 		            .where('start_date', '<', end)
+
+
+		            // get specific user's data
+		            .where('holder', '==', 'userID')
+
 			            .get()
 							.then(function(querySnapshot) {
-								//console.log(querySnapshot.docs.length);
+								
 								if(!querySnapshot.docs.length){
 									document.getElementById("booking-time").innerHTML = 'No times available';
 									return;
@@ -367,8 +372,6 @@
 					       		 // console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
 								
 					       		 startTimes = doc.data().start_date.seconds - interval;
-					       		 console.log(startTimes, "start date seconds - interval");
-
 					       		 endTimes = doc.data().end_date.seconds;
 
 					       		  // run function to populate drop down times

@@ -19,7 +19,7 @@ const signUpButton = document.getElementById('sign-up-button');
 //Add login event
 signUpButton.addEventListener('click', e => {  
 
-  //Get email and password
+  // Get email and password
   const email = txtEmail.value;
   const pass = txtPassword.value;
   const auth = firebase.auth();
