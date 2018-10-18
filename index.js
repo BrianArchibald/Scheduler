@@ -19,9 +19,9 @@ mobileNavIcon.addEventListener('click', changeMobileNav);
 closeMenu.addEventListener('click', changeMobileNav);
 
 // Show/Hide Edit Buttons on Meeting Link
-$(".link-edit-container").click(function () {
-  $(this).toggleClass("buttons-not-hidden");
-})
+// $(".link-edit-container").click(function () {
+//   $(this).toggleClass("buttons-not-hidden");
+// })
 
 //Create Meeting click
 $('.create-link-button').click(function(){
@@ -33,6 +33,7 @@ $('#main-sign-out').click(function(){
   console.log('sign out clicked');
   firebase.auth().signOut().then(function() {
     console.log('sign out successful');
+    window.location.href="index.html";
   }).catch(function(error) {
     console.log('error happened');
   });

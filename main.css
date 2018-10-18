@@ -760,8 +760,11 @@ label {
 	padding-bottom: 2vh;
 }
 .link-li-container {
-	display: grid;
-    grid-template-columns: 2fr 3fr 3fr;
+	
+   /* grid-template-columns: 2fr 3fr 3fr; */
+
+    display: grid;
+    grid-template-rows: 1fr 1fr;
 
 	/*display: flex;
     justify-content: space-between;*/
@@ -777,20 +780,37 @@ label {
 	visibility: visible;
 	margin-right: -58px;
 }
-.ind-link-text {
-	margin-left: -10vw;
+.ind-link{
+	margin: 0px 0 15px 10px;
 }
+
+
+.link-edit-container {
+	/*visibility: visible;
+	*/
+	display: flex;
+
+}
+/*
 .link-edit-container {
 	visibility: hidden;
 
 }
+*/
+/*
 .link-edit-container.buttons-not-hidden {
-	visibility: visible;
+	visibility: hidden;
 }
+*/
+.link-edit-container.buttons-not-hidden {
+	display: flex;
+}
+
+
 .meeting-link-buttons{
 	display: flex;
-	flex-direction: row;
-	margin-right: 20px;
+    flex-direction: row;
+    margin: 5px;
 }
 .meeting-buttons {
 	cursor: pointer;
@@ -804,14 +824,27 @@ label {
     margin-left: 10px;
 
 }
+/*
 .booked-edit-container {
 	display: flex;
 }
+*/
+.booked-edit-container {
+	display: flex;
+	flex-direction: column;
+}
+/*
 .booked-links {
 	display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-right: 60px;
+}
+*/
+.booked-links {
+	display: flex;
+    flex-direction: column;
+    margin-top: 10px;
 }
 .booked-extras {
 	font-size: 14px;
@@ -821,6 +854,18 @@ label {
 }
 .cancel-booked {
 	height: 36px;
+	width: 111px;
+	color: grey;
+	border: 1px solid grey;
+	border-radius: 2px;
+	background-color: white;
+	margin-top: 17px;
+	margin-bottom: 13px;
+    
+}
+/*
+.cancel-booked {
+	height: 36px;
 	color: grey;
 	border: 1px solid grey;
 	border-radius: 2px;
@@ -828,6 +873,8 @@ label {
 	margin-top: -6px;
     margin-right: 20px;
 }
+*/
+
 
 .meeting-link-buttons .delete-meeting {
 	margin-left: 40px;
@@ -839,10 +886,20 @@ label {
 .scheduled-title {
 	margin-bottom: 5vh;
 }
+/*
 .scheduled-meetings-list {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	margin: 4vh 3.5vh 4vh 0;
+	border-bottom: 1px solid #cacaca;
+	padding-bottom: 2vh;
+}
+*/
+.scheduled-meetings-list {
+	display: flex;
+	flex-direction: column;
+	
 	margin: 4vh 3.5vh 4vh 0;
 	border-bottom: 1px solid #cacaca;
 	padding-bottom: 2vh;
@@ -1022,6 +1079,7 @@ label {
 	}
 }
 
+/*
 @media screen and (max-width: 976px) {
 	.booked-edit-container { 
 	    margin-top: 49px;
@@ -1030,7 +1088,7 @@ label {
 	.scheduled-dots {
 		margin-bottom: 20px;
 	}
-
+*/
 @media screen and (max-width: 783px) {
 	.landing-left {
 		margin-left: 3vh;
@@ -1088,7 +1146,22 @@ label {
     margin-bottom: -20px;
 	}
 }
+/*
+@media screen and (max-width: 595px) {
+	.meeting-link-buttons {
+		display: flex;
+		flex-direction: column;
 
+	}
+	.meeting-buttons {
+		height: 30px;
+    	width: 70px;
+    	margin-top: 5px;
+	}
+	.meeting-link-buttons .delete-meeting {
+       margin-left: 10px; 
+}
+*/
 @media screen and (max-width: 393px) {
 	.main-meeting-links {
 	    display: flex;

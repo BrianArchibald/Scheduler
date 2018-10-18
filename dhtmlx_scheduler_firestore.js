@@ -3,6 +3,8 @@
 
 	function init(scheduler){
 
+		//scheduler.load()
+
 		var events;
 		var unsubscr;
 
@@ -31,7 +33,7 @@
 
 					save_start(eventId);
 
-					//////////////trying to get userID
+					// Set the calendar info with logged in users UID
 					scheduler.setUserData(eventId, "holder", userID);
 					console.log(userID);
 					
