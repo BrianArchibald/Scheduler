@@ -387,7 +387,17 @@
 			}
 
 			// change times when timezone is changed
-			//$(".DropDownTimezone").change(function )
+			
+			$("#DropDownTimezone").change(function() {    
+				// user time zone to seconds
+				userTimeZone = $("#DropDownTimezone").val() * 3600;
+				console.log(userTimeZone, "jqtz");
+			})
+
+			let timeZoneDate = new Date();
+			let userTimeZone = timeZoneDate.getTimezoneOffset() * 60;
+			console.log(userTimeZone, "tz mins from UTC");
+
 
 			function populateTimes (start, end, seconds) {
 
