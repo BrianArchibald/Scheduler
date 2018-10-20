@@ -40,4 +40,27 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
   }
 });
 
+// document.getElementById('DropDownTimezone-signup').value = signUpTimeZone;
+// let signUptimeZoneDate = new Date();
+// var signUpTimeZone = signUptimeZoneDate.getTimezoneOffset() / 60;
+
+
+// console.log(signUpTimeZone);
+
+// SelectElement("zones", valueToSelect)
+
+// function SelectElement(id, valueToSelect)
+// {    
+//     let element = document.getElementById(id);
+//     element.value = valueToSelect;
+// }
+
+
+// let signUpTimeZone = document.getElementById('DropDownTimezone-signup');
+
+// let SignUptimeZoneDate = new Date();
+// signUpTimeZone = SignUptimeZoneDate.getTimezoneOffset() / 60;
+// console.log(signUpTimeZone, "tz");
+
 }());
+

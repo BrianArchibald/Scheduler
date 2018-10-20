@@ -1050,6 +1050,10 @@ label {
 
 
 
+
+
+
+
 /*   Media Queries   */
 
 @media screen and (max-width: 1013px) {
@@ -1105,6 +1109,12 @@ label {
 	.additional-feature {
 		padding: 3vh 3vh 0 3vh;
 	}
+	.settings-container {
+		margin-left: 2vw;
+	}
+	#settings-DropDownTimezone {
+		width: 250px;
+	}
 }
 @media screen and (max-width: 697px) {
 	.mobile-nav-menu {
@@ -1131,19 +1141,35 @@ label {
 		grid-template-columns: 1fr 1fr 1fr;
 	}
 	.fa-arrow-left {
-    margin-right: 220px;
+    	margin-right: 220px;
 	}
 	.booking-duration {
-    text-align: center;
+    	text-align: center;
 	}
 	.booking-time-header {
-    display: grid;
-    grid-template-rows: 1fr;
+    	display: grid;
+    	grid-template-rows: 1fr;
 	}
 	.booking-time-title {
-    text-align: center;
-    margin-right: 0;
-    margin-bottom: -20px;
+    	text-align: center;
+    	margin-right: 0;
+    	margin-bottom: -20px;
+	}
+	.settings-container .timezone h5 {
+    	font-size: 16px;
+    	margin-right: 0vh; 
+    }
+    .settings-timezone-button .landing-button {
+   		padding: 10px 23px;
+    	margin: 10vh 0 10vh 0;
+	}
+	.settings-container .timezone {
+    	display: flex;
+    	flex-direction: column;
+	}
+	.settings-timezone-button {
+		display: flex;
+		justify-content: center;
 	}
 }
 /*

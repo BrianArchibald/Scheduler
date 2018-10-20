@@ -237,6 +237,7 @@
 		let startTimes = 0;
 		let endTimes = 0;
 		let interval = 0;
+		let userTimeZone = 0;
         
         // add active class to button clicked
 		$(".booking-time-button").click(function() {
@@ -377,7 +378,7 @@
 
 					       		  // run function to populate drop down times
 					       		 
-					       		 populateTimes(startTimes, endTimes, interval);
+					       		 populateTimes(startTimes, endTimes, interval, userTimeZone);
 					       		
 				    		});
 				})
@@ -392,14 +393,15 @@
 				// user time zone to seconds
 				userTimeZone = $("#DropDownTimezone").val() * 3600;
 				console.log(userTimeZone, "jqtz");
+				populateTimes(startTimes, endTimes, interval, userTimeZone);
 			})
 
 			let timeZoneDate = new Date();
-			let userTimeZone = timeZoneDate.getTimezoneOffset() * 60;
+			userTimeZone = timeZoneDate.getTimezoneOffset() * 60;
 			console.log(userTimeZone, "tz mins from UTC");
 
 
-			function populateTimes (start, end, seconds) {
+			function populateTimes (start, end, seconds, timeZone) {
 
 						console.log(start, "start" , end, "end", seconds, "seconds");
 
@@ -408,19 +410,19 @@
 							let startHtml = "";
 							if(seconds) {
 								do {
-								 	start = start + seconds;
+								 	start = (start + timeZone) + seconds;
 								 	console.log(start, "start = Start plus seconds");
 								 	console.log(seconds, "seconds");
 
-								 	endTime = end - start;
+								 	endTime = (end + timeZone) - start;
 									let startFormatted = new Date(start * 1000);
 									let formattedTime = startFormatted.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
 									console.log(formattedTime);
 										startHtml +=
 										`<button class="booking-time-selector booking-button" data-hour-min=${formattedTime} onclick="activeClassSpecificTime(this)">${formattedTime}</button>`;
 								
-								} while (endTime > seconds * 2);
-							document.getElementById("booking-time").innerHTML += startHtml;
+									} while (endTime > seconds * 2);
+								document.getElementById("booking-time").innerHTML += startHtml;
 							}
 					}
 				}
