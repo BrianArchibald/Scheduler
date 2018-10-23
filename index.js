@@ -38,3 +38,59 @@ $('#main-sign-out').click(function(){
     console.log('error happened');
   });
 })
+
+
+
+
+// // Copy to clipboard 
+// function copyToClipboard(elementId) {
+
+//   // Create a "hidden" input
+//   var aux = document.createElement("input");
+
+//   // Assign it the value of the specified element
+//   aux.setAttribute("value", document.getElementById(elementId).innerHTML);
+
+//   // Append it to the body
+//   document.body.appendChild(aux);
+
+//   // Highlight its content
+//   aux.select();
+
+//   // Copy the highlighted text
+//   document.execCommand("copy");
+
+//   // Remove it from the body
+//   document.body.removeChild(aux);
+
+// }
+
+// <p id="p1">P1: I am paragraph 1</p>
+// <p id="p2">P2: I am a second paragraph</p>
+// <button onclick="copyToClipboard('p1')">Copy P1</button>
+// <button onclick="copyToClipboard('p2')">Copy P2</button>
+// <br/><br/><input type="text" placeholder="Paste here for test" />
+
+
+// Copy to clipboard 
+function copyToClipboard(elementId) {
+  console.log("copy ran");
+  // Create a "hidden" input
+  var aux = document.createElement("input");
+
+  // Assign it the value of the specified element
+  aux.setAttribute("value", document.getElementById(elementId).innerHTML);
+
+  // Append it to the body
+  document.body.appendChild(aux);
+
+  // Highlight its content
+  aux.select();
+
+  // Copy the highlighted text
+  document.execCommand("copy");
+
+  // Remove it from the body
+  document.body.removeChild(aux);
+
+}

@@ -1,6 +1,15 @@
+//let clickedDuration;
+let createTitle = "";
+let createLocation = "";
+let createDescription = "";
+
 // Meeting Duration Buttons
 $(".create-duration-times").click(function() {
      let clicked = $(this);
+     // get data attr from clicked time
+     let clickedDuration = clicked.data('create-sec');
+     
+     console.log(clickedDuration);
 	 if (clicked.hasClass('active-button')) {
 	   $('.create-duration-times').removeClass('disabled'); //enable all again  
 	   clicked.removeClass('active-button');
@@ -10,8 +19,11 @@ $(".create-duration-times").click(function() {
 	   clicked.removeClass('disabled');
 	   $('.create-duration-times').not(clicked).addClass('disabled'); //disable everything except clicked element
 	 }
+	 
+
 });
-// Click on Availability to show calendar
+
+// Click on availability to show calendar
 $("#create-save").click(function() {
  	window.location.href='calendar.html';
 });
@@ -19,3 +31,25 @@ $("#create-save").click(function() {
 $('.create-cancel').click(function(){
    window.location.href='main.html';
 })
+
+//Get value of title input
+$( "#create-title-input" )
+  .keyup(function() {
+    return createTitle = $( this ).val();
+    
+  })
+  .keyup();
+
+//Get value of location input
+$( "#create-location" )
+  .keyup(function() {
+    return createLocation = $( this ).val();
+  })
+  .keyup();
+
+  //Get value of description input
+$( "#create-description" )
+  .keyup(function() {
+    return createDescription = $( this ).val();
+  })
+  .keyup();
