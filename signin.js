@@ -17,7 +17,7 @@
 
 
 (function() {
-	//initialize firebase
+  //initialize firebase
     var config = {
       apiKey: "AIzaSyDJFbbPR1n6if3yX1giV8KvW_Pyq88aBKk",
       authDomain: "calendar-c07dd.firebaseapp.com",
@@ -31,11 +31,10 @@
 const txtEmail = document.getElementById('signup-email');
 const txtPassword = document.getElementById('signup-password');
 const signInButton = document.getElementById('sign-in-button');
+const signInForm = document.getElementById('signin-form');
 
 //Add login event
 signInButton.addEventListener('click', e => {  
-   console.log("clicked");
-
   //Get email and password
   const email = txtEmail.value;
   const pass = txtPassword.value;
@@ -44,6 +43,14 @@ signInButton.addEventListener('click', e => {
   const promise = auth.signInWithEmailAndPassword(email, pass);
   promise.catch(e => console.log(e.message));
 }); 
+
+//Hit Enter for sign up instead of clicking button
+signInForm.addEventListener('keyup', function(event) {
+  event.preventDefault();
+  if(event.keyCode === 13) {
+    signInButton.click();
+  }
+});
 
 //Add a realtime listener for auth state changes
 firebase.auth().onAuthStateChanged(firebaseUser => {

@@ -632,14 +632,27 @@ label {
 
 .pre-confirm-modal {
 	display: none;
-	position: fixed;
+	
 	opacity: 1;
 	z-index: 999;
+	/*
+	position: fixed;
 	left: 32%;
 	top: 0;
-	max-width: 550px;
 	margin: auto;
 	margin-top: 20vh;
+	*/
+	left: 50%;
+	top: 50;
+	max-width: 550px;
+	position: absolute;
+	margin-left: -275px;
+	margin-right: -275px;
+
+
+
+
+	
 	overflow: auto;
 	border-radius: 2px;
     border: 1px solid #b1b1b1;

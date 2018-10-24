@@ -40,6 +40,35 @@ $('#main-sign-out').click(function(){
 })
 
 
+//Get url and set as link for meetings
+let meetingLink = window.location.href;
+console.log(meetingLink);
+document.getElementById("ind-link-id").innerHTML = meetingLink;
+
+//Copy meeting link to clipboard via copy button
+function copyToClipboard(element) {
+  let $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(element).text()).select();
+  document.execCommand("copy");
+  $temp.remove();
+}
+
+
+// $('.copy-meeting-link').click(function(event){
+//   let copyText = $('#ind-link-id').innerHTML;
+//   copyText.focus();
+//   copyText.select();
+
+//   try {
+//     let successful = document.execCommand('copy');
+//     let msg = successful ? 'successful' : 'unsuccessful';
+//     console.log('Copying text command was ' + msg);
+//   } catch (err) {
+//     console.log('Unable to copy');
+//   }
+// })
+
 
 
 // // Copy to clipboard 
@@ -72,25 +101,25 @@ $('#main-sign-out').click(function(){
 // <br/><br/><input type="text" placeholder="Paste here for test" />
 
 
-// Copy to clipboard 
-function copyToClipboard(elementId) {
-  console.log("copy ran");
-  // Create a "hidden" input
-  var aux = document.createElement("input");
+// // Copy to clipboard 
+// function copyToClipboard(elementId) {
+//  console.log("copy ran");
+//   // Create a "hidden" input
+//   var aux = document.createElement("input");
 
-  // Assign it the value of the specified element
-  aux.setAttribute("value", document.getElementById(elementId).innerHTML);
+//   // Assign it the value of the specified element
+//   aux.setAttribute("value", document.getElementById(elementId).innerHTML);
 
-  // Append it to the body
-  document.body.appendChild(aux);
+//   // Append it to the body
+//   document.body.appendChild(aux);
 
-  // Highlight its content
-  aux.select();
+//   // Highlight its content
+//   aux.select();
 
-  // Copy the highlighted text
-  document.execCommand("copy");
+//   // Copy the highlighted text
+//   document.execCommand("copy");
 
-  // Remove it from the body
-  document.body.removeChild(aux);
+//   // Remove it from the body
+//   document.body.removeChild(aux);
 
-}
+// }
