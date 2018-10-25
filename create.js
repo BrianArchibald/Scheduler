@@ -19,13 +19,24 @@ $(".create-duration-times").click(function() {
 	   clicked.removeClass('disabled');
 	   $('.create-duration-times').not(clicked).addClass('disabled'); //disable everything except clicked element
 	 }
-	 
-
 });
+
+var userID;
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    //signed in
+     userID = user.uid;
+    // console.log(userID, "userID");
+  } else {
+    // No user is signed in.
+    // console.log("signed out", user);
+  }
+});
+
 
 // Click on availability to show calendar
 $("#create-save").click(function() {
- 	window.location.href='calendar.html';
+ 	window.location.href=`calendar.html#${userID}`;
 });
 // Cancel button back to main page.
 $('.create-cancel').click(function(){

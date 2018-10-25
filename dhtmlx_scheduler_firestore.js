@@ -8,48 +8,51 @@
 		var events;
 		var unsubscr;
 
-		function init_saving(data){
-			events = [
-				scheduler.attachEvent("onEventChanged", function(eventId, event) {
-					if (scheduler._update_from_firebase) return;
+		function init_saving(){
 
-					save_start(eventId);
-					data.doc(eventId).update(toFirebaseData(event))
+				// console.log(firebase.auth().currentUser)
+				let data = db.collection("events")
+				events = [
+					scheduler.attachEvent("onEventChanged", function(eventId, event) {
+						if (scheduler._update_from_firebase) return;
+
+						save_start(eventId);
+						data.doc(eventId).update(toFirebaseData(event))
 						.then(save_end)
 						.catch(error_handler);
-				}),
-				scheduler.attachEvent("onEventDeleted", function(eventId, event) {
-					if (scheduler._update_from_firebase) return;
-
-					// ignore call against temporary IDs
-					if (typeof eventId !== "string") return;
-					save_start(eventId);
-					data.doc(eventId).delete()
+					}),
+					scheduler.attachEvent("onEventDeleted", function(eventId, event) {
+						if (scheduler._update_from_firebase) return;
+						
+						// ignore call against temporary IDs
+						if (typeof eventId !== "string") return;
+						save_start(eventId);
+						data.doc(eventId).delete()
 						.then(save_end)
 						.catch(error_handler);
-				}),
-				scheduler.attachEvent("onEventAdded", function(eventId, event) {
-					if (scheduler._update_from_firebase) return;
+					}),
+					scheduler.attachEvent("onEventAdded", function(eventId, event) {
+						if (scheduler._update_from_firebase) return;
 
-					save_start(eventId);
-
-					// Set the calendar info with logged in users UID
-					scheduler.setUserData(eventId, "holder", userID);
-					console.log(userID);
-					
-
-					data.add(toFirebaseData(event))
+						save_start(eventId);
+						
+						// Set the calendar info with logged in users UID
+						scheduler.setUserData(eventId, "holder", window.location.href.split("#")[1]);
+						// console.log(userID);
+						
+						
+						data.add(toFirebaseData(event))
 						.then(a => {
 							scheduler.changeEventId(eventId, a.id);
 							return a;
 						})
 						.then(save_end)
 						.catch(error_handler);
-				})
-			];
-
-		}
-
+					})
+				];
+				
+			}
+			
 
 		function init_loading(data){
 			unsubscr = data.onSnapshot(function(query) {
@@ -83,6 +86,7 @@
 					});
 
 					//batch adding
+					// console.log(queue)
 					if (queue.length){
 						scheduler.parse(queue, "json");
 					}

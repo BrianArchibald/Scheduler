@@ -8,6 +8,25 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
 	 crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+	<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
+	<script>
+		//initialize firebase
+		var config = {
+			apiKey: "AIzaSyDJFbbPR1n6if3yX1giV8KvW_Pyq88aBKk",
+			authDomain: "calendar-c07dd.firebaseapp.com",
+			databaseURL: "https://calendar-c07dd.firebaseio.com",
+			projectId: "calendar-c07dd",
+			storageBucket: "calendar-c07dd.appspot.com",
+			messagingSenderId: "1041934999578"
+		};
+		firebase.initializeApp(config);
+	</script>
+	<script
+	  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+	  crossorigin="anonymous"></script>
 </head>
 <body>
 	<div class="main-wrapper">
@@ -21,13 +40,13 @@
 				<div class="nav-menu">
 					<ul class="nav-list">	
 						<li>
-							<a class="nav-menu-link nav-list-items" id="main-home" href="#">HOME</a>		
+							<a class="nav-menu-link nav-list-items" id="main-home" href="main.html">HOME</a>		
 						</li>
 						<li>
 							<a class="nav-menu-link nav-list-items" href="#">SETTINGS</a>	
 						</li>
 						<li>
-							<a class="nav-menu-link nav-list-items" href="#">ACCOUNT</a>
+							<a class="nav-menu-link nav-list-items settings-sign-out" href="index.html">SIGN OUT</a>
 						</li>
 					</ul>	
 				</div>
@@ -59,7 +78,7 @@
 						</li>
 						<li>
 							<a class="nav-active" href="#">
-								<div class="nav-list-mobile" class="close-menu">Account</div>
+								<div class="nav-list-mobile" class="close-menu settings-sign-out">Sign Out</div>
 							</a>
 						</li>
 					</ul>
