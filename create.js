@@ -1,4 +1,4 @@
-//let clickedDuration;
+let clickedDuration;
 let createTitle = "";
 let createLocation = "";
 let createDescription = "";
@@ -7,8 +7,7 @@ let createDescription = "";
 $(".create-duration-times").click(function() {
      let clicked = $(this);
      // get data attr from clicked time
-     let clickedDuration = clicked.data('create-sec');
-     
+     clickedDuration = clicked.data('create-sec');
      console.log(clickedDuration);
 	 if (clicked.hasClass('active-button')) {
 	   $('.create-duration-times').removeClass('disabled'); //enable all again  
@@ -26,13 +25,12 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     //signed in
      userID = user.uid;
-    // console.log(userID, "userID");
+    console.log(userID, "userID");
   } else {
     // No user is signed in.
-    // console.log("signed out", user);
+    console.log("signed out", user);
   }
 });
-
 
 // Click on availability to show calendar
 $("#create-save").click(function() {
@@ -47,7 +45,6 @@ $('.create-cancel').click(function(){
 $( "#create-title-input" )
   .keyup(function() {
     return createTitle = $( this ).val();
-    
   })
   .keyup();
 

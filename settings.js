@@ -1,8 +1,9 @@
 //let timeZoneSettings = document.getElementById('settings-DropDownTimezone');
 const timeZoneSubmit = document.getElementById('settings-timezone');
+let timeZoneSettings;
 
 timeZoneSubmit.addEventListener('click', e => {
-	let timeZoneSettings = document.getElementById('settings-DropDownTimezone').value;
+	return timeZoneSettings = document.getElementById('settings-DropDownTimezone').value;
 	console.log(timeZoneSettings);
 })
 
