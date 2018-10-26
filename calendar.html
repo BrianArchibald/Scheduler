@@ -62,27 +62,27 @@
             db.settings({ timestampsInSnapshots:true });
             scheduler.init('scheduler_here', new Date(),"week");
             // scheduler.firebase(db.collection("events"));
-            var userID;
-            firebase.auth().onAuthStateChanged(function(user) {
-              if (user) {
+          //  var userID;
+           // firebase.auth().onAuthStateChanged(function(user) {
+             // if (user) {
                 //signed in
-                console.log("signed in", user);
-                console.log("signed in", user.email);
+               // console.log("signed in", user);
+              //  console.log("signed in", user.email);
 
-                userID = user.uid;
+              //  userID = user.uid;
                 console.log(userID, "userID");
-              } else {
+           //   } else {
                 // No user is signed in.
-                console.log("signed out", user);
-              }
-            });
+            //    console.log("signed out", user);
+            //  }
+          //  });
 // console.log()
             // Only load DB for the logged in user
             scheduler.firebase(db.collection("events")
                 .where('holder', '==', window.location.href.split("#")[1])
                 );
                 // console.log(db.collection("events").where('holder', '==', window.location.href.split("#")[1]),")
-            
+            //just a minute
             
             var userID;
             firebase.auth().onAuthStateChanged(function(user) {

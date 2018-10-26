@@ -34,7 +34,9 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 // Click on availability to show calendar
 $("#create-save").click(function() {
+
  	window.location.href=`calendar.html#${userID}`;
+
 });
 // Cancel button back to main page.
 $('.create-cancel').click(function(){
@@ -44,7 +46,9 @@ $('.create-cancel').click(function(){
 //Get value of title input
 $( "#create-title-input" )
   .keyup(function() {
-    return createTitle = $( this ).val();
+    createTitle = $( this ).val();
+
+
   })
   .keyup();
 
