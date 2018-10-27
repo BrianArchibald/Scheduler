@@ -375,9 +375,17 @@ function activeClass(el, target) {
 		       		 // console.log(doc.data().end_date.toDate().getHours(), " end hours");
 		       		 // console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
 						console.log(doc.data().start_date.toDate(), "start date");
-						// get timezone from FB user
+
+						timeZoneDB = doc.data().start_date.toDate();
+						
+						// let timeZoneDB = "";
+						// let regex = /(?<=GMT).+?(?= \()/;						
+						// let ownerTimeZone = timeZoneDB.match(regex);
+						// console.log(ownerTimeZone);
+						
+						// get timezone from DB user
 						// this regex below will get -500 which is taken from: Sat Oct 27 2018 04:20:00 GMT-0500 (Central Daylight Time)
-						// (?<=T).+?(?= \()
+						// (?<=GMT).+?(?= \()
 						
 
 
@@ -399,6 +407,10 @@ function activeClass(el, target) {
 	yearClicked = clicked[0].dataset.year;
 	totalDateClicked = monthClicked + "/" + dateClicked + "/" + yearClicked;    
 }
+
+
+
+
 
 // change times when timezone is changed
 
