@@ -9,6 +9,7 @@ $(".create-duration-times").click(function() {
      // get data attr from clicked time
      clickedDuration = clicked.data('create-sec');
      console.log(clickedDuration);
+     localStorage.setItem('clickedDuration', clickedDuration);
 	 if (clicked.hasClass('active-button')) {
 	   $('.create-duration-times').removeClass('disabled'); //enable all again  
 	   clicked.removeClass('active-button');
@@ -36,8 +37,8 @@ firebase.auth().onAuthStateChanged(function(user) {
 $("#create-save").click(function() {
 
  	window.location.href=`calendar.html#${userID}`;
-
 });
+
 // Cancel button back to main page.
 $('.create-cancel').click(function(){
    window.location.href='main.html';
@@ -47,21 +48,34 @@ $('.create-cancel').click(function(){
 $( "#create-title-input" )
   .keyup(function() {
     createTitle = $( this ).val();
-
-
   })
   .keyup();
+  //Set title to local storage
+  $("#create-location").blur(function() {
+    localStorage.setItem("title", createTitle);
+    console.log("blur");
+  });
 
 //Get value of location input
 $( "#create-location" )
   .keyup(function() {
-    return createLocation = $( this ).val();
-  })
+    createLocation = $( this ).val();
+  }) 
   .keyup();
+//Set location to local storage
+  $("#create-location").blur(function() {
+    localStorage.setItem("location", createLocation);
+    console.log("blur");
+  });
 
   //Get value of description input
 $( "#create-description" )
   .keyup(function() {
-    return createDescription = $( this ).val();
+    createDescription = $( this ).val();
   })
   .keyup();
+  //Set desciption to local storage
+  $("#create-description").blur(function() {
+    localStorage.setItem("description", createDescription);
+    console.log("blur");
+  });

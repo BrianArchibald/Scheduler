@@ -112,6 +112,18 @@ let n = 0;
 let modalName = "";
 let modalEmail = "";
 
+//Add location to modal from local storage
+$( document ).ready(function() {
+	let modalLocation = localStorage.getItem('location');
+	$('#location').html(modalLocation);
+    
+    if (localStorage.getItem("clickedDuration") !== null) {
+  		//set duration time button to localstorage from create.html
+  		let duration = localStorage.getItem('clickedDuration');
+  		$('.booking-duration').html()
+	}
+});
+
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May","Jun","Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
 let d = new Date();
 let weekday = new Array(7);
@@ -129,14 +141,12 @@ function initWeekCalendar (x) {
     var weekHtml = "";
     n = n + x;
     n = n < 0 ? 0 : n;
-	for (let i = n*7; i < (n*7)+7; i++) {
-			
+	for (let i = n*7; i < (n*7)+7; i++) {		
 		Date.prototype.addDays = function(days) {
 		    let date = new Date(this.valueOf());
 		    date.setDate(date.getDate() + days);
 		    return date;
 		}
-
 		let date = new Date();
 		let dayOfWeek = weekday[date.addDays(i).getDay()];
 		let dayOfMonth = date.addDays(i).getMonth();
@@ -366,6 +376,8 @@ function activeClass(el, target) {
 		       		 // console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
 						console.log(doc.data().start_date.toDate(), "start date");
 						// get timezone from FB user
+						// this regex below will get -500 which is taken from: Sat Oct 27 2018 04:20:00 GMT-0500 (Central Daylight Time)
+						// (?<=T).+?(?= \()
 						
 
 
