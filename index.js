@@ -39,15 +39,13 @@ $('#main-sign-out').click(function(){
   });
 })
 
-
-
-
 //Get userID from local storage
 let userID = localStorage.getItem('userID');
 //Get url and set as link for meetings
 let meetingLink = `calendar.html#${userID}`;
-console.log(meetingLink);
-document.getElementById("ind-link-id").innerHTML = meetingLink;
+// Set href on sheduled meetings
+$('ind-link-id').attr('href',meetingLink);
+document.getElementById("ind-link-id").innerHTML = 'Scheduled Meeting Link';
 
 //Copy meeting link to clipboard via copy button
 function copyToClipboard(element) {
