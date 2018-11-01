@@ -4,7 +4,8 @@
 	function init(scheduler){
 
 		//scheduler.load()
-
+		// making calendar responsive
+		//scheduler.BeforeInit.Add(string.Format("initResponsive({0})", scheduler.Name));
 		var events;
 		var unsubscr;
 
