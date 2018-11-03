@@ -335,7 +335,7 @@ let modalSaveDate = 0;
 $('.modal-signup-button').click(function () {
 	// submit name and email
 	//send email to owner and user
-
+	
 	//Get current time submit is clicked for main page.
 	let modalSaveDate = new Date();
 	let dd = modalSaveDate.getDate();
@@ -350,20 +350,45 @@ $('.modal-signup-button').click(function () {
 	    mm=`0${mm}`;
 	} 
 	modalSaveDate = `${mm}/${dd}/${yyyy}`;
-	console.log(modalSaveDate);
-	var template_params = {
-	   "modalEmail":  "kmd107@gmail.com",// "modalEmail_value",
-	   "modalName": "modalName_value",
-	   "clickedTimeButton": "clickedTimeButton_value",
-	   "totalDateClicked": "totalDateClicked_value"
-	}
-
-	var service_id = "default_service";
-	var template_id = "scheduler_confirm";
-
-	console.log(modalEmail);
-	emailjs.send(service_id,template_id,template_params);
+	
+	sendUserEmail();
+	sendOwnerEmail();
+	// let template_params = {
+	//    "modalEmail":  modalEmail,
+	//    "modalName": modalName,
+	//    "clickedTimeButton": clickedTimeButton,
+	//    "totalDateClicked": totalDateClicked
+	// }
+	// let service_id = "default_service";
+	// let template_id = "scheduler_confirm";
+	// emailjs.send(service_id,template_id,template_params);
 })
+
+// Use emailjs to send user confirmation email
+function sendUserEmail() {
+	let template_params = {
+	   "modalEmail":  modalEmail,
+	   "modalName": modalName,
+	   "clickedTimeButton": clickedTimeButton,
+	   "totalDateClicked": totalDateClicked
+	}
+	let service_id = "default_service";
+	let template_id = "scheduler_confirm";
+	emailjs.send(service_id,template_id,template_params);	
+}
+
+// Use emailjs to send owner confirmation email
+function sendOwnerEmail() {
+	let template_params = {
+	   "modalEmail":  modalEmail,
+	   "modalName": modalName,
+	   "clickedTimeButton": clickedTimeButton,
+	   "totalDateClicked": totalDateClicked
+	}
+	let service_id = "default_service";
+	let template_id = "scheduler_confirm";
+	emailjs.send(service_id,template_id,template_params);
+}
 
 //Get name on modal
 $('.modal-name-input').keyup(function() {
@@ -466,6 +491,11 @@ function activeClass(el, target) {
 
 	console.log(clicked);
 	monthClicked = clicked[0].dataset.month;
+	monthClicked = parseInt(clicked[0].dataset.month) + 1;
+	if (monthClicked > 12) {
+		monthClicked = 1;
+	}
+	console.log(monthClicked, "monthclicked");
 	dateClicked = clicked[0].dataset.date;
 	yearClicked = clicked[0].dataset.year;
 	totalDateClicked = monthClicked + "/" + dateClicked + "/" + yearClicked;    
