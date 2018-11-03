@@ -33,6 +33,17 @@
 // var template_id = "template_7H4gRgo2_clone";
 // emailjs.send(service_id,template_id,template_params);
 
+// var template_params = {
+//    "modalEmail": "modalEmail_value",
+//    "modalName": "modalName_value",
+//    "clickedTimeButton": "clickedTimeButton_value",
+//    "totalDateClicked": "totalDateClicked_value"
+// }
+
+// var service_id = "default_service";
+// var template_id = "scheduler_confirm";
+//need to send this after modal finished
+//emailjs.send(service_id,template_id,template_params);
 
 
 
@@ -340,6 +351,18 @@ $('.modal-signup-button').click(function () {
 	} 
 	modalSaveDate = `${mm}/${dd}/${yyyy}`;
 	console.log(modalSaveDate);
+	var template_params = {
+	   "modalEmail":  "kmd107@gmail.com",// "modalEmail_value",
+	   "modalName": "modalName_value",
+	   "clickedTimeButton": "clickedTimeButton_value",
+	   "totalDateClicked": "totalDateClicked_value"
+	}
+
+	var service_id = "default_service";
+	var template_id = "scheduler_confirm";
+
+	console.log(modalEmail);
+	emailjs.send(service_id,template_id,template_params);
 })
 
 //Get name on modal
