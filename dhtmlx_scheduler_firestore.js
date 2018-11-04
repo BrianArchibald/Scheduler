@@ -39,6 +39,8 @@
 						
 						// Set the calendar info with logged in users UID
 						scheduler.setUserData(eventId, "holder", window.location.href.split("#")[1]);
+						let userEmail = localStorage.getItem("email");
+						scheduler.setUserData(eventId, "email", userEmail);
 						// console.log(userID);
 						
 						

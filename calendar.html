@@ -91,13 +91,16 @@
             //just a minute
             
             var userID;
+
             firebase.auth().onAuthStateChanged(function(user) {
               if (user) {
+
                 //signed in
                 console.log("signed in", user);
                 console.log("signed in", user.email);
 
                 userID = user.uid;
+                localStorage.setItem('email', user.email);
                 localStorage.setItem('userID', userID);
                 console.log(userID, "userID");
               } else {
@@ -105,6 +108,7 @@
                 console.log("signed out", user);
               }
             });
+
 
             </script>
             <script type="text/javascript" src="calendar.js"></script>

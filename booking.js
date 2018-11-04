@@ -1,54 +1,3 @@
-// run onclick of modal sign up button
-// 1 email for user
-//	emailjs.sendForm('default_service', 'contact_template', this);
-// 1 email for owner (change user and owner on template)
-// 	emailjs.sendForm('default_service', 'contact_template', this);
-
-
-
-// This is meeting confirm owner 
-// var template_params = {
-//    "user_name": "user_name_value",
-//    "owner_name": "owner_name_value",
-//    "meeting_time": "meeting_time_value",
-//    "meeting_date": "meeting_date_value"
-// }
-
-// var service_id = "default_service";
-// var template_id = "scheduler_confirm";
-// emailjs.send(service_id,template_id,template_params);
-
-
-//This is for user
-// var template_params = {
-//    "owner_email": "owner_email_value",
-//    "reply_to": "reply_to_value",
-//    "user_name": "user_name_value",
-//    "owner_name": "owner_name_value",
-//    "meeting_time": "meeting_time_value",
-//    "meeting_date": "meeting_date_value"
-// }
-
-// var service_id = "default_service";
-// var template_id = "template_7H4gRgo2_clone";
-// emailjs.send(service_id,template_id,template_params);
-
-// var template_params = {
-//    "modalEmail": "modalEmail_value",
-//    "modalName": "modalName_value",
-//    "clickedTimeButton": "clickedTimeButton_value",
-//    "totalDateClicked": "totalDateClicked_value"
-// }
-
-// var service_id = "default_service";
-// var template_id = "scheduler_confirm";
-//need to send this after modal finished
-//emailjs.send(service_id,template_id,template_params);
-
-
-
-
-
 // //////// CreateMeeting Page //////////
 
 // //let clickedDuration;
@@ -406,6 +355,7 @@ let monthNameClicked = monthNames[monthClicked];
 let dateClicked = 0;
 let yearClicked = 0;
 let totalDateClicked = "";
+let ownerEmail = "";
 
 function activeClass(el, target) {
 	let clicked = $(el);
@@ -463,7 +413,8 @@ function activeClass(el, target) {
 		       		 // console.log(doc.data().end_date.toDate().getHours(), " end hours");
 		       		 // console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
 						console.log(doc.data().start_date.toDate(), "start date");
-
+						let ownerEmail = doc.data().email;
+						console.log(ownerEmail);
 						timeZoneDB = doc.data().start_date.toDate();
 						
 						// let timeZoneDB = "";
