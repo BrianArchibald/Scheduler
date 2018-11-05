@@ -108,6 +108,7 @@ backward.href = `#${window.location.href.split("#")[1]}`
 let durationClicked = false;
 let dayClicked = false;
 let meetingTimeClicked = false;
+
 let n = 0;
 let modalName = "";
 let modalEmail = "";
@@ -358,6 +359,9 @@ let dateClicked = 0;
 let yearClicked = 0;
 let totalDateClicked = "";
 let ownerEmail = "";
+let meetingTitle = "";
+let meetingLocation = "";
+let meetingDescription = "";
 
 function activeClass(el, target) {
 	let clicked = $(el);
@@ -415,9 +419,20 @@ function activeClass(el, target) {
 		       		 // console.log(doc.data().end_date.toDate().getHours(), " end hours");
 		       		 // console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
 						console.log(doc.data().start_date.toDate(), "start date");
-						let ownerEmail = doc.data().email;
+						ownerEmail = doc.data().email;
 						console.log(ownerEmail);
 						timeZoneDB = doc.data().start_date.toDate();
+
+
+						meetingTitle = doc.data().title;
+						console.log(meetingTitle);
+						meetingLocation = doc.data().location;
+						console.log(meetingLocation);
+						meetingDescription = doc.data().description;
+						console.log(meetingDescription);
+
+
+
 						
 						// let timeZoneDB = "";
 						// let regex = /(?<=GMT).+?(?= \()/;						
