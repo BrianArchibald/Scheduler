@@ -316,6 +316,7 @@ $('.modal-signup-button').click(function () {
 // Use emailjs to send user confirmation email
 function sendUserEmail() {
 	let template_params = {
+	   "ownerEmail": ownerEmail,
 	   "modalEmail":  modalEmail,
 	   "modalName": modalName,
 	   "clickedTimeButton": clickedTimeButton,
@@ -329,6 +330,7 @@ function sendUserEmail() {
 // Use emailjs to send owner confirmation email
 function sendOwnerEmail() {
 	let template_params = {
+	   "ownerEmail": ownerEmail,
 	   "modalEmail":  modalEmail,
 	   "modalName": modalName,
 	   "clickedTimeButton": clickedTimeButton,

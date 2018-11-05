@@ -53,7 +53,7 @@ $( "#create-title-input" )
   //Set title to local storage
   $("#create-location").blur(function() {
     localStorage.setItem("title", createTitle);
-    console.log("blur");
+    console.log("title stored");
   });
 
 //Get value of location input
@@ -65,7 +65,7 @@ $( "#create-location" )
 //Set location to local storage
   $("#create-location").blur(function() {
     localStorage.setItem("location", createLocation);
-    console.log("blur");
+    console.log("loc stored");
   });
 
   //Get value of description input
@@ -77,5 +77,5 @@ $( "#create-description" )
   //Set desciption to local storage
   $("#create-description").blur(function() {
     localStorage.setItem("description", createDescription);
-    console.log("blur");
+    console.log("desc stored");
   });

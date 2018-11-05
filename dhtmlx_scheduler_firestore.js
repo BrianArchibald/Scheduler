@@ -39,9 +39,18 @@
 						
 						// Set the calendar info with logged in users UID
 						scheduler.setUserData(eventId, "holder", window.location.href.split("#")[1]);
+						// Get email of calendar owner and store in DB
 						let userEmail = localStorage.getItem("email");
 						scheduler.setUserData(eventId, "email", userEmail);
-						// console.log(userID);
+						
+						// Get title, description, location and store in DB
+						let userTitle = localStorage.getItem("title");
+						scheduler.setUserData(eventId, "title", userTitle);
+						let userLocation = localStorage.getItem("location");
+						scheduler.setUserData(eventId, "location", userLocation);
+						let userDescription = localStorage.getItem("description");
+						scheduler.setUserData(eventId, "description", userDescription);
+
 						
 						
 						data.add(toFirebaseData(event))
