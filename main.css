@@ -623,7 +623,7 @@ label {
 
 .active-button {
 	color: rgb(0, 88, 255);
-	border-color: rgb(66, 133, 244);
+	border-color: rgb(66, 133, 244) !important;
 	transition: all 0.2s ease 0s;
 }
 

@@ -51,6 +51,10 @@
 						let userDescription = localStorage.getItem("description");
 						scheduler.setUserData(eventId, "description", userDescription);
 
+						// Get Duration clicked and store in DB
+						let userDuration = localStorage.getItem("clickedDuration");
+						scheduler.setUserData(eventId, "duration", userDuration);
+
 						
 						
 						data.add(toFirebaseData(event))

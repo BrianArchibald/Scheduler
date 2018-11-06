@@ -70,11 +70,6 @@
 
 
 
-let forward = document.getElementById('forward'); 
-let backward = document.getElementById('backward'); 
-forward.href = `#${window.location.href.split("#")[1]}`
-backward.href = `#${window.location.href.split("#")[1]}`
-
 // db.collection("events").get().then(function (data) {
 // 	data.forEach(function (doc) {
 // 		// doc.data() is never undefined for query doc snapshots
@@ -103,6 +98,11 @@ backward.href = `#${window.location.href.split("#")[1]}`
 // 		// console.log(doc.data().end_date.toDate().getHours(), " end hours");
 // 	});
 // });
+
+let forward = document.getElementById('forward'); 
+let backward = document.getElementById('backward'); 
+forward.href = `#${window.location.href.split("#")[1]}`
+backward.href = `#${window.location.href.split("#")[1]}`
 		
 //flags to tell if all three buttons clicked to display modal
 let durationClicked = false;
@@ -115,11 +115,16 @@ let modalEmail = "";
 
 //Add location to modal from local storage
 $( document ).ready(function() {
-	let modalLocation = localStorage.getItem('location');
-	$('#location').html(modalLocation);
+
+	//let modalLocation = localStorage.getItem('location');
+	$('#location').html(meetingLocation);
     
     if (localStorage.getItem("clickedDuration") !== null) {
   		//set duration time button to localstorage from create.html
+
+  		// in the DB duration is "duration"
+
+  		
   		let duration = localStorage.getItem('clickedDuration');
   		$('.booking-duration').html()
 	}
@@ -154,12 +159,12 @@ function initWeekCalendar (x) {
 			
 			weekHtml +=
 			`<div class="booking-day">
-					<div class="booking-day-title">${dayOfWeek}</div>
-						<button class="booking-day-button" data-date="${date.addDays(i).getDate()}" data-month="${dayOfMonth}" data-year="${currentYear}" onclick="activeClass(this, $(this))">
-							<div class="booking-day-button-month">${monthNames[dayOfMonth]}</div>
-							<div class="booking-day-dayOfMonth">${date.addDays(i).getDate()}</div>
-						</button>
-				</div>`;
+				<div class="booking-day-title">${dayOfWeek}</div>
+					<button class="booking-day-button" data-date="${date.addDays(i).getDate()}" data-month="${dayOfMonth}" data-year="${currentYear}" onclick="activeClass(this, $(this))">
+						<div class="booking-day-button-month">${monthNames[dayOfMonth]}</div>
+						<div class="booking-day-dayOfMonth">${date.addDays(i).getDate()}</div>
+					</button>
+			</div>`;
 	}
 	document.getElementById("booking-calendar").innerHTML = weekHtml;
 }
@@ -246,6 +251,7 @@ $(".booking-time-selector").click(function() {
 });
 
 let clickedTimeButton;
+
 // Add active class to specific time button
 function activeClassSpecificTime(el) {
 	let clicked = $(el);
@@ -281,11 +287,9 @@ $('.confirm-modal-cancel-button').click(function () {
 })
 
 let modalSaveDate = 0;
+
 //Submit button on modal
 $('.modal-signup-button').click(function () {
-	// submit name and email
-	//send email to owner and user
-	
 	//Get current time submit is clicked for main page.
 	let modalSaveDate = new Date();
 	let dd = modalSaveDate.getDate();
@@ -303,15 +307,6 @@ $('.modal-signup-button').click(function () {
 	
 	sendUserEmail();
 	sendOwnerEmail();
-	// let template_params = {
-	//    "modalEmail":  modalEmail,
-	//    "modalName": modalName,
-	//    "clickedTimeButton": clickedTimeButton,
-	//    "totalDateClicked": totalDateClicked
-	// }
-	// let service_id = "default_service";
-	// let template_id = "scheduler_confirm";
-	// emailjs.send(service_id,template_id,template_params);
 })
 
 // Use emailjs to send user confirmation email
@@ -321,7 +316,9 @@ function sendUserEmail() {
 	   "modalEmail":  modalEmail,
 	   "modalName": modalName,
 	   "clickedTimeButton": clickedTimeButton,
-	   "totalDateClicked": totalDateClicked
+	   "totalDateClicked": totalDateClicked,
+	   "meetingDescription": meetingDescription,
+	   "meetingLocation": meetingLocation
 	}
 	let service_id = "default_service";
 	let template_id = "scheduler_confirm";
@@ -335,7 +332,9 @@ function sendOwnerEmail() {
 	   "modalEmail":  modalEmail,
 	   "modalName": modalName,
 	   "clickedTimeButton": clickedTimeButton,
-	   "totalDateClicked": totalDateClicked
+	   "totalDateClicked": totalDateClicked,
+	   "meetingDescription": meetingDescription,
+	   "meetingLocation": meetingLocation
 	}
 	let service_id = "default_service";
 	let template_id = "scheduler_confirm";
@@ -352,7 +351,6 @@ $('.modal-email-input').keyup(function() {
 	return modalEmail = $( this ).val();
 }).keyup();
 
-
 let monthClicked = 0;
 let monthNameClicked = monthNames[monthClicked];
 let dateClicked = 0;
@@ -362,6 +360,7 @@ let ownerEmail = "";
 let meetingTitle = "";
 let meetingLocation = "";
 let meetingDescription = "";
+let userDurationClicked = 0;
 
 function activeClass(el, target) {
 	let clicked = $(el);
@@ -430,6 +429,8 @@ function activeClass(el, target) {
 						console.log(meetingLocation);
 						meetingDescription = doc.data().description;
 						console.log(meetingDescription);
+						userDurationClicked = doc.data().duration;
+						console.log(userDurationClicked);
 
 
 
