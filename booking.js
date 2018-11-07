@@ -42,30 +42,62 @@ let n = 0;
 let modalName = "";
 let modalEmail = "";
 
-function setDurationButtons (){
-	
-    if (userDurationClicked !== null) {
-  		let duration = userDurationClicked;
+$( document ).ready(function() {
+	let modalLocation = localStorage.getItem('location');
+	$('#location').html(modalLocation);
+    
+    if (localStorage.getItem("clickedDuration") !== null) {
+  		//set duration time button to localstorage from create.html
+		// console.log("LOL");
+
+  		let duration = localStorage.getItem('clickedDuration');
+  		console.log(duration);
 		$(".booking-time-button.booking-button").each(function(index){
-			
 			if($(this).data('sec') == duration) {
 				$(this).addClass('active-button');
-
+				// console.log($(this));
 				interval = $(this).data("sec");
-				let clicked = $(this);
 				let adjustedstartTime = startTimes + interval;
 				document.getElementById("booking-time").innerHTML = "";
 				populateTimes(adjustedstartTime,endTimes, interval, userTimeZone);
 
 				if (  $('#booking-calendar .active-button').length )
 					activeClass(document.querySelector('#booking-calendar .active-button'), clicked );
-			} else {
+			}
+			else {
 				$(this).addClass('hidden');
+				// console.log("POLO");
 			}
 		});
 		$('.booking-duration').html()
 	}
-};
+});
+
+
+// function setDurationButtons (){
+//     if (userDurationClicked !== null) {
+//     	debugger;
+//   		let duration = userDurationClicked;
+// 		$(".booking-time-button.booking-button").each(function(index){
+			
+// 			if($(this).data('sec') == duration) {
+// 				$(this).addClass('active-button');
+
+// 				interval = $(this).data("sec");
+// 				let clicked = $(this);
+// 				let adjustedstartTime = startTimes + interval;
+// 				document.getElementById("booking-time").innerHTML = "";
+// 				populateTimes(adjustedstartTime,endTimes, interval, userTimeZone);
+
+// 				if (  $('#booking-calendar .active-button').length )
+// 					activeClass(document.querySelector('#booking-calendar .active-button'), clicked );
+// 			} else {
+// 				$(this).addClass('hidden');
+// 			}
+// 		});
+// 		$('.booking-duration').html()
+// 	}
+// };
 
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May","Jun","Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
 let d = new Date();
@@ -206,6 +238,7 @@ function activeClassSpecificTime(el) {
 	    $('.booking-time-selector').not(clicked).addClass('disabled'); //disable everything except clicked element
 		}
 		meetingTimeClicked = true;
+		durationClicked = true;
 		runModal();
 };
 
@@ -393,7 +426,7 @@ function activeClass(el, target) {
 
 
 					// set only Duration button that was clicked on create meeting page
-					setDurationButtons();
+					//setDurationButtons();
 					
 					// let timeZoneDB = "";
 					// let regex = /(?<=GMT).+?(?= \()/;						
