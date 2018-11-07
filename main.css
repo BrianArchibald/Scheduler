@@ -917,7 +917,9 @@ label {
 	border-bottom: 1px solid #cacaca;
 	padding-bottom: 2vh;
 }
-
+.hidden {
+	display: none;
+}
 
 /* Settings Page  */
 

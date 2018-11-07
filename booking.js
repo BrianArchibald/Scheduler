@@ -1,74 +1,3 @@
-// //////// CreateMeeting Page //////////
-
-// //let clickedDuration;
-// let createTitle = "";
-// let createLocation = "";
-// let createDescription = "";
-
-// // Meeting Duration Buttons
-// $(".create-duration-times").click(function() {
-//      let clicked = $(this);
-//      // get data attr from clicked time
-//      let clickedDuration = clicked.data('create-sec');
-     
-//      console.log(clickedDuration);
-// 	 if (clicked.hasClass('active-button')) {
-// 	   $('.create-duration-times').removeClass('disabled'); //enable all again  
-// 	   clicked.removeClass('active-button');
-// 	 } else {
-// 	  $('.create-duration-times').removeClass('active-button');
-// 	   clicked.addClass('active-button');
-// 	   clicked.removeClass('disabled');
-// 	   $('.create-duration-times').not(clicked).addClass('disabled'); //disable everything except clicked element
-// 	 }
-// });
-
-// var userID;
-// firebase.auth().onAuthStateChanged(function(user) {
-//   if (user) {
-//     //signed in
-//      userID = user.uid;
-//     console.log(userID, "userID");
-//   } else {
-//     // No user is signed in.
-//     console.log("signed out", user);
-//   }
-// });
-
-// // Click on availability to show calendar
-// $("#create-save").click(function() {
-//  	window.location.href=`calendar.html#${userID}`;
-// });
-// // Cancel button back to main page.
-// $('.create-cancel').click(function(){
-//    window.location.href='main.html';
-// })
-
-// //Get value of title input
-// $( "#create-title-input" )
-//   .keyup(function() {
-//     return createTitle = $( this ).val();
-    
-//   })
-//   .keyup();
-
-// //Get value of location input
-// $( "#create-location" )
-//   .keyup(function() {
-//     return createLocation = $( this ).val();
-//   })
-//   .keyup();
-
-//   //Get value of description input
-// $( "#create-description" )
-//   .keyup(function() {
-//     return createDescription = $( this ).val();
-//   })
-//   .keyup();
-
-// /// End of CreateMeeting.html page ////
-
-
 
 // db.collection("events").get().then(function (data) {
 // 	data.forEach(function (doc) {
@@ -113,22 +42,30 @@ let n = 0;
 let modalName = "";
 let modalEmail = "";
 
-//Add location to modal from local storage
-$( document ).ready(function() {
+function setDurationButtons (){
+	
+    if (userDurationClicked !== null) {
+  		let duration = userDurationClicked;
+		$(".booking-time-button.booking-button").each(function(index){
+			
+			if($(this).data('sec') == duration) {
+				$(this).addClass('active-button');
 
-	//let modalLocation = localStorage.getItem('location');
-	$('#location').html(meetingLocation);
-    
-    if (localStorage.getItem("clickedDuration") !== null) {
-  		//set duration time button to localstorage from create.html
+				interval = $(this).data("sec");
+				let clicked = $(this);
+				let adjustedstartTime = startTimes + interval;
+				document.getElementById("booking-time").innerHTML = "";
+				populateTimes(adjustedstartTime,endTimes, interval, userTimeZone);
 
-  		// in the DB duration is "duration"
-
-  		
-  		let duration = localStorage.getItem('clickedDuration');
-  		$('.booking-duration').html()
+				if (  $('#booking-calendar .active-button').length )
+					activeClass(document.querySelector('#booking-calendar .active-button'), clicked );
+			} else {
+				$(this).addClass('hidden');
+			}
+		});
+		$('.booking-duration').html()
 	}
-});
+};
 
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May","Jun","Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
 let d = new Date();
@@ -171,6 +108,7 @@ function initWeekCalendar (x) {
 
 let dateLeftArrow = undefined;
 let dateRightArrow = undefined;
+
 $(".fa-arrow-left").click(function() {
 	// need to have date - 7 days
 	Date.prototype.addDays = function(days) {
@@ -307,6 +245,10 @@ $('.modal-signup-button').click(function () {
 	
 	sendUserEmail();
 	sendOwnerEmail();
+	addMeetingToFirebase();
+
+	//Change Modal text after submit to success.
+	$('#booking-modal').html('Congratulations on scheduling your meeting!  Both parties will receive email confirmations with the details')
 })
 
 // Use emailjs to send user confirmation email
@@ -340,6 +282,26 @@ function sendOwnerEmail() {
 	let template_id = "scheduler_confirm";
 	emailjs.send(service_id,template_id,template_params);
 }
+
+function addMeetingToFirebase() {
+	let userID = `#${window.location.href.split("#")[1]}`;
+		//send meeting details to firebase
+		db.collection('booked').doc(userID).set({
+			//title: ,
+	    	location: meetingLocation,
+	    	date: totalDateClicked,
+	    	time: clickedTimeButton,
+	    	description: meetingDescription,
+	    	modalEmail: modalEmail
+	}, {merge: true})
+	.then(function() {
+	    console.log("Document successfully written!");
+	})
+	.catch(function(error) {
+	    console.error("Error writing document: ", error);
+	});
+}	
+
 
 //Get name on modal
 $('.modal-name-input').keyup(function() {
@@ -394,20 +356,13 @@ function activeClass(el, target) {
     this.db.collection('events')  
         .where('start_date', '>', start)
         .where('start_date', '<', end)
-
-
-        // get specific user's data
-       // .where('holder', '==', 'userID')
         .where('holder', '==', window.location.href.split("#")[1])
-
             .get()
-				.then(function(querySnapshot) {
-					
+				.then(function(querySnapshot) {					
 					if(!querySnapshot.docs.length){
 						document.getElementById("booking-time").innerHTML = 'No times available';
 						return;
 					}
-
 		    		querySnapshot.forEach(function(doc) {
 		        	// doc.data() is never undefined for query doc snapshots
 		       		// console.log(doc.id, " => ", doc.data()); 
@@ -417,36 +372,37 @@ function activeClass(el, target) {
 		       		 // console.log(doc.data().end_date, "end time wo todate");
 		       		 // console.log(doc.data().end_date.toDate().getHours(), " end hours");
 		       		 // console.log(doc.data().end_date.toDate().getMinutes(), " end mins");
-						console.log(doc.data().start_date.toDate(), "start date");
-						ownerEmail = doc.data().email;
-						console.log(ownerEmail);
-						timeZoneDB = doc.data().start_date.toDate();
+					console.log(doc.data().start_date.toDate(), "start date");
+					ownerEmail = doc.data().email;
+					console.log(ownerEmail);
+					timeZoneDB = doc.data().start_date.toDate();
 
 
-						meetingTitle = doc.data().title;
-						console.log(meetingTitle);
-						meetingLocation = doc.data().location;
-						console.log(meetingLocation);
-						meetingDescription = doc.data().description;
-						console.log(meetingDescription);
-						userDurationClicked = doc.data().duration;
-						console.log(userDurationClicked);
+					meetingTitle = doc.data().title;
+					console.log(meetingTitle);
+
+					meetingLocation = doc.data().location;
+					$('#location').html(meetingLocation);
+					console.log(meetingLocation);
+
+					meetingDescription = doc.data().description;
+					console.log(meetingDescription);
+
+					userDurationClicked = doc.data().duration;
+					console.log(userDurationClicked);
 
 
-
-						
-						// let timeZoneDB = "";
-						// let regex = /(?<=GMT).+?(?= \()/;						
-						// let ownerTimeZone = timeZoneDB.match(regex);
-						// console.log(ownerTimeZone);
-						
-						// get timezone from DB user
-						// this regex below will get -500 which is taken from: Sat Oct 27 2018 04:20:00 GMT-0500 (Central Daylight Time)
-						// (?<=GMT).+?(?= \()
-						
-
-
-
+					// set only Duration button that was clicked on create meeting page
+					setDurationButtons();
+					
+					// let timeZoneDB = "";
+					// let regex = /(?<=GMT).+?(?= \()/;						
+					// let ownerTimeZone = timeZoneDB.match(regex);
+					// console.log(ownerTimeZone);
+					
+					// get timezone from DB user
+					// this regex below will get -500 which is taken from: Sat Oct 27 2018 04:20:00 GMT-0500 (Central Daylight Time)
+					// (?<=GMT).+?(?= \()
 		       		 startTimes = doc.data().start_date.seconds - interval;
 		       		 endTimes = doc.data().end_date.seconds;
 
@@ -470,12 +426,7 @@ function activeClass(el, target) {
 	totalDateClicked = monthClicked + "/" + dateClicked + "/" + yearClicked;    
 }
 
-
-
-
-
 // change times when timezone is changed
-
 $("#DropDownTimezone").change(function() {    
 	// user time zone to seconds
 	userTimeZone = $("#DropDownTimezone").val() * 3600;
@@ -488,11 +439,8 @@ console.log(userTimeZone, "tz mins from UTC");
 
 
 function populateTimes (start, end, seconds, timezone) {
-
-	console.log(start, "start" , end, "end", seconds, "seconds");
-
+	console.log(start, "start" , end, "end", seconds, "seconds", timezone, "timezone");
 	if (start != 0 && end != 0) {
-
 		let startHtml = "";
 		if(seconds) {
 			do {
@@ -505,7 +453,6 @@ function populateTimes (start, end, seconds, timezone) {
 					`<button class="booking-time-selector booking-button" data-hour-min=${formattedTime} onclick="activeClassSpecificTime(this)">${formattedTime}</button>`;
 			
 			} while (endTime > seconds * 2);
-
 
 			// the while loop is not working
 
