@@ -42,41 +42,52 @@ let n = 0;
 let modalName = "";
 let modalEmail = "";
 
-$( document ).ready(function() {
+
+//Add location to modal from local storage
+
+
+// $( document ).ready(function() {
+function setDurationButtons (){
+
 	let modalLocation = localStorage.getItem('location');
 	$('#location').html(modalLocation);
-    
-    if (localStorage.getItem("clickedDuration") !== null) {
-  		//set duration time button to localstorage from create.html
-		// console.log("LOL");
 
-  		let duration = localStorage.getItem('clickedDuration');
-  		console.log(duration);
+	let clicked = "";
+    
+    if (userDurationClicked !== null) {
 		$(".booking-time-button.booking-button").each(function(index){
-			if($(this).data('sec') == duration) {
+			if($(this).data('sec') == userDurationClicked) {
 				$(this).addClass('active-button');
-				// console.log($(this));
-				interval = $(this).data("sec");
+				clicked = $(this);
+				interval = clicked.data("sec");
+			} else {
+				$(this).addClass('hidden');
+			}
+		});
+	}
+
+				
+				
+				
 				let adjustedstartTime = startTimes + interval;
 				document.getElementById("booking-time").innerHTML = "";
 				populateTimes(adjustedstartTime,endTimes, interval, userTimeZone);
 
 				if (  $('#booking-calendar .active-button').length )
 					activeClass(document.querySelector('#booking-calendar .active-button'), clicked );
-			}
-			else {
-				$(this).addClass('hidden');
-				// console.log("POLO");
-			}
-		});
+			
+			
+		
+		
+		
 		$('.booking-duration').html()
-	}
-});
+	
+};
 
 
 // function setDurationButtons (){
+	
 //     if (userDurationClicked !== null) {
-//     	debugger;
 //   		let duration = userDurationClicked;
 // 		$(".booking-time-button.booking-button").each(function(index){
 			
@@ -238,7 +249,6 @@ function activeClassSpecificTime(el) {
 	    $('.booking-time-selector').not(clicked).addClass('disabled'); //disable everything except clicked element
 		}
 		meetingTimeClicked = true;
-		durationClicked = true;
 		runModal();
 };
 
@@ -421,12 +431,12 @@ function activeClass(el, target) {
 					meetingDescription = doc.data().description;
 					console.log(meetingDescription);
 
-					userDurationClicked = doc.data().duration;
-					console.log(userDurationClicked);
+					userDurationClicked = parseInt(doc.data().duration);
+					console.log(userDurationClicked, "userDurationClicked");
 
 
 					// set only Duration button that was clicked on create meeting page
-					//setDurationButtons();
+					setDurationButtons();
 					
 					// let timeZoneDB = "";
 					// let regex = /(?<=GMT).+?(?= \()/;						
