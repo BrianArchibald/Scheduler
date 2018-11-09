@@ -55,7 +55,7 @@ function setDurationButtons (){
 	let clicked = "";
     
     if (userDurationClicked !== null) {
-		$(".booking-time-button.booking-button").each(function(index){
+		$(".booking-time-button").each(function(index){
 			if($(this).data('sec') == userDurationClicked) {
 				$(this).addClass('active-button');
 				clicked = $(this);
