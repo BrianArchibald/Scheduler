@@ -41,7 +41,7 @@ signInButton.addEventListener('click', e => {
   const auth = firebase.auth();
   // Sign in
   const promise = auth.signInWithEmailAndPassword(email, pass);
-  promise.catch(e => console.log(e.message));
+  promise.catch(e => alert(e.message));
 }); 
 
 //Hit Enter for sign up instead of clicking button
@@ -53,9 +53,11 @@ signInForm.addEventListener('keyup', function(event) {
 });
 
 //Add a realtime listener for auth state changes
-firebase.auth().onAuthStateChanged(firebaseUser => {
-  if(firebaseUser) {
-  console.log(firebaseUser);
+firebase.auth().onAuthStateChanged(user => {
+  if(user) {
+    let userID = user.uid
+    localStorage.setItem('userID','userID');
+  console.log(user);
   //send user when logged in to main.html
   window.location = 'main.html';
   // can add css to show hide/show logged in etc...
