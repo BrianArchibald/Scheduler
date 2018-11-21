@@ -1,22 +1,12 @@
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
-    //signed in
-    //userID = user.uid;
-    //this.userId = user.uid
-    //console.log(userID, "userID");
-    // let userID = user.uid
-    // localStorage.setItem('userID','userID');
     console.log("signed in");
     console.log(user.uid);
   } else {
     // No user is signed in.
     console.log("signed out", user);
   }
-  //console.log(userID, "userIDinside block");
 });
-// let userID = localStorage.getItem('userID');
-
- //console.log(userID, "userID after getting local");
 
 const nav = document.querySelector('.nav-container-main');
 const mobileNavIcon = document.querySelector('.mobile-nav-icon');
@@ -42,7 +32,6 @@ closeMenu.addEventListener('click', changeMobileNav);
 // $(".link-edit-container").click(function () {
 //   $(this).toggleClass("buttons-not-hidden");
 // })
-
 
 //Create Meeting click
 $('.create-link-button').click(function(){
@@ -83,47 +72,59 @@ $('.delete-meeting-link').click(function(){
 })
 
 
+let dataArray = [];
 let userID = '#' + localStorage.userID;
 let holder = localStorage.userID;
 db.collection("events")
-  .where('holder', '==', holder)
+  .where('holder', '==', holder).orderBy('start_date')
     .get()
       .then(function(querySnapshot) {
           querySnapshot.forEach(function(doc) {
               // doc.data() is never undefined for query doc snapshots
-              var data = (doc.id, " => ", doc.data());
-              date=data.start_date;
-              date_seconds=date.seconds;
+              let data = (doc.id, " => ", doc.data());
+              dataArray.push(data);
+              
+
+              // uniqueTitles = [...new Set(dataArray.map(item => item.title))];
+              // console.log(uniqueTitles);
+
+
+              //date=data.start_date;
+              //date_seconds=date.seconds;
 
               // time the meeting is at on modal
-              let actual_date=new Date(date_seconds).toLocaleString('en-US', {hour: 'numeric', minute: 'numeric', hour12: true });
+              //let actual_date=new Date(date_seconds).toLocaleString('en-US', {hour: 'numeric', minute: 'numeric', hour12: true });
 
               //may not need this if above has all the info
-              let d = new Date(date_seconds); // or whatever date you have
-              let tzName = d.toLocaleString('en', {timeZoneName:'short'}).split(' ').pop();
+              //let d = new Date(date_seconds); // or whatever date you have
+              //let tzName = d.toLocaleString('en', {timeZoneName:'short'}).split(' ').pop();
 
-          // data.name should be the name of the person who booked on modal    data.email will be modal email person and there timezone here
-             // var myHTML1='<li class="scheduled-meetings-list"><a id="title" class="ind-meeting">'+data.name+'</a><div class="link-edit-container booked-edit-container"><div class="meeting-link-buttons booked-links"><div class="booked-email booked-extras">Email: <span id="email" class="booked-email-text">'+data.email+'</span></div><div class="booked-timezone booked-extras">Timezone: <span id="timezone" class="booked-email-text">'+tzName+'</span></div><div class="booked-at booked-extras">Booked At: <span id="booked" class="booked-email-text">'+actual_date+'</span></div><button class="cancel-booked">Cancel Meeting</button></div></div></li>'
-          // document.getElementById("meetings2_div").innerHTML += myHTML1;
+             // let myHTML='<li class="link-li-container"><div class="ind-link-text"><a class="ind-link" id="test" href="#">'+data.title+'</a></div><div class="link-edit-container"><div class="meeting-link-buttons"><button class="edit-meeting-link meeting-buttons" href="#">Edit</button><button class="copy-meeting-link meeting-buttons">Copy</button><button class="visit-meeting-link meeting-buttons" href="calendar.html">Visit</button><button class="delete-meeting-link meeting-buttons delete-meeting">Delete</button></div></div></li>';
+             // document.getElementById('meetings_div').innerHTML += myHTML;  
 
-            let myHTML='<li class="link-li-container"><div class="ind-link-text"><a class="ind-link" id="test" href="#">'+data.title+'</a></div><div class="link-edit-container"><div class="meeting-link-buttons"><button class="edit-meeting-link meeting-buttons" href="#">Edit</button><button class="copy-meeting-link meeting-buttons">Copy</button><button class="visit-meeting-link meeting-buttons" href="calendar.html">Visit</button><button class="delete-meeting-link meeting-buttons delete-meeting">Delete</button></div></div></li>';
-            document.getElementById('meetings_div').innerHTML += myHTML;  
-          });  
+             // let myHTML='<li class="link-li-container"><div class="ind-link-text"><a class="ind-link" id="test" href="#">'+uniqueTitles+'</a></div><div class="link-edit-container"><div class="meeting-link-buttons"><button class="edit-meeting-link meeting-buttons" href="#">Edit</button><button class="copy-meeting-link meeting-buttons">Copy</button><button class="visit-meeting-link meeting-buttons" href="calendar.html">Visit</button><button class="delete-meeting-link meeting-buttons delete-meeting">Delete</button></div></div></li>';
+             // document.getElementById('meetings_div').innerHTML += myHTML;  
+          }); 
+      // console.log(dataArray);
+       console.log(dataArray);
+const uniqueTitles = [...new Set(dataArray.map(item => item.title))];
+console.log(uniqueTitles);  
+
       });
+// console.log(dataArray);
+// const uniqueTitles = [...new Set(dataArray.map(item => item.title))];
+// console.log(uniqueTitles);
 
-//let userID = '#' + localStorage.userID ;
+
+
 db.collection("booked")
-  .where('userID', '==', userID)
+  .where('userID', '==', userID).orderBy('date')
     .get()
       .then(function(querySnapshot) {
           querySnapshot.forEach(function(doc) {
             // doc.data() is never undefined for query doc snapshots
             let data = (doc.id, " => ", doc.data());
-
-              // data.name should be the name of the person who booked on modal    data.email will be modal email person and there timezone here    need to add most of modal confirms to db for referencing here
-            let myHTML1='<li class="scheduled-meetings-list"><a id="title" class="ind-meeting">'+data.description+'</a><div class="link-edit-container booked-edit-container"><div class="meeting-link-buttons booked-links"><div class="booked-email booked-extras">Name: <span id="email" class="booked-email-text">'+data.name+'</span></div><div class="booked-email booked-extras">Email: <span id="email" class="booked-email-text">'+data.modalEmail+'</span></div><div class="booked-at booked-extras">Meeeting Date: <span id="booked" class="booked-email-text">'+data.date+' at '+data.time+'</span><div class="booked-at booked-extras">Duration: <span id="booked" class="booked-email-text">Mtg Duration</span></div><div class="booked-at booked-extras">Location: <span id="booked" class="booked-email-text">'+data.location+'</span></div><button class="cancel-booked">Cancel Meeting</button></div></div></li>'
-           document.getElementById("meetings2_div").innerHTML += myHTML1;
-
-        });  
-      });        
-//}());
+            let myHTML1='<li class="scheduled-meetings-list"><a id="title" class="ind-meeting">'+data.description+'</a><div class="link-edit-container booked-edit-container"><div class="meeting-link-buttons booked-links"><div class="booked-email booked-extras">Name: <span id="email" class="booked-email-text">'+data.name+'</span></div><div class="booked-email booked-extras">Email: <span id="email" class="booked-email-text">'+data.modalEmail+'</span></div><div class="booked-at booked-extras">Meeeting Date: <span id="booked" class="booked-email-text">'+data.date+' at '+data.time+'</span><div class="booked-at booked-extras">Duration: <span id="booked" class="booked-email-text">'+data.interval+'</span></div><div class="booked-at booked-extras">Location: <span id="booked" class="booked-email-text">'+data.location+'</span></div><button class="cancel-booked">Cancel Meeting</button></div></div></li>'
+            document.getElementById("meetings2_div").innerHTML += myHTML1;
+          });  
+        });        

@@ -684,7 +684,14 @@ label {
 }
 #pre-confirm-cancel-button {
 	background-color: #d4d4d4;
-	margin-left: 15px
+	margin-left: 15px;
+}
+.modalSuccess {
+	min-height: 164px;
+	min-width: 450px;
+	text-align: center;
+	padding-top: 90px;
+	line-height: 1.6;
 }
 
 

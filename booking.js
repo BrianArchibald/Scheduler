@@ -295,7 +295,8 @@ $('.modal-signup-button').click(function () {
 	addMeetingToFirebase();
 
 	//Change Modal text after submit to success.
-	$('#booking-modal').html('Congratulations on scheduling your meeting!  Both parties will receive email confirmations with the details')
+	$('#booking-modal').html('Congratulations on scheduling your meeting!  Both parties will receive email confirmations with the details');
+	$('.pre-confirm-modal').addClass('modalSuccess');
 })
 
 // Use emailjs to send user confirmation email
