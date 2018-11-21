@@ -332,6 +332,7 @@ function sendOwnerEmail() {
 
 function addMeetingToFirebase() {
 	let userID = `#${window.location.href.split("#")[1]}`;
+	interval = interval / 60 + ' mins';
 		//send meeting details to firebase
 		db.collection('booked').add({    //db.collection('booked').doc(userID).set({
 			title: meetingTitle,
@@ -341,7 +342,8 @@ function addMeetingToFirebase() {
 	    	description: meetingDescription,
 	    	modalEmail: modalEmail,
 	    	name: modalName,
-	    	userID: userID
+	    	userID: userID,
+	    	interval: interval
 	})   //}, {merge: true})
 	.then(function() {
 	    console.log("Document successfully written!");
