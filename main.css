@@ -538,10 +538,9 @@ label {
 	justify-content: space-between;
 }
 .booking-time-title {
-	margin-right: 50px;
-	color: #4c6896;
-	
-	
+	/*margin-right: 50px;
+	took this out wo timezone */
+	color: #4c6896;	
 }
 #booking-calendar {
 	display: flex;

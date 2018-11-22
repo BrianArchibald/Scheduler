@@ -105,10 +105,15 @@ db.collection("events")
              // let myHTML='<li class="link-li-container"><div class="ind-link-text"><a class="ind-link" id="test" href="#">'+uniqueTitles+'</a></div><div class="link-edit-container"><div class="meeting-link-buttons"><button class="edit-meeting-link meeting-buttons" href="#">Edit</button><button class="copy-meeting-link meeting-buttons">Copy</button><button class="visit-meeting-link meeting-buttons" href="calendar.html">Visit</button><button class="delete-meeting-link meeting-buttons delete-meeting">Delete</button></div></div></li>';
              // document.getElementById('meetings_div').innerHTML += myHTML;  
           }); 
-      // console.log(dataArray);
-       console.log(dataArray);
-const uniqueTitles = [...new Set(dataArray.map(item => item.title))];
-console.log(uniqueTitles);  
+
+       // makes a new Set array with only unique elements
+        const uniqueTitles = [...new Set(dataArray.map(item => item.title))];
+        console.log(uniqueTitles);  
+        uniqueTitles.forEach(function(element) {
+
+          let myHTML='<li class="link-li-container"><div class="ind-link-text"><a class="ind-link" id="test" href="#">'+element+'</a></div><div class="link-edit-container"><div class="meeting-link-buttons"><button class="edit-meeting-link meeting-buttons" href="#">Edit</button><button class="copy-meeting-link meeting-buttons">Copy</button><button class="visit-meeting-link meeting-buttons" href="calendar.html">Visit</button><button class="delete-meeting-link meeting-buttons delete-meeting">Delete</button></div></div></li>';
+          document.getElementById('meetings_div').innerHTML += myHTML;  
+        });
 
       });
 // console.log(dataArray);
