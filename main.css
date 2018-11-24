@@ -880,6 +880,7 @@ label {
     color: #4c6896;
 }
 .cancel-booked {
+	cursor: pointer;
 	height: 36px;
 	width: 111px;
 	color: grey;

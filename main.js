@@ -67,9 +67,18 @@ function copyToClipboard(element) {
 }
 
 //Delete link when delete button clicked
-$('.delete-meeting-link').click(function(){
-  document.getElementById("ind-link-id").innerHTML = "";
-})
+// function cancelMeeting() {
+//   console.log(" clicked");
+// }
+
+
+// $( document ).ready(function(){
+//     // Sets up click behavior on all button elements with the alert class
+//     // that exist in the DOM when the instruction was executed
+    $( "cancel-booked" ).click(function() {
+        console.log( "A button with the alert class was clicked!" );
+    }, 1500);
+// });
 
 
 let dataArray = [];
@@ -106,17 +115,34 @@ db.collection("events")
              // document.getElementById('meetings_div').innerHTML += myHTML;  
           }); 
 
+          //location.href=`booking.html#${userID}` send user to booking page
+
        // makes a new Set array with only unique elements
         const uniqueTitles = [...new Set(dataArray.map(item => item.title))];
         console.log(uniqueTitles);  
         uniqueTitles.forEach(function(element) {
 
-          let myHTML='<li class="link-li-container"><div class="ind-link-text"><a class="ind-link" id="test" href="#">'+element+'</a></div><div class="link-edit-container"><div class="meeting-link-buttons"><button class="edit-meeting-link meeting-buttons" href="#">Edit</button><button class="copy-meeting-link meeting-buttons">Copy</button><button class="visit-meeting-link meeting-buttons" href="calendar.html">Visit</button><button class="delete-meeting-link meeting-buttons delete-meeting">Delete</button></div></div></li>';
+          let myHTML='<li class="link-li-container"><div class="ind-link-text"><a class="ind-link" id="test" href="calendar.html'+userID+'">'+element+'</a></div><div class="link-edit-container><div class="meeting-link-buttons"><button class="edit-meeting-link meeting-buttons" href="calendar.html'+userID+'">Edit</button><button class="copy-meeting-link meeting-buttons" onclick="copyToClipboard()">Copy</button><button class="visit-meeting-link meeting-buttons" href="booking.html'+userID+'">Visit</button><button class="delete-meeting-link meeting-buttons delete-meeting">Delete</button></div></div></li>';
           document.getElementById('meetings_div').innerHTML += myHTML;  
+
+          // let myHTML=
+          //   `<li class="link-li-container">
+          //     <div class="ind-link-text"><a class="ind-link" id="test" href=`calendar.html#${userID}`>${element}</a></div>
+          //       <div class="link-edit-container">
+          //         <div class="meeting-link-buttons">
+          //           <button class="edit-meeting-link meeting-buttons" href=`calendar.html#${userID}`>Edit</button>
+          //           <button class="copy-meeting-link meeting-buttons">Copy</button>
+          //           <button class="visit-meeting-link meeting-buttons" href=`booking.html#${userID}`>Visit</button>
+          //           <button class="delete-meeting-link meeting-buttons delete-meeting">Delete</button>
+          //         </div>
+          //       </div>
+          //     </li>`;
+          // document.getElementById('meetings_div').innerHTML += myHTML;
         });
 
       });
 // console.log(dataArray);
+
 // const uniqueTitles = [...new Set(dataArray.map(item => item.title))];
 // console.log(uniqueTitles);
 
@@ -129,7 +155,23 @@ db.collection("booked")
           querySnapshot.forEach(function(doc) {
             // doc.data() is never undefined for query doc snapshots
             let data = (doc.id, " => ", doc.data());
-            let myHTML1='<li class="scheduled-meetings-list"><a id="title" class="ind-meeting">'+data.description+'</a><div class="link-edit-container booked-edit-container"><div class="meeting-link-buttons booked-links"><div class="booked-email booked-extras">Name: <span id="email" class="booked-email-text">'+data.name+'</span></div><div class="booked-email booked-extras">Email: <span id="email" class="booked-email-text">'+data.modalEmail+'</span></div><div class="booked-at booked-extras">Meeeting Date: <span id="booked" class="booked-email-text">'+data.date+' at '+data.time+'</span><div class="booked-at booked-extras">Duration: <span id="booked" class="booked-email-text">'+data.interval+'</span></div><div class="booked-at booked-extras">Location: <span id="booked" class="booked-email-text">'+data.location+'</span></div><button class="cancel-booked">Cancel Meeting</button></div></div></li>'
+            console.log(doc.id);
+            let myHTML1='<li class="scheduled-meetings-list"><a id="title" class="ind-meeting">'+data.description+'</a><div class="link-edit-container booked-edit-container"><div class="meeting-link-buttons booked-links"><div class="booked-email booked-extras">Name: <span id="email" class="booked-email-text">'+data.name+'</span></div><div class="booked-email booked-extras">Email: <span id="email" class="booked-email-text">'+data.modalEmail+'</span></div><div class="booked-at booked-extras">Meeeting Date: <span id="booked" class="booked-email-text">'+data.date+' at '+data.time+'</span><div class="booked-at booked-extras">Duration: <span id="booked" class="booked-email-text">'+data.interval+'</span></div><div class="booked-at booked-extras">Location: <span id="booked" class="booked-email-text">'+data.location+'</span></div><button class="cancel-booked" onclick="cancelMeeting('+doc.id+')">Cancel Meeting</button></div></div></li>'
+            document.getElementById("meetings2_div").innerHTML += myHTML1;
+
+            // let myHTML1=
+            //   `<li class="scheduled-meetings-list"><a id="title" class="ind-meeting">${data.description}</a>
+            //     <div class="link-edit-container booked-edit-container">
+            //       <div class="meeting-link-buttons booked-links">
+            //         <div class="booked-email booked-extras">Name: <span id="email" class="booked-email-text">${data.name}</span></div>
+            //         <div class="booked-email booked-extras">Email: <span id="email" class="booked-email-text">${data.modalEmail}</span></div>
+            //         <div class="booked-at booked-extras">Meeeting Date: <span id="booked" class="booked-email-text">${data.date} at ${data.time}</span>
+            //         <div class="booked-at booked-extras">Duration: <span id="booked" class="booked-email-text">${data.interval}</span></div>
+            //         <div class="booked-at booked-extras">Location: <span id="booked" class="booked-email-text">${data.location}</span></div>
+            //         <button class="cancel-booked">Cancel Meeting</button>
+            //       </div>
+            //     </div>
+            //   </li>`
             document.getElementById("meetings2_div").innerHTML += myHTML1;
           });  
         });        
