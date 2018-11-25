@@ -354,7 +354,6 @@ function addMeetingToFirebase() {
 	});
 }	
 
-
 //Get name on modal
 $('.modal-name-input').keyup(function() {
 	return modalName = $( this ).val();
@@ -430,19 +429,12 @@ function activeClass(el, target) {
 					console.log(window.location.href.split("#")[1], 'ID');
 					timeZoneDB = doc.data().start_date.toDate();
 
-
 					meetingTitle = doc.data().title;
-					console.log(meetingTitle);
-
 					meetingLocation = doc.data().location;
 					$('#location').html(meetingLocation);
-					console.log(meetingLocation);
-
 					meetingDescription = doc.data().description;
-					console.log(meetingDescription);
-
 					userDurationClicked = parseInt(doc.data().duration);
-					console.log(userDurationClicked, "userDurationClicked");
+
 
 
 					// set only Duration button that was clicked on create meeting page
@@ -460,7 +452,6 @@ function activeClass(el, target) {
 		       		 endTimes = doc.data().end_date.seconds;
 
 		       		  // run function to populate drop down times
-		       		  console.log
 		       		 populateTimes(startTimes, endTimes, interval);	
 	    		});
 	})
@@ -481,84 +472,34 @@ function activeClass(el, target) {
 }
 
 // change times when timezone is changed
-$("#DropDownTimezone").change(function() {    
-	// user time zone to seconds
-	userTimeZone = $("#DropDownTimezone").val() * 3600;
-	console.log(userTimeZone, "userTimeZone");
-})
+// $("#DropDownTimezone").change(function() {    
+// 	// user time zone to seconds
+// 	userTimeZone = $("#DropDownTimezone").val() * 3600;
+// 	console.log(userTimeZone, "userTimeZone");
+// })
 
 let timeZoneDate = new Date();
 userTimeZone = timeZoneDate.getTimezoneOffset() * 60;
-console.log(userTimeZone, "tz mins from UTC");
-
-
-// function populateTimes (start, end, seconds, timezone) {
-// 	console.log(start, "start" , end, "end", seconds, "seconds", timezone, "timezone");
-// 	if (start != 0 && end != 0) {
-// 		let startHtml = "";
-// 		if(seconds) {
-// 			do {
-// 			 	start = (start + timezone) + seconds;
-// 			 	endTime = (end + timezone) - start;
-// 				let startFormatted = new Date(start * 1000);
-// 				let formattedTime = startFormatted.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-// 				console.log(formattedTime);
-// 					startHtml +=
-// 					`<button class="booking-time-selector booking-button" data-hour-min=${formattedTime} onclick="activeClassSpecificTime(this)">${formattedTime}</button>`;
-			
-// 			} while (endTime > seconds * 2);
-
-// 			// the while loop is not working
-
-// 			// while (endTime > seconds * 2) {
-// 			//  	start = (start + timeZone) + seconds;
-// 			//  	console.log(start, "start = Start plus seconds");
-// 			//  	console.log(seconds, "seconds");
-
-// 			//  	endTime = (end + timeZone) - start;
-// 			// 	let startFormatted = new Date(start * 1000);
-// 			// 	let formattedTime = startFormatted.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-// 			// 	console.log(formattedTime);
-// 			// 		startHtml +=
-// 			// 		`<button class="booking-time-selector booking-button" data-hour-min=${formattedTime} onclick="activeClassSpecificTime(this)">${formattedTime}</button>`;
-			
-// 			// 	};
-
-// 		document.getElementById("booking-time").innerHTML += startHtml;
-// 		}
-// 	}
-// }
-
 
 function populateTimes (start, end, seconds) {
-
-						console.log(start, "start" , end, "end", seconds, "seconds");
 						if (start != 0 && end != 0) {
 							let startHtml = "";
 							if(seconds) {
-
 								do {
 								 	start = start + seconds;
-								 	console.log(start, "start = Start plus seconds");
-								 	console.log(seconds, "seconds");
 								 	endTimes = end - start;
-
 								 	if(seconds > endTimes) {
 								 		startHtml = "No times available";
 								 		break;
 								 	}
-
 									let startFormatted = new Date(start * 1000);
 									let formattedTime = startFormatted.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-									console.log(formattedTime);
 										startHtml +=
 										`<button class="booking-time-selector booking-button" data-hour-min=${formattedTime} onclick="activeClassSpecificTime(this)">${formattedTime}</button>`;
-								
 								} while (endTimes >= seconds * 2);
 							document.getElementById("booking-time").innerHTML += startHtml;
 							}
 					}
 				}
-
 
 initWeekCalendar(0);

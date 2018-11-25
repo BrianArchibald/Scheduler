@@ -371,6 +371,9 @@ button {
 	font-size: 13px;
 	color: #4c6896;
 }
+.sign-in-link:hover {
+	color: #6187c6;
+}
 .signup-bottom-text {
 	text-align: center;
 	font-size: 13px;
