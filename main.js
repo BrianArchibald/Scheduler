@@ -140,6 +140,7 @@ db.collection("events")
         // get meeting ID of element when user clicks cancel meeting
           $( ".delete-meeting" ).click(function(event) {
               let clicked = $(this);
+              console.log(clicked);
               let linkUserId = clicked.attr("userid");
               let linkElement = clicked.attr("element");
               console.log(linkUserId, linkElement);
@@ -147,6 +148,7 @@ db.collection("events")
           });
       });
 
+//let bookedID = "";
 db.collection("booked")
   .where('userID', '==', userID).orderBy('date')
     .get()
@@ -177,7 +179,13 @@ db.collection("booked")
           $( ".cancel-booked" ).click(function(event) {
               let clicked = $(this);
               let bookedID = clicked.attr("data-id");
-              console.log(bookedID, "booked ID");     
-          });
+              console.log(bookedID, "booked ID");  
+
+              db.collection("booked").doc(bookedID).delete().then(function() {
+                  console.log("Document successfully deleted!");
+              }).catch(function(error) {
+                  console.error("Error removing document: ", error);
+              });
+            });
       });
 
