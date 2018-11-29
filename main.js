@@ -66,19 +66,8 @@ function copyToClipboard(element) {
   $temp.remove();
 }
 
-//Delete link when delete button clicked
-// function cancelMeeting(id) {
-//   console.log(" clicked");
-// }
-
-
-// $( document ).ready(function(){
-//     // Sets up click behavior on all button elements with the alert class
-//     // that exist in the DOM when the instruction was executed
-//     $( "cancel-booked" ).click(function() {
-       
-//         console.log( "A button with the alert class was clicked!" );
-//     }, 1500);
+// $(".copy-meeting-link").click(function() {
+//   console.log( "Handler for .click() called." );
 // });
 
 
@@ -120,7 +109,7 @@ db.collection("events")
         console.log(uniqueTitles);  
         uniqueTitles.forEach(function(element) {
 
-          let myHTML='<li class="link-li-container"><div class="ind-link-text"><a class="ind-link" id="test" href="calendar.html'+userID+'">'+element+'</a></div><div class="link-edit-container><div class="meeting-link-buttons"><button class="edit-meeting-link meeting-buttons" href="calendar.html'+userID+'">Edit</button><button class="copy-meeting-link meeting-buttons" onclick="copyToClipboard()">Copy</button><button class="visit-meeting-link meeting-buttons" href="booking.html'+userID+'">Visit</button><button class="delete-meeting-link meeting-buttons delete-meeting" data-userid="'+userID+'" data-element"'+element+'">Delete</button></div></div></li>';
+          let myHTML='<li class="link-li-container"><div class="ind-link-text"><a class="ind-link" id="test" href="calendar.html'+userID+'">'+element+'</a></div><div class="link-edit-container><div class="meeting-link-buttons"><button class="edit-meeting-link meeting-buttons" href="calendar.html'+userID+'">Edit</button><button class="copy-meeting-link meeting-buttons">Copy</button><button class="visit-meeting-link meeting-buttons" href="booking.html'+userID+'">Visit</button><button class="delete-meeting-link meeting-buttons delete-meeting" data-userid="'+userID+'" data-element="'+element+'">Delete</button></div></div></li>';
           document.getElementById('meetings_div').innerHTML += myHTML;  
 
           // let myHTML=
@@ -137,18 +126,36 @@ db.collection("events")
           //     </li>`;
           // document.getElementById('meetings_div').innerHTML += myHTML;
         });
+          $(".copy-meeting-link").click(function() {
+            let copyItem = $(this);
+            console.log(copyItem);
+            console.log( "Handler for .click() called." );
+          });
+
+
         // get meeting ID of element when user clicks cancel meeting
           $( ".delete-meeting" ).click(function(event) {
               let clicked = $(this);
-              console.log(clicked);
-              let linkUserId = clicked.attr("userid");
-              let linkElement = clicked.attr("element");
+              // Hide Meeting link without DB refresh
+              $(this).closest(".link-li-container").hide();
+              let linkUserId = clicked.attr("data-userid");
+              let linkElement = clicked.attr("data-element");
               console.log(linkUserId, linkElement);
-               
-          });
+
+              // Remove meeting link from DB
+              db.collection("events")
+                   //.where('holder', '==', holder)
+                   .where('title', '==', linkElement)
+                     .delete()
+                       .then(function() {
+                          console.log("Document successfully deleted!");
+                      }).catch(function(error) {
+                          console.error("Error removing document: ", error);
+                      });
+            });
+         
       });
 
-//let bookedID = "";
 db.collection("booked")
   .where('userID', '==', userID).orderBy('date')
     .get()
@@ -178,9 +185,11 @@ db.collection("booked")
           // get meeting ID of element when user clicks cancel meeting
           $( ".cancel-booked" ).click(function(event) {
               let clicked = $(this);
+              // Hides the meeting when clicked cancel without DB refresh
+              $(this).closest(".scheduled-meetings-list").hide();
               let bookedID = clicked.attr("data-id");
               console.log(bookedID, "booked ID");  
-
+              // Deletes item from DB
               db.collection("booked").doc(bookedID).delete().then(function() {
                   console.log("Document successfully deleted!");
               }).catch(function(error) {
