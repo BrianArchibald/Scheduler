@@ -33,12 +33,24 @@ closeMenu.addEventListener('click', changeMobileNav);
 //   $(this).toggleClass("buttons-not-hidden");
 // })
 
-//Create Meeting click
+// Create Meeting click
 $('.create-link-button').click(function(){
    window.location.href='createMeeting.html';
 })
 
-//Sign Out User
+// // Click on meeting link
+// $('.ind-link').click(function(){
+//    window.location.href="booking.html + userID";
+// })
+
+
+    // $('.visit-meeting-link').click(function(){
+    //   console.log("visit clicked");
+    //   window.location.href="booking.html + userID";
+    // })
+
+
+// Sign Out User
 $('#main-sign-out').click(function(){
   console.log('sign out clicked');
   firebase.auth().signOut().then(function() {
@@ -58,13 +70,15 @@ $('#main-sign-out').click(function(){
 // document.getElementById("ind-link-id").innerHTML = 'Scheduled Meeting Link';
 
 //Copy meeting link to clipboard via copy button
-function copyToClipboard(element) {
-  let $temp = $("<input>");
-  $("body").append($temp);
-  $temp.val($(element).text()).select();
-  document.execCommand("copy");
-  $temp.remove();
-}
+// function copyToClipboard(element) {
+//   let $temp = $("<input>");
+//   $("body").append($temp);
+//   $temp.val($(element).text()).select();
+//   document.execCommand("copy");
+//   $temp.remove();
+// }
+
+
 
 // $(".copy-meeting-link").click(function() {
 //   console.log( "Handler for .click() called." );
@@ -80,9 +94,13 @@ db.collection("events")
       .then(function(querySnapshot) {
           querySnapshot.forEach(function(doc) {
               // doc.data() is never undefined for query doc snapshots
+              // console.log(doc.id);
+
               let data = (doc.id, " => ", doc.data());
-              console.log(data);
+              console.log(doc.data);
+              console.log(doc.id);
               dataArray.push(data);
+              console.log(dataArray);
               // uniqueTitles = [...new Set(dataArray.map(item => item.title))];
               // console.log(uniqueTitles);
               //date=data.start_date;
@@ -105,12 +123,13 @@ db.collection("events")
           //location.href=`booking.html#${userID}` send user to booking page
 
        // makes a new Set array with only unique elements
-        const uniqueTitles = [...new Set(dataArray.map(item => item.title))];
+       // const uniqueTitles = [...new Set(dataArray.map(item => item.title))];
+        const uniqueTitles = [...new Set(dataArray.map(item => ({name: item.title, id: item.id})))];
         console.log(uniqueTitles);  
         uniqueTitles.forEach(function(element) {
 
-          let myHTML='<li class="link-li-container"><div class="ind-link-text"><a class="ind-link" id="test" href="calendar.html'+userID+'">'+element+'</a></div><div class="link-edit-container><div class="meeting-link-buttons"><button class="edit-meeting-link meeting-buttons" href="calendar.html'+userID+'">Edit</button><button class="copy-meeting-link meeting-buttons">Copy</button><button class="visit-meeting-link meeting-buttons" href="booking.html'+userID+'">Visit</button><button class="delete-meeting-link meeting-buttons delete-meeting" data-userid="'+userID+'" data-element="'+element+'">Delete</button></div></div></li>';
-          document.getElementById('meetings_div').innerHTML += myHTML;  
+          let myHTML='<li class="link-li-container"><div class="ind-link-text"><a class="ind-link" id="test" data-docid="'+item.id+'" href="booking.html'+userID+'">'+element+'</a></div><div class="link-edit-container><div class="meeting-link-buttons"><button class="edit-meeting-link meeting-buttons">Edit</button><button class="copy-meeting-link meeting-buttons" data-clipboard-text="https://calendar-c07dd.firebaseapp.com/booking.html'+userID+'">Copy</button><button class="visit-meeting-link meeting-buttons">Visit</button><button class="delete-meeting-link meeting-buttons delete-meeting" data-userid="'+userID+'" data-element="'+element+'">Delete</button></div></div></li>';
+          document.getElementById('meetings-div').innerHTML += myHTML;  
 
           // let myHTML=
           //   `<li class="link-li-container">
@@ -126,14 +145,29 @@ db.collection("events")
           //     </li>`;
           // document.getElementById('meetings_div').innerHTML += myHTML;
         });
-          $(".copy-meeting-link").click(function() {
-            let copyItem = $(this);
-            console.log(copyItem);
-            console.log( "Handler for .click() called." );
-          });
 
+          // Copy link to clipboard
+          var clipboard = new ClipboardJS('.copy-meeting-link');
+          clipboard.on('success', function(e) {
+                alert("Link Copied");
+                e.clearSelection();
+            });
+            clipboard.on('error', function(e) {
+                console.error('Action:', e.action);
+                console.error('Trigger:', e.trigger);
+            });
 
-        // get meeting ID of element when user clicks cancel meeting
+          // Send user to booking page
+          $('.visit-meeting-link').click(function(){
+            window.location.href=`booking.html${userID}`;
+          })
+
+          // Send user to calendar to Edit Times
+          $('.edit-meeting-link').click(function(){
+            window.location.href=`calendar.html${userID}`;
+          })
+
+        // Get meeting ID of element when user clicks cancel meeting
           $( ".delete-meeting" ).click(function(event) {
               let clicked = $(this);
               // Hide Meeting link without DB refresh
@@ -144,15 +178,52 @@ db.collection("events")
 
               // Remove meeting link from DB
               db.collection("events")
-                   //.where('holder', '==', holder)
-                   .where('title', '==', linkElement)
-                     .delete()
-                       .then(function() {
-                          console.log("Document successfully deleted!");
-                      }).catch(function(error) {
-                          console.error("Error removing document: ", error);
-                      });
-            });
+                   .where('holder', '==', holder)
+                   .where('description', '==', linkElement)
+                      .get()
+                         .then(querySnapshot => {
+                            querySnapshot.forEach((doc) => {
+                              console.log(doc);
+                              doc.ref.delete().then(() => {
+                                console.log("Document successfully deleted!");
+                              }).catch(function(error) {
+                                console.error("Error removing document: ", error);
+                              });
+                            });
+                          })
+                          .catch(function(error) {
+                            console.log("Error getting documents: ", error);
+                          });
+
+
+                //  let eventTitleDelete = db.collection("events").where('holder', '==', holder).where('description', '==', linkElement);
+                //  eventTitleDelete.get().then(function(querySnapshot) {
+                //   querySnapshot.forEach(function(doc) {
+                //     doc.ref.delete();
+                //   });
+                // });
+
+                // db.collection('events').where('description', '==', linkElement).get()
+                //   querySnapshot.forEach(function(doc) {
+                //     console.log(doc.id);
+
+                //   });
+
+
+
+            // db.collection("events").where('holder', '==', holder)
+            //   .get()
+            //   .then(function(querySnapshot) {
+            //       querySnapshot.forEach(function(doc) {
+            //           // doc.data() is never undefined for query doc snapshots
+            //           console.log(doc.id, " => ", doc.data());
+            //       });
+            //   })
+            //   .catch(function(error) {
+            //       console.log("Error getting documents: ", error);
+            //   });
+
+        });
          
       });
 
