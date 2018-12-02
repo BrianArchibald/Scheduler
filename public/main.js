@@ -56,7 +56,7 @@ db.collection("events")
               dataArray.push(data, doc.id);
           }); 
 
-      // makes a new Set array with only unique elements
+      // Makes a new Set array with only unique elements
       const uniqueTitles = [...new Set(dataArray.map(item => item.title))]; 
       uniqueTitles.forEach(function(element) {
 
@@ -120,8 +120,6 @@ db.collection("booked")
           querySnapshot.forEach(function(doc) {
             // doc.data() is never undefined for query doc snapshots
             let data = (doc.id, " => ", doc.data());
-            // let myHTML1='<li class="scheduled-meetings-list"><a id="title" class="ind-meeting">'+data.description+'</a><div class="link-edit-container booked-edit-container"><div class="meeting-link-buttons booked-links"><div class="booked-email booked-extras">Name: <span id="email" class="booked-email-text">'+data.name+'</span></div><div class="booked-email booked-extras">Email: <span id="email" class="booked-email-text">'+data.modalEmail+'</span></div><div class="booked-at booked-extras">Meeeting Date: <span id="booked" class="booked-email-text">'+data.date+' at '+data.time+'</span><div class="booked-at booked-extras">Duration: <span id="booked" class="booked-email-text">'+data.interval+'</span></div><div class="booked-at booked-extras">Location: <span id="booked" class="booked-email-text">'+data.location+'</span></div><button class="cancel-booked" data-id="'+doc.id+'">Cancel Meeting</button></div></div></li>'
-            // document.getElementById("meetings2-div").innerHTML += myHTML1;
 
             let myHTML1 =  
             `<li class="scheduled-meetings-list">
@@ -154,4 +152,3 @@ db.collection("booked")
               });
             });
       });
-

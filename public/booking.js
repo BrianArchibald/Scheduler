@@ -55,29 +55,27 @@ let dateLeftArrow = undefined;
 let dateRightArrow = undefined;
 
 $(".fa-arrow-left").click(function() {
-	// need to have date - 7 days
+	// Need to have date - 7 days
 	Date.prototype.addDays = function(days) {
         let date = new Date(this.valueOf());
         date.setDate(date.getDate() + days);
-        //return date;
+        // Return date;
         let dateLeftArrow = date.addDays(-7);
         return dateLeftArrow;
     }
 	initWeekCalendar(-1);
-	console.log("clicked left");
 })
 
 $(".fa-arrow-right").click(function() {
-	// need to have date + 7 days
+	// Need to have date + 7 days
 	Date.prototype.addDays = function(days) {
         let date = new Date(this.valueOf());
         date.setDate(date.getDate() + days);
-        //return date;
+        // Return date;
         let dateRightArrow = date.addDays(7);
         return dateRightArrow;
     }
 	initWeekCalendar(1);
-	console.log("clicked right");
 })
 
 let startTimes = 0;
@@ -85,17 +83,17 @@ let endTimes = 0;
 let interval = 0;
 let userTimeZone = 0;
 
-// add active class to duration clicked
+// Add active class to duration clicked
 $(".booking-time-button").click(function() {
     let clicked = $(this);
 	  if (clicked.hasClass('active-button')) {
-	    $('.booking-time-button').removeClass('disabled'); //enable all again  
+	    $('.booking-time-button').removeClass('disabled'); // Enable all again  
 	    clicked.removeClass('active-button');
 	  } else {
 	   $('.booking-time-button').removeClass('active-button');
 	    clicked.addClass('active-button');
 	    clicked.removeClass('disabled');
-	    $('.booking-time-button').not(clicked).addClass('disabled'); //disable everything except clicked element
+	    $('.booking-time-button').not(clicked).addClass('disabled'); // Disable everything except clicked element
 	  }
 	  if($('.booking-time-button').hasClass('active-button')) {
 		durationClicked = true;
@@ -113,18 +111,18 @@ $(".booking-time-button").click(function() {
 		activeClass(document.querySelector('#booking-calendar .active-button'), clicked );
 });
 
-//add active class to button clicked
+// Add active class to button clicked
 $(".booking-time-selector").click(function() {
 	let clicked = $(this);
 	console.log(clicked);
 	  if (clicked.hasClass('active-button')) {
-	    $('.booking-time-selector').removeClass('disabled'); //enable all again  
+	    $('.booking-time-selector').removeClass('disabled'); // Enable all again  
 	    clicked.removeClass('active-button');
 	  } else {
 	   $('.booking-time-selector').removeClass('active-button');
 	    clicked.addClass('active-button');
 	    clicked.removeClass('disabled');
-	    $('.booking-time-selector').not(clicked).addClass('disabled'); //disable everything except clicked element
+	    $('.booking-time-selector').not(clicked).addClass('disabled'); // Disable everything except clicked element
 	  }
 
 	if($('.booking-time-selector').hasClass('active-button')) {
@@ -139,17 +137,17 @@ let clickedTimeButton;
 // Add active class to specific time button
 function activeClassSpecificTime(el) {
 	let clicked = $(el);
-	// get specific time of meeting for Modal
+	// Get specific time of meeting for Modal
 	clickedTimeButton = clicked[0].innerHTML;
-	// add active class to button clicked
+	// Add active class to button clicked
 	  if (clicked.hasClass('active-button')) {
-	    $('.booking-time-selector').removeClass('disabled'); //enable all again  
+	    $('.booking-time-selector').removeClass('disabled'); // Enable all again  
 	    clicked.removeClass('active-button');
 	  	} else {
 	   $('.booking-time-selector').removeClass('active-button');
 	    clicked.addClass('active-button');
 	    clicked.removeClass('disabled');
-	    $('.booking-time-selector').not(clicked).addClass('disabled'); //disable everything except clicked element
+	    $('.booking-time-selector').not(clicked).addClass('disabled'); // Disable everything except clicked element
 		}
 		meetingTimeClicked = true;
 		runModal();
@@ -160,7 +158,7 @@ function runModal() {
 		$('.pre-confirm-modal').css('display', 'grid');
 		$('.booking-wrapper').css('opacity', '.4');
 	}
-	//Add date/time of meeting to modal
+	// Add date/time of meeting to modal
 	$('.pre-confirm-time').html("Your meeting is on " + totalDateClicked + " at " + clickedTimeButton);
 };
 
@@ -193,7 +191,7 @@ $('.modal-signup-button').click(function () {
 	sendOwnerEmail();
 	addMeetingToFirebase();
 
-	//Change Modal text after submit to success.
+	// Change Modal text after submit to success.
 	$('#booking-modal').html('Congratulations on scheduling your meeting!  Both parties will receive email confirmations with the details');
 	$('.pre-confirm-modal').addClass('modalSuccess');
 })
@@ -233,7 +231,7 @@ function sendOwnerEmail() {
 function addMeetingToFirebase() {
 	let userID = `#${window.location.href.split("#")[1]}`;
 	interval = interval / 60 + ' mins';
-		//send meeting details to firebase
+		// Send meeting details to firebase
 		db.collection('booked').add({   
 			title: meetingTitle,
 	    	location: meetingLocation,
@@ -253,12 +251,12 @@ function addMeetingToFirebase() {
 	});
 }	
 
-//Get name on modal
+// Get name on modal
 $('.modal-name-input').keyup(function() {
 	return modalName = $( this ).val();
 }).keyup();
 
-//Get email on modal
+// Get email on modal
 $('.modal-email-input').keyup(function() {
 	return modalEmail = $( this ).val();
 }).keyup();
@@ -278,7 +276,7 @@ function activeClass(el, target) {
 	let clicked = $(el);
 	document.getElementById("booking-time").innerHTML = "";
 	
-	// add active class to button clicked
+	// Add active class to button clicked
 	  if (clicked.hasClass('active-button') && !target.hasClass('booking-time-button') ) {
 	    $('.booking-day-button').removeClass('disabled'); //enable all again  
 	    clicked.removeClass('active-button');
@@ -302,7 +300,7 @@ function activeClass(el, target) {
 	let start = new Date(calData);
 	let end = new Date(calDataPlusDay);
 
-    //get day from db of the day clicked
+    // Get day from db of the day clicked
     this.db.collection('events')  
         .where('start_date', '>', start)
         .where('start_date', '<', end)
@@ -324,7 +322,7 @@ function activeClass(el, target) {
 		       		startTimes = doc.data().start_date.seconds - interval;
 		       		endTimes = doc.data().end_date.seconds;
 
-		       		// run function to populate drop down times
+		       		// Run function to populate drop down times
 		       		populateTimes(startTimes, endTimes, interval);	
 	    		});
 	})
@@ -332,13 +330,11 @@ function activeClass(el, target) {
   		console.log("Error getting documents: ", error);
 	});	 
 
-	console.log(clicked);
 	monthClicked = clicked[0].dataset.month;
 	monthClicked = parseInt(clicked[0].dataset.month) + 1;
 	if (monthClicked > 12) {
 		monthClicked = 1;
 	}
-	console.log(monthClicked, "monthclicked");
 	dateClicked = clicked[0].dataset.date;
 	yearClicked = clicked[0].dataset.year;
 	totalDateClicked = monthClicked + "/" + dateClicked + "/" + yearClicked;    
