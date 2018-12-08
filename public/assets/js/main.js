@@ -126,10 +126,10 @@ db.collection("booked")
                 <a id="title" class="ind-meeting">${data.description}</a>
               <div class="link-edit-container booked-edit-container">
                 <div class="meeting-link-buttons booked-links">
-                  <div class="booked-email booked-extras">Name: <span id="email" class="booked-email-text">${data.name}</span></div>
-                  <div class="booked-email booked-extras">Email: <span id="email" class="booked-email-text">${data.modalEmail}</span></div>
-                  <div class="booked-at booked-extras">Meeeting Date: <span id="booked" class="booked-email-text">${data.date} at ${data.time}</span>
-                  <div class="booked-at booked-extras">Duration: <span id="booked" class="booked-email-text">${data.interval}</span></div><div class="booked-at booked-extras">Location: <span id="booked" class="booked-email-text">${data.location}</span></div>
+                  <div class="booked-email booked-title booked-extras">Name: <span id="email" class="booked-email-text" data-title="${data.name}">${data.name}</span></div>
+                  <div class="booked-email booked-extras">Email: <span id="email" class="booked-email-text booked-modal-email" data-modalemail="${data.modalEmail}">${data.modalEmail}</span></div>
+                  <div class="booked-at booked-extras">Meeeting Date: <span id="booked" class="booked-email-text booked-date" data-date="${data.date}" data-time="${data.time}">${data.date} at ${data.time}</span>
+                  <div class="booked-at booked-interval booked-extras">Duration: <span id="booked" class="booked-email-text">${data.interval}</span></div><div class="booked-at booked-extras">Location: <span id="booked" class="booked-email-text">${data.location}</span></div>
                   <button class="cancel-booked" data-id="${doc.id}">Cancel Meeting</button>
                 </div>
               </div>
@@ -140,8 +140,39 @@ db.collection("booked")
           // Get meeting ID of element when user clicks cancel meeting
           $( ".cancel-booked" ).click(function(event) {
               let clicked = $(this);
+              console.log(this);
               // Hides the meeting when clicked cancel without DB refresh
               $(this).closest(".scheduled-meetings-list").hide();
+
+
+              let titleDiv = $(this).closest(".booked-title");
+              let bookedTitle = titleDiv.attr("data-title");
+
+              let modalEmailDiv = $(this).closest(".booked-modal-email");
+              let modalEmail = modalEmailDiv.attr("data-modalemail");
+
+              let dateDiv = $(this).closest(".booked-date");
+              let bookedDate = dateDiv.attr("data-date");
+
+              let bookedAtDiv = $(this).closest(".booked-date");
+              let bookedTime = bookedAtDiv.attr("data-time");
+
+              let ownerEmail = dataArray[0].email;
+
+              function sendCancelEmail() {
+                let template_params = {
+                   "ownerEmail": ownerEmail,
+                   "bookedTitle": bookedTitle,
+                   "modalEmail":  modalEmail,
+                   "bookedDate": bookedDate,
+                   "bookedTime": bookedTime,
+                }
+                let service_id = "default_service";
+                let template_id = "template_7H4gRgo2";
+                emailjs.send(service_id,template_id,template_params); 
+              }
+
+
               let bookedID = clicked.attr("data-id");
               console.log(bookedID, "booked ID");  
               // Deletes item from DB
