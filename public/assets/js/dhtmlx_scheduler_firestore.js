@@ -45,7 +45,15 @@
 						
 						// Get title, description, location and store in DB
 						let userTitle = localStorage.getItem("title");
-						scheduler.setUserData(eventId, "title", userTitle);
+
+						if(userTitle != undefined) {
+							scheduler.setUserData(eventId, "title", userTitle);
+						}
+
+						// Set Unique ID to DB from Create Meeting Page
+						let uniqueID = localStorage.getItem("uniqueID");
+						scheduler.setUserData(eventId, "uniqueID", uniqueID);
+
 						let userLocation = localStorage.getItem("location");
 						scheduler.setUserData(eventId, "location", userLocation);
 						let userDescription = localStorage.getItem("description");

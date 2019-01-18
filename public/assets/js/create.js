@@ -34,6 +34,10 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 // Click on availability to show calendar
 $("#create-save").click(function() {
+  // Generate unique ID when save is clicked
+  let uniqueID = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase();
+  localStorage.setItem("uniqueID", uniqueID);
+
  	window.location.href=`calendar.html#${userID}`;
 });
 
