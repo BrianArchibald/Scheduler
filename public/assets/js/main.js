@@ -55,26 +55,26 @@ db.collection("events")
               let data = (doc.id, " => ", doc.data());
               dataArray.push(data, doc.id);
           }); 
-
       // Makes a new Set array with only unique elements
       const uniqueTitles = [...new Set(dataArray.map(item => item.title))]; 
       uniqueTitles.forEach(function(element) {
-
-        let myHTML =
-          `<li class="link-li-container">
-            <div class="ind-link-text">
-              <a class="ind-link" id="test" data-docid="" href="booking.html${userID}">${element}</a>
-            </div>
-            <div class="link-edit-container>
-              <div class="meeting-link-buttons">
-                <button class="edit-meeting-link meeting-buttons">Edit</button>
-                <button class="copy-meeting-link meeting-buttons" data-clipboard-text="https://calendar-c07dd.firebaseapp.com/booking.html${userID}">Copy</button>
-                <button class="visit-meeting-link meeting-buttons">Visit</button>
-                <button class="delete-meeting-link meeting-buttons delete-meeting" data-userid="${userID}" data-element="${element}">Delete</button>
+        if (element != undefined) {
+          let myHTML =
+            `<li class="link-li-container">
+              <div class="ind-link-text">
+                <a class="ind-link" id="test" data-docid="" href="booking.html${userID}">${element}</a>
               </div>
-            </div>
-          </li>`;
-        document.getElementById('meetings-div').innerHTML += myHTML;  
+              <div class="link-edit-container>
+                <div class="meeting-link-buttons">
+                  <button class="edit-meeting-link meeting-buttons">Edit</button>
+                  <button class="copy-meeting-link meeting-buttons" data-clipboard-text="https://calendar-c07dd.firebaseapp.com/booking.html${userID}">Copy</button>
+                  <button class="visit-meeting-link meeting-buttons">Visit</button>
+                  <button class="delete-meeting-link meeting-buttons delete-meeting" data-userid="${userID}" data-element="${element}">Delete</button>
+                </div>
+              </div>
+            </li>`;
+          document.getElementById('meetings-div').innerHTML += myHTML;
+        }  
       });
 
           // Copy link to clipboard
