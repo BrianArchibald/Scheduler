@@ -123,7 +123,7 @@ db.collection("booked")
 
             let myHTML1 =  
             `<li class="scheduled-meetings-list">
-                <a id="title" class="ind-meeting">${data.description}</a>
+                <a id="title" class="ind-meeting">${data.title}</a>
               <div class="link-edit-container booked-edit-container">
                 <div class="meeting-link-buttons booked-links">
                   <div class="booked-email booked-title booked-extras">Name: <span id="email" class="booked-email-text" data-title="${data.name}">${data.name}</span></div>

@@ -4,6 +4,7 @@ const firstName = document.getElementById('first-name');
 const lastName = document.getElementById('last-name');
 const signUpButton = document.getElementById('sign-up-button');
 const signUpForm = document.getElementById('signup-form');
+const demoButtom = document.getElementById('demo-button');
 
 // Add login event
 signUpButton.addEventListener('click', e => {  
@@ -16,6 +17,18 @@ signUpButton.addEventListener('click', e => {
   promise.catch(e => console.log(e.message));
   //e.preventDefault();
 });
+
+// Demo button
+demoButtom.addEventListener('click', e => { 
+console.log("demo clicked"); 
+  // Get email and password
+  const email = "demo@email.com";
+  const pass = "password";
+  const auth = firebase.auth();
+  // Sign in
+  const promise = auth.signInWithEmailAndPassword(email, pass);
+  promise.catch(e => alert(e.message));
+}); 
 
 //Hit Enter for sign up instead of clicking button
 signUpForm.addEventListener('keyup', function(event) {
