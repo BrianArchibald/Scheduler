@@ -1,57 +1,94 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Sign Up Page</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/main.css">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-	<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
-	<script>
-		// Initialize firebase
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sign Up Page</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700"
+      rel="stylesheet"
+    />
+    <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
+    <script>
+      // Initialize firebase
       var config = {
-      apiKey: "AIzaSyDJFbbPR1n6if3yX1giV8KvW_Pyq88aBKk",
-      authDomain: "calendar-c07dd.firebaseapp.com",
-      databaseURL: "https://calendar-c07dd.firebaseio.com",
-      projectId: "calendar-c07dd",
-      storageBucket: "calendar-c07dd.appspot.com",
-      messagingSenderId: "1041934999578"
-    };
-    firebase.initializeApp(config);
-	</script>
-</head>
+        apiKey: "AIzaSyDJFbbPR1n6if3yX1giV8KvW_Pyq88aBKk",
+        authDomain: "calendar-c07dd.firebaseapp.com",
+        databaseURL: "https://calendar-c07dd.firebaseio.com",
+        projectId: "calendar-c07dd",
+        storageBucket: "calendar-c07dd.appspot.com",
+        messagingSenderId: "1041934999578"
+      };
+      firebase.initializeApp(config);
+    </script>
+  </head>
 
-<body class="signup-body">
-	<div id="wrapper-signup">
-		<div class="header-signup">
-			<h2 class="signup-header-text">Sign Up</h2>
-			<p>Easy scheduling with no fees.</p>
-		</div>
-		<div class="signup-boxes">
-			<br>
-			<div class="signupbox-bottom">
-				<div class="signup-form" id="signup-form">
-					<input type="text" class="signup-inputs" id="first-name" placeholder="First Name" name="first-name" required>
-				    <input type="text" class="signup-inputs" id="last-name" placeholder="Last Name" name="last-name" required>
-				    <input type="email" class="signup-inputs" id="signup-email" placeholder="Email" name="emailaddress" required> 
-				  	<input type="password" class="signup-inputs" id="signup-password" placeholder="Password" name="psw" minlength="8" required>
-				  	<button class="signup-button" id="sign-up-button">Sign Up</button>
-				  	<button class="signup-button" id="demo-button">Demo</button>
-				</div>
-			</div>
-		</div>
+  <body class="signup-body">
+    <div id="wrapper-signup">
+      <div class="header-signup">
+        <h2 class="signup-header-text">Sign Up</h2>
+        <p>Easy scheduling with no fees.</p>
+      </div>
+      <div class="signup-boxes">
+        <br />
+        <div class="signupbox-bottom">
+          <div class="signup-form" id="signup-form">
+            <input
+              type="text"
+              class="signup-inputs"
+              id="first-name"
+              placeholder="First Name"
+              name="first-name"
+              required
+            />
+            <input
+              type="text"
+              class="signup-inputs"
+              id="last-name"
+              placeholder="Last Name"
+              name="last-name"
+              required
+            />
+            <input
+              type="email"
+              class="signup-inputs"
+              id="signup-email"
+              placeholder="Email"
+              name="emailaddress"
+              required
+            />
+            <input
+              type="password"
+              class="signup-inputs"
+              id="signup-password"
+              placeholder="Password"
+              name="psw"
+              minlength="8"
+              required
+            />
+            <button class="signup-button" id="sign-up-button">Sign Up</button>
+            <button class="signup-button" id="demo-button">Demo</button>
+          </div>
+        </div>
+      </div>
 
-		<div class="footer text-center">
-		    <div class="footer-container-signup">
-		      <div class="signup-legal">
-		      	<p class="signup-footer-items">By signing up you are agreeing to the <span class="terms-conditions"><a href="#">Terms</a></span> and <span class="terms-conditions"><a href="#">Conditions</a></span></p>
-		      </div>
-		    </div>
-		</div> <!-- End of Footer -->
-	</div>
-	
-	<script src="assets/js/signup.js"></script>
-</body>
+      <div class="footer text-center">
+        <div class="footer-container-signup">
+          <div class="signup-legal">
+            <p class="signup-footer-items">
+              By signing up you are agreeing to the
+              <span class="terms-conditions"><a href="#">Terms</a></span> and
+              <span class="terms-conditions"><a href="#">Conditions</a></span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- End of Footer -->
+    </div>
+
+    <script src="assets/js/signup.js"></script>
+  </body>
 </html>

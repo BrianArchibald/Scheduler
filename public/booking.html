@@ -1,109 +1,161 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Booking Page</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+      integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700"
+      rel="stylesheet"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+      crossorigin="anonymous"
+    ></script>
 
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Booking Page</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/main.css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-	 crossorigin="anonymous">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-	<script
-	  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
-	  crossorigin="anonymous"></script>
-	 
-	<script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.2.4/email.min.js"></script>
-	<script type="text/javascript">
-		(function(){
-		    emailjs.init("user_NWN6mRjW2M0FTkvY8lVGD");
-		})();
-	</script>
-	
-</head>
+    <script
+      type="text/javascript"
+      src="https://cdn.emailjs.com/sdk/2.2.4/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function() {
+        emailjs.init("user_NWN6mRjW2M0FTkvY8lVGD");
+      })();
+    </script>
+  </head>
 
-<body>
-	<div class="booking-wrapper">
-		<div class="booking-title">
-			<p>Choose Your Time to Meet</p>
-		</div>
-		<div class="booking-location">
-			<p>Location: <span id="location"></span></p>
-		</div>
-		<div class="meeting-length">
-			<h3 class="meeting-length-title">Meeting Length</h3>
-		</div>
-		<div class="booking-duration" id="booking-duration-container">
-			<button class="booking-time-button booking-button" id="30-min-button" data-sec="1800">30 min</button>
-			<button class="booking-time-button booking-button" id="60-min-button" data-sec="3600">60 min</button>
-			<button class="booking-time-button booking-button" id="90-min-button" data-sec="5400">90 min</button>
-			<button class="booking-time-button booking-button" id="120-min-button" data-sec="7200">120 min</button>   			
-		</div>
-		<div class="booking-date-header">
-			<h3>Date of Meeting</h3>
-		</div>
-		<div class="day-arrows">
-			<a  id="forward" >
-				<i class="fas fa-arrow-left"></i>
-			</a>
-			<a  id="backward" >
-				<i class="fas fa-arrow-right"></i>
-			</a>
-		</div>
-		<div id="booking-calendar">
-		</div>
+  <body>
+    <div class="booking-wrapper">
+      <div class="booking-title">
+        <p>Choose Your Time to Meet</p>
+      </div>
+      <div class="booking-location">
+        <p>Location: <span id="location"></span></p>
+      </div>
+      <div class="meeting-length">
+        <h3 class="meeting-length-title">Meeting Length</h3>
+      </div>
+      <div class="booking-duration" id="booking-duration-container">
+        <button
+          class="booking-time-button booking-button"
+          id="30-min-button"
+          data-sec="1800"
+        >
+          30 min
+        </button>
+        <button
+          class="booking-time-button booking-button"
+          id="60-min-button"
+          data-sec="3600"
+        >
+          60 min
+        </button>
+        <button
+          class="booking-time-button booking-button"
+          id="90-min-button"
+          data-sec="5400"
+        >
+          90 min
+        </button>
+        <button
+          class="booking-time-button booking-button"
+          id="120-min-button"
+          data-sec="7200"
+        >
+          120 min
+        </button>
+      </div>
+      <div class="booking-date-header">
+        <h3>Date of Meeting</h3>
+      </div>
+      <div class="day-arrows">
+        <a id="forward">
+          <i class="fas fa-arrow-left"></i>
+        </a>
+        <a id="backward">
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+      <div id="booking-calendar"></div>
 
-		<div class="booking-time-header">
-			<div class="booking-time-title">
-				<h3>Meeting Time</h3>
-			</div>
-		</div>
+      <div class="booking-time-header">
+        <div class="booking-time-title">
+          <h3>Meeting Time</h3>
+        </div>
+      </div>
 
-		<div class="booking-time" id="booking-time">
-		</div>
-	</div>
+      <div class="booking-time" id="booking-time"></div>
+    </div>
 
-	<!-- Modal Window after all selections are made -->
-	<div class="pre-confirm-modal" id="booking-modal">
-		<div class="pre-confirm-title">
-			<p class="pre-confirm-title-text">Confirm Your Meeting</p>
-		</div>
-		<div class="pre-confirm-time">
-			September 21, 2018 8:30 AM.
-		</div>
-		<div class="pre-confirm-header-text">
-			Both participants will get a confirmation email with the details after you click
-			submit.
-		</div>
-		<div class="pre-confirm-inputs">
-			<input type="text" class="signup-inputs modal-name-input" placeholder="Name" name="first-name" required>
-			<input type="text" class="signup-inputs modal-email-input" placeholder="Email" name="email" required>
-		</div>
-		<div class="pre-confirm-buttons">
-			<button type="submit" class="signup-button modal-signup-button">Submit</button>
-			<button type="cancel" class="signup-button confirm-modal-cancel-button" id="pre-confirm-cancel-button">Cancel</button>
-		</div>
-	</div> <!-- End of Modal Window -->
+    <!-- Modal Window after all selections are made -->
+    <div class="pre-confirm-modal" id="booking-modal">
+      <div class="pre-confirm-title">
+        <p class="pre-confirm-title-text">Confirm Your Meeting</p>
+      </div>
+      <div class="pre-confirm-time">
+        September 21, 2018 8:30 AM.
+      </div>
+      <div class="pre-confirm-header-text">
+        Both participants will get a confirmation email with the details after
+        you click submit.
+      </div>
+      <div class="pre-confirm-inputs">
+        <input
+          type="text"
+          class="signup-inputs modal-name-input"
+          placeholder="Name"
+          name="first-name"
+          required
+        />
+        <input
+          type="text"
+          class="signup-inputs modal-email-input"
+          placeholder="Email"
+          name="email"
+          required
+        />
+      </div>
+      <div class="pre-confirm-buttons">
+        <button type="submit" class="signup-button modal-signup-button">
+          Submit
+        </button>
+        <button
+          type="cancel"
+          class="signup-button confirm-modal-cancel-button"
+          id="pre-confirm-cancel-button"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+    <!-- End of Modal Window -->
 
-	<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
-	<script>
-		//initialize firebase
-		var config = {
-			apiKey: "AIzaSyDJFbbPR1n6if3yX1giV8KvW_Pyq88aBKk",
-			authDomain: "calendar-c07dd.firebaseapp.com",
-			databaseURL: "https://calendar-c07dd.firebaseio.com",
-			projectId: "calendar-c07dd",
-			storageBucket: "calendar-c07dd.appspot.com",
-			messagingSenderId: "1041934999578"
-		};
-		firebase.initializeApp(config);
-		// Initialize Cloud Firestore through Firebase
-		var db = firebase.firestore();
-		db.settings({ timestampsInSnapshots: true });
-	</script>
-	<script type="text/javascript" src="assets/js/booking.js"></script>
-</body>
+    <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
+    <script>
+      //initialize firebase
+      var config = {
+        apiKey: "AIzaSyDJFbbPR1n6if3yX1giV8KvW_Pyq88aBKk",
+        authDomain: "calendar-c07dd.firebaseapp.com",
+        databaseURL: "https://calendar-c07dd.firebaseio.com",
+        projectId: "calendar-c07dd",
+        storageBucket: "calendar-c07dd.appspot.com",
+        messagingSenderId: "1041934999578"
+      };
+      firebase.initializeApp(config);
+      // Initialize Cloud Firestore through Firebase
+      var db = firebase.firestore();
+      db.settings({ timestampsInSnapshots: true });
+    </script>
+    <script type="text/javascript" src="assets/js/booking.js"></script>
+  </body>
 </html>

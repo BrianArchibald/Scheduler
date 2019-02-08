@@ -1,54 +1,82 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Sign In Page</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/main.css">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-	<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
-	<script>
-	  var config = {
-      apiKey: "AIzaSyDJFbbPR1n6if3yX1giV8KvW_Pyq88aBKk",
-      authDomain: "calendar-c07dd.firebaseapp.com",
-      databaseURL: "https://calendar-c07dd.firebaseio.com",
-      projectId: "calendar-c07dd",
-      storageBucket: "calendar-c07dd.appspot.com",
-      messagingSenderId: "1041934999578"
-    };
-    firebase.initializeApp(config);
-	</script>
-</head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sign In Page</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700"
+      rel="stylesheet"
+    />
+    <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
+    <script>
+      var config = {
+        apiKey: "AIzaSyDJFbbPR1n6if3yX1giV8KvW_Pyq88aBKk",
+        authDomain: "calendar-c07dd.firebaseapp.com",
+        databaseURL: "https://calendar-c07dd.firebaseio.com",
+        projectId: "calendar-c07dd",
+        storageBucket: "calendar-c07dd.appspot.com",
+        messagingSenderId: "1041934999578"
+      };
+      firebase.initializeApp(config);
+    </script>
+  </head>
 
-<body class="signup-body">
-	<div id="wrapper-signup">
-		<div class="header-signup">
-			<h2 class="signup-header-text">Sign In</h2>
-			<p></p>
-		</div>
-		<div class="signup-boxes">
-			<br>
-			<div class="signupbox-bottom">
-				<div class="signup-form" id="signin-form">
-				    <input type="email" class="signup-inputs" id="signup-email" placeholder="Email" name="emailaddress" required> 
-				  	<input type="password" class="signup-inputs" id="signup-password" placeholder="Password" name="psw" minlength="8" required>
-				  	<button class="signin-button signup-button" id="sign-in-button">Sign In</button>
-				</div>
-				<div class="sign-in-to-signup"><a class="sign-in-link" href="signup.html">Need to Create an Account Instead?</a>
-				</div>
-			</div>
-		</div>
+  <body class="signup-body">
+    <div id="wrapper-signup">
+      <div class="header-signup">
+        <h2 class="signup-header-text">Sign In</h2>
+        <p></p>
+      </div>
+      <div class="signup-boxes">
+        <br />
+        <div class="signupbox-bottom">
+          <div class="signup-form" id="signin-form">
+            <input
+              type="email"
+              class="signup-inputs"
+              id="signup-email"
+              placeholder="Email"
+              name="emailaddress"
+              required
+            />
+            <input
+              type="password"
+              class="signup-inputs"
+              id="signup-password"
+              placeholder="Password"
+              name="psw"
+              minlength="8"
+              required
+            />
+            <button class="signin-button signup-button" id="sign-in-button">
+              Sign In
+            </button>
+          </div>
+          <div class="sign-in-to-signup">
+            <a class="sign-in-link" href="signup.html"
+              >Need to Create an Account Instead?</a
+            >
+          </div>
+        </div>
+      </div>
 
-		<div class="footer text-center">
-		    <div class="footer-container-signup">
-		      <div class="signup-legal">
-		      	<p class="signup-footer-items">By signing in you are agreeing to the <span class="terms-conditions"><a href="#">Terms</a></span> and <span class="terms-conditions"><a href="#">Conditions</a></span></p>
-		      </div>
-		    </div>
-		</div> <!-- End of Footer -->
-	</div>
-	<script src="assets/js/signin.js"></script>
-</body>
+      <div class="footer text-center">
+        <div class="footer-container-signup">
+          <div class="signup-legal">
+            <p class="signup-footer-items">
+              By signing in you are agreeing to the
+              <span class="terms-conditions"><a href="#">Terms</a></span> and
+              <span class="terms-conditions"><a href="#">Conditions</a></span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- End of Footer -->
+    </div>
+    <script src="assets/js/signin.js"></script>
+  </body>
 </html>

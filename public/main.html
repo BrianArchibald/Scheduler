@@ -1,126 +1,158 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Main Page</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/main.css">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-	<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
-	<script
-	  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
-	  crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
-	
-	<script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.2.4/email.min.js"></script>
-	<script type="text/javascript">
-		(function(){
-		    emailjs.init("user_NWN6mRjW2M0FTkvY8lVGD");
-		})();
-	</script>
-	<script>
-	  var config = {
-      apiKey: "AIzaSyDJFbbPR1n6if3yX1giV8KvW_Pyq88aBKk",
-      authDomain: "calendar-c07dd.firebaseapp.com",
-      databaseURL: "https://calendar-c07dd.firebaseio.com",
-      projectId: "calendar-c07dd",
-      storageBucket: "calendar-c07dd.appspot.com",
-      messagingSenderId: "1041934999578"
-    };
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Main Page</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+      integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+      crossorigin="anonymous"
+    />
+    <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdn.emailjs.com/sdk/2.2.4/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function() {
+        emailjs.init("user_NWN6mRjW2M0FTkvY8lVGD");
+      })();
+    </script>
+    <script>
+      var config = {
+        apiKey: "AIzaSyDJFbbPR1n6if3yX1giV8KvW_Pyq88aBKk",
+        authDomain: "calendar-c07dd.firebaseapp.com",
+        databaseURL: "https://calendar-c07dd.firebaseio.com",
+        projectId: "calendar-c07dd",
+        storageBucket: "calendar-c07dd.appspot.com",
+        messagingSenderId: "1041934999578"
+      };
       firebase.initializeApp(config);
-    // Initialize Cloud Firestore through Firebase
-    var db = firebase.firestore();
-    const firestore = firebase.firestore();
-    const settings = {/* your settings... */ timestampsInSnapshots: true};
-    firestore.settings(settings);
-	</script>
-</head>
-<body>
-	<div class="main-wrapper">
-		<div class="nav-container-main">
-			<nav class="main-nav">
-				<div class="nav-logo">
-					<a href="index.html">
-						<i class="fas fa-cubes"></i>
-					</a>
-				</div>
-				<div class="nav-menu">
-					<ul class="nav-list">	
-						<li>
-							<a class="nav-menu-link nav-list-items" id="main-home" href="main.html">HOME</a>		
-						</li>
-						<li>
-							<a class="nav-menu-link nav-list-items" href="settings.html">SETTINGS</a>	
-						</li>
-						<li>
-							<a class="nav-menu-link nav-list-items" id="main-sign-out" href="#">SIGN OUT</a>
-						</li>
-					</ul>	
-				</div>
-				<div class="mobile-nav-menu">
-					<a class="mobile-nav-icon">
-						<i class="fa fa-bars" id="menu-icon" aria-hidden="true"></i> 
-					</a>
-				</div>
-			</nav>
-		</div>  <!-- End of Nav Container -->
+      // Initialize Cloud Firestore through Firebase
+      var db = firebase.firestore();
+      const firestore = firebase.firestore();
+      const settings = { /* your settings... */ timestampsInSnapshots: true };
+      firestore.settings(settings);
+    </script>
+  </head>
+  <body>
+    <div class="main-wrapper">
+      <div class="nav-container-main">
+        <nav class="main-nav">
+          <div class="nav-logo">
+            <a href="index.html">
+              <i class="fas fa-cubes"></i>
+            </a>
+          </div>
+          <div class="nav-menu">
+            <ul class="nav-list">
+              <li>
+                <a
+                  class="nav-menu-link nav-list-items"
+                  id="main-home"
+                  href="main.html"
+                  >HOME</a
+                >
+              </li>
+              <li>
+                <a class="nav-menu-link nav-list-items" href="settings.html"
+                  >SETTINGS</a
+                >
+              </li>
+              <li>
+                <a
+                  class="nav-menu-link nav-list-items"
+                  id="main-sign-out"
+                  href="#"
+                  >SIGN OUT</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="mobile-nav-menu">
+            <a class="mobile-nav-icon">
+              <i class="fa fa-bars" id="menu-icon" aria-hidden="true"></i>
+            </a>
+          </div>
+        </nav>
+      </div>
+      <!-- End of Nav Container -->
 
-		<nav class="mobile-nav" id="mobile-nav">
-				<div class="mobile-menu" id="close-menu">
-					<ul class="mobile-list" id="mobile-list">
-						<li>
-							<a class="nav-active">
-								<div class="nav-list-mobile" class="close-menu">Close Menu</div>
-							</a>
-						</li>
-						<li>
-							<a class="nav-active" href="main.html">
-								<div class="nav-list-mobile" id="mobile-contact" class="close-menu">Home</div>
-							</a>
-						</li>
-						<li>
-							<a class="nav-active" href="#">
-								<div class="nav-list-mobile" class="close-menu">Settings</div>
-							</a>
-						</li>
-						<li>
-							<a class="nav-active" href="#">
-								<div class="nav-list-mobile" class="close-menu">Sign Out</div>
-							</a>
-						</li>
-					</ul>
-				</div>
-			</nav> 
+      <nav class="mobile-nav" id="mobile-nav">
+        <div class="mobile-menu" id="close-menu">
+          <ul class="mobile-list" id="mobile-list">
+            <li>
+              <a class="nav-active">
+                <div class="nav-list-mobile" class="close-menu">Close Menu</div>
+              </a>
+            </li>
+            <li>
+              <a class="nav-active" href="main.html">
+                <div
+                  class="nav-list-mobile"
+                  id="mobile-contact"
+                  class="close-menu"
+                >
+                  Home
+                </div>
+              </a>
+            </li>
+            <li>
+              <a class="nav-active" href="#">
+                <div class="nav-list-mobile" class="close-menu">Settings</div>
+              </a>
+            </li>
+            <li>
+              <a class="nav-active" href="#">
+                <div class="nav-list-mobile" class="close-menu">Sign Out</div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
-		<div class="main-content-wrapper">
-			<div class="main-meeting-links">
-				<div class="main-links-title">
-					<h3 class="your-meetings">Meeting Links</h3>
-				</div>
-				<div class="create-link">
-					<button class="landing-button create-link-button">Create Meeting</button>
-				</div>
-			</div>
-			<div class="link-list-container">
-				<ul class="link-list">	
-					<div id="meetings-div"></div>
-				</ul>	
-			</div>
-			<div class="scheduled-meetings-container">
-				<div class="scheduled-header">
-					<h3 class="scheduled-title">Scheduled Meetings</h3>
-				</div>
-				<ul class="scheduled-meetings">	
-					<div id="meetings2-div"></div>
-				</ul>	
-			</div>
-		</div>
-	</div>
-	<script type="text/javascript" src="assets/js/main.js"></script>
-
-</body>
+      <div class="main-content-wrapper">
+        <div class="main-meeting-links">
+          <div class="main-links-title">
+            <h3 class="your-meetings">Meeting Links</h3>
+          </div>
+          <div class="create-link">
+            <button class="landing-button create-link-button">
+              Create Meeting
+            </button>
+          </div>
+        </div>
+        <div class="link-list-container">
+          <ul class="link-list">
+            <div id="meetings-div"></div>
+          </ul>
+        </div>
+        <div class="scheduled-meetings-container">
+          <div class="scheduled-header">
+            <h3 class="scheduled-title">Scheduled Meetings</h3>
+          </div>
+          <ul class="scheduled-meetings">
+            <div id="meetings2-div"></div>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+  </body>
 </html>

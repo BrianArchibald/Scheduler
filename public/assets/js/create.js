@@ -5,19 +5,21 @@ let createDescription = "";
 
 // Meeting Duration Buttons
 $(".create-duration-times").click(function() {
-     let clicked = $(this);
-     // Get data attr from clicked time
-     clickedDuration = clicked.data('create-sec');
-     localStorage.setItem('clickedDuration', clickedDuration);
-	 if (clicked.hasClass('active-button')) {
-	   $('.create-duration-times').removeClass('disabled'); // Enable all again  
-	   clicked.removeClass('active-button');
-	 } else {
-	  $('.create-duration-times').removeClass('active-button');
-	   clicked.addClass('active-button');
-	   clicked.removeClass('disabled');
-	   $('.create-duration-times').not(clicked).addClass('disabled'); // Disable everything except clicked element
-	 }
+  let clicked = $(this);
+  // Get data attr from clicked time
+  clickedDuration = clicked.data("create-sec");
+  localStorage.setItem("clickedDuration", clickedDuration);
+  if (clicked.hasClass("active-button")) {
+    $(".create-duration-times").removeClass("disabled"); // Enable all again
+    clicked.removeClass("active-button");
+  } else {
+    $(".create-duration-times").removeClass("active-button");
+    clicked.addClass("active-button");
+    clicked.removeClass("disabled");
+    $(".create-duration-times")
+      .not(clicked)
+      .addClass("disabled"); // Disable everything except clicked element
+  }
 });
 
 var userID;
@@ -35,49 +37,54 @@ firebase.auth().onAuthStateChanged(function(user) {
 // Click on availability to show calendar
 $("#create-save").click(function() {
   // Generate unique ID when save is clicked
-  let uniqueID = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase();
+  let uniqueID = (
+    Date.now().toString(36) +
+    Math.random()
+      .toString(36)
+      .substr(2, 5)
+  ).toUpperCase();
   localStorage.setItem("uniqueID", uniqueID);
 
- 	window.location.href=`calendar.html#${userID}`;
+  window.location.href = `calendar.html#${userID}`;
 });
 
 // Cancel button back to main page.
-$('.create-cancel').click(function(){
-   window.location.href='main.html';
-})
+$(".create-cancel").click(function() {
+  window.location.href = "main.html";
+});
 
 // Get value of title input
-$( "#create-title-input" )
+$("#create-title-input")
   .keyup(function() {
-    createTitle = $( this ).val();
+    createTitle = $(this).val();
   })
   .keyup();
-  
-  // Set title to local storage
-  $("#create-location").blur(function() {
-    localStorage.setItem("title", createTitle);
-  });
+
+// Set title to local storage
+$("#create-location").blur(function() {
+  localStorage.setItem("title", createTitle);
+});
 
 // Get value of location input
-$( "#create-location" )
+$("#create-location")
   .keyup(function() {
-    createLocation = $( this ).val();
-  }) 
+    createLocation = $(this).val();
+  })
   .keyup();
 
 //Set location to local storage
-  $("#create-location").blur(function() {
-    localStorage.setItem("location", createLocation);
-  });
+$("#create-location").blur(function() {
+  localStorage.setItem("location", createLocation);
+});
 
-  //Get value of description input
-$( "#create-description" )
+//Get value of description input
+$("#create-description")
   .keyup(function() {
-    createDescription = $( this ).val();
+    createDescription = $(this).val();
   })
   .keyup();
 
-  //Set desciption to local storage
-  $("#create-description").blur(function() {
-    localStorage.setItem("description", createDescription);
-  });
+//Set desciption to local storage
+$("#create-description").blur(function() {
+  localStorage.setItem("description", createDescription);
+});

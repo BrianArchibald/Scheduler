@@ -1,84 +1,103 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Calendar</title>
-        <script src="dhtmlx/dhtmlx-scheduler/codebase/dhtmlxscheduler.js"></script>
-        <link rel="stylesheet" type="text/css" href="dhtmlx/dhtmlx-scheduler/codebase/dhtmlxscheduler.css">
-        <!-- dhtmlxScheduler-Firebase adapter -->
-        <script type="text/javascript" src="assets/js/dhtmlx_scheduler_firestore.js"></script>
-        <!-- FireBase -->
-        <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
-        <link rel="stylesheet" type="text/css" href="assets/css/main.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/calendarmedia.css">
-        </head>
-        <body>
-            <button class="create-initial-buttons scheduler-top" id="calender-done-button">Done</button>
-            <div id="scheduler_here" class="dhx_cal_container" style='width:75%; height:90%; margin: auto; top: 1vh'>
-                <div class="dhx_cal_navline">
-                    <div class="dhx_cal_prev_button">&nbsp;</div>
-                    <div class="dhx_cal_next_button">&nbsp;</div>
-                    <div class="dhx_cal_today_button"></div>
-                    <div class="dhx_cal_date"></div>
-                    <div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>
-                    <div class="dhx_cal_tab" name="week_tab" style="right:140px;"></div>
-                    <div class="dhx_cal_tab" name="month_tab" style="right:76px;"></div>
-                </div>
-                <div class="dhx_cal_header"></div>
-                <div class="dhx_cal_data"></div>
-            
-        </div>
-            <style type="text/css" media="screen">
-            html, body{
-            margin:0px;
-            padding:0px;
-            height:100%;
-            overflow:hidden;
-            }
-            </style>
-            <script>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Calendar</title>
+    <script src="dhtmlx/dhtmlx-scheduler/codebase/dhtmlxscheduler.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="dhtmlx/dhtmlx-scheduler/codebase/dhtmlxscheduler.css"
+    />
+    <!-- dhtmlxScheduler-Firebase adapter -->
+    <script
+      type="text/javascript"
+      src="assets/js/dhtmlx_scheduler_firestore.js"
+    ></script>
+    <!-- FireBase -->
+    <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="assets/css/calendarmedia.css"
+    />
+  </head>
+  <body>
+    <button
+      class="create-initial-buttons scheduler-top"
+      id="calender-done-button"
+    >
+      Done
+    </button>
+    <div
+      id="scheduler_here"
+      class="dhx_cal_container"
+      style="width:75%; height:90%; margin: auto; top: 1vh"
+    >
+      <div class="dhx_cal_navline">
+        <div class="dhx_cal_prev_button">&nbsp;</div>
+        <div class="dhx_cal_next_button">&nbsp;</div>
+        <div class="dhx_cal_today_button"></div>
+        <div class="dhx_cal_date"></div>
+        <div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>
+        <div class="dhx_cal_tab" name="week_tab" style="right:140px;"></div>
+        <div class="dhx_cal_tab" name="month_tab" style="right:76px;"></div>
+      </div>
+      <div class="dhx_cal_header"></div>
+      <div class="dhx_cal_data"></div>
+    </div>
+    <style type="text/css" media="screen">
+      html,
+      body {
+        margin: 0px;
+        padding: 0px;
+        height: 100%;
+        overflow: hidden;
+      }
+    </style>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDJFbbPR1n6if3yX1giV8KvW_Pyq88aBKk",
+        authDomain: "calendar-c07dd.firebaseapp.com",
+        databaseURL: "https://calendar-c07dd.firebaseio.com",
+        projectId: "calendar-c07dd",
+        storageBucket: "calendar-c07dd.appspot.com",
+        messagingSenderId: "1041934999578"
+      };
 
-            // Initialize Firebase
-            var config = {
-                apiKey: "AIzaSyDJFbbPR1n6if3yX1giV8KvW_Pyq88aBKk",
-                authDomain: "calendar-c07dd.firebaseapp.com",
-                databaseURL: "https://calendar-c07dd.firebaseio.com",
-                projectId: "calendar-c07dd",
-                storageBucket: "calendar-c07dd.appspot.com",
-                messagingSenderId: "1041934999578"
-            };
-            
-            firebase.initializeApp(config);
-            // Initialize Cloud Firestore through Firebase
-            var db = firebase.firestore();
-            db.settings({ timestampsInSnapshots:true });
-            scheduler.init('scheduler_here', new Date(),"week");
-            
-            // Only load DB for the logged in user
-            scheduler.firebase(db.collection("events")
-                .where('holder', '==', window.location.href.split("#")[1])
-                );
-            
-            var userID;
+      firebase.initializeApp(config);
+      // Initialize Cloud Firestore through Firebase
+      var db = firebase.firestore();
+      db.settings({ timestampsInSnapshots: true });
+      scheduler.init("scheduler_here", new Date(), "week");
 
-            firebase.auth().onAuthStateChanged(function(user) {
-              if (user) {
-                //signed in
-                console.log("signed in", user);
-                userID = user.uid;
-                localStorage.setItem('email', user.email);
-                localStorage.setItem('userID', userID);
+      // Only load DB for the logged in user
+      scheduler.firebase(
+        db
+          .collection("events")
+          .where("holder", "==", window.location.href.split("#")[1])
+      );
 
-              } else {
-                // No user is signed in.
-                console.log("signed out", user);
-              }
-            });
+      var userID;
 
-            </script>
-            <script type="text/javascript" src="assets/js/calendar.js"></script>
-        </body>
-    </html>
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          //signed in
+          console.log("signed in", user);
+          userID = user.uid;
+          localStorage.setItem("email", user.email);
+          localStorage.setItem("userID", userID);
+        } else {
+          // No user is signed in.
+          console.log("signed out", user);
+        }
+      });
+    </script>
+    <script type="text/javascript" src="assets/js/calendar.js"></script>
+  </body>
+</html>

@@ -1,7 +1,7 @@
-const nav = document.querySelector('.nav-container-main');
-const mobileNavIcon = document.querySelector('.mobile-nav-icon');
-const mobileNavList = document.querySelector('#mobile-nav');
-const closeMenu = document.querySelector('#close-menu');
+const nav = document.querySelector(".nav-container-main");
+const mobileNavIcon = document.querySelector(".mobile-nav-icon");
+const mobileNavList = document.querySelector("#mobile-nav");
+const closeMenu = document.querySelector("#close-menu");
 
 function changeMobileNav() {
   if (nav.style.display != "none") {
@@ -14,5 +14,5 @@ function changeMobileNav() {
     mobileNavList.style.display = "none";
   }
 }
-mobileNavIcon.addEventListener('click', changeMobileNav);
-closeMenu.addEventListener('click', changeMobileNav);
+mobileNavIcon.addEventListener("click", changeMobileNav);
+closeMenu.addEventListener("click", changeMobileNav);

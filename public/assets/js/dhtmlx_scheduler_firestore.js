@@ -1,192 +1,180 @@
+(function() {
+  function init(scheduler) {
+    var events;
+    var unsubscr;
 
-(function(){
+    function init_saving() {
+      let data = db.collection("events");
+      events = [
+        scheduler.attachEvent("onEventChanged", function(eventId, event) {
+          if (scheduler._update_from_firebase) return;
 
-	function init(scheduler){
+          save_start(eventId);
+          data
+            .doc(eventId)
+            .update(toFirebaseData(event))
+            .then(save_end)
+            .catch(error_handler);
+        }),
+        scheduler.attachEvent("onEventDeleted", function(eventId, event) {
+          if (scheduler._update_from_firebase) return;
 
-		//scheduler.load()
-		// making calendar responsive
-		//scheduler.BeforeInit.Add(string.Format("initResponsive({0})", scheduler.Name));
-		var events;
-		var unsubscr;
+          // ignore call against temporary IDs
+          if (typeof eventId !== "string") return;
+          save_start(eventId);
+          data
+            .doc(eventId)
+            .delete()
+            .then(save_end)
+            .catch(error_handler);
+        }),
+        scheduler.attachEvent("onEventAdded", function(eventId, event) {
+          if (scheduler._update_from_firebase) return;
 
-		function init_saving(){
+          save_start(eventId);
 
-				// console.log(firebase.auth().currentUser)
-				let data = db.collection("events")
-				events = [
-					scheduler.attachEvent("onEventChanged", function(eventId, event) {
-						if (scheduler._update_from_firebase) return;
+          // Set the calendar info with logged in users UID
+          scheduler.setUserData(
+            eventId,
+            "holder",
+            window.location.href.split("#")[1]
+          );
+          // Get email of calendar owner and store in DB
+          let userEmail = localStorage.getItem("email");
+          scheduler.setUserData(eventId, "email", userEmail);
 
-						save_start(eventId);
-						data.doc(eventId).update(toFirebaseData(event))
-						.then(save_end)
-						.catch(error_handler);
-					}),
-					scheduler.attachEvent("onEventDeleted", function(eventId, event) {
-						if (scheduler._update_from_firebase) return;
-						
-						// ignore call against temporary IDs
-						if (typeof eventId !== "string") return;
-						save_start(eventId);
-						data.doc(eventId).delete()
-						.then(save_end)
-						.catch(error_handler);
-					}),
-					scheduler.attachEvent("onEventAdded", function(eventId, event) {
-						if (scheduler._update_from_firebase) return;
+          // Get title, description, location and store in DB
+          let userTitle = localStorage.getItem("title");
 
-						save_start(eventId);
-						
-						// Set the calendar info with logged in users UID
-						scheduler.setUserData(eventId, "holder", window.location.href.split("#")[1]);
-						// Get email of calendar owner and store in DB
-						let userEmail = localStorage.getItem("email");
-						scheduler.setUserData(eventId, "email", userEmail);
-						
-						// Get title, description, location and store in DB
-						let userTitle = localStorage.getItem("title");
+          if (userTitle != undefined) {
+            scheduler.setUserData(eventId, "title", userTitle);
+          }
 
-						if(userTitle != undefined) {
-							scheduler.setUserData(eventId, "title", userTitle);
-						}
+          // Set Unique ID to DB from Create Meeting Page
+          let uniqueID = localStorage.getItem("uniqueID");
+          scheduler.setUserData(eventId, "uniqueID", uniqueID);
 
-						// Set Unique ID to DB from Create Meeting Page
-						let uniqueID = localStorage.getItem("uniqueID");
-						scheduler.setUserData(eventId, "uniqueID", uniqueID);
+          let userLocation = localStorage.getItem("location");
+          scheduler.setUserData(eventId, "location", userLocation);
+          let userDescription = localStorage.getItem("description");
+          scheduler.setUserData(eventId, "description", userDescription);
 
-						let userLocation = localStorage.getItem("location");
-						scheduler.setUserData(eventId, "location", userLocation);
-						let userDescription = localStorage.getItem("description");
-						scheduler.setUserData(eventId, "description", userDescription);
+          // Get Duration clicked and store in DB
+          let userDuration = localStorage.getItem("clickedDuration");
+          scheduler.setUserData(eventId, "duration", userDuration);
 
-						// Get Duration clicked and store in DB
-						let userDuration = localStorage.getItem("clickedDuration");
-						scheduler.setUserData(eventId, "duration", userDuration);
+          data
+            .add(toFirebaseData(event))
+            .then(a => {
+              scheduler.changeEventId(eventId, a.id);
+              return a;
+            })
+            .then(save_end)
+            .catch(error_handler);
+        })
+      ];
+    }
 
-						
-						
-						data.add(toFirebaseData(event))
-						.then(a => {
-							scheduler.changeEventId(eventId, a.id);
-							return a;
-						})
-						.then(save_end)
-						.catch(error_handler);
-					})
-				];
-				
-			}
-			
+    function init_loading(data) {
+      unsubscr = data.onSnapshot(function(query) {
+        if (query.metadata.hasPendingWrites) return;
 
-		function init_loading(data){
-			unsubscr = data.onSnapshot(function(query) {
-				if (query.metadata.hasPendingWrites) return;
+        scheduler._update_from_firebase = true;
+        var queue = [];
 
-				scheduler._update_from_firebase = true;
-				var queue = [];
+        try {
+          query.docChanges().forEach(function(change) {
+            var id = change.doc.id;
+            var data = fromFirebaseData(change.doc);
 
-				try {
-					query.docChanges().forEach(function(change) {
-						var id = change.doc.id;
-						var data = fromFirebaseData(change.doc);
+            switch (change.type) {
+              case "added":
+                if (!scheduler.getEvent(id)) queue.push(data); //collecting data batch
+                break;
 
-						switch(change.type){
-							case "added":
-								if (!scheduler.getEvent(id))
-									queue.push(data); //collecting data batch
-								break;
+              case "modified":
+                var ev = scheduler.getEvent(id);
+                for (var key in data) ev[key] = data[key];
+                scheduler.updateEvent(id);
+                break;
 
-							case "modified":
-								var ev = scheduler.getEvent(id);
-								for (var key in data)
-									ev[key] = data[key];
-								scheduler.updateEvent(id);
-								break;
+              case "removed":
+                scheduler.deleteEvent(id);
+                break;
+            }
+          });
 
-							case "removed":
-								scheduler.deleteEvent(id);
-								break;
-						}
-					});
+          //batch adding
+          if (queue.length) {
+            scheduler.parse(queue, "json");
+          }
+        } catch (e) {
+          console.error(e);
+        }
 
-					//batch adding
-					// console.log(queue)
-					if (queue.length){
-						scheduler.parse(queue, "json");
-					}
-				} catch(e){
-					console.error(e);
-				}
+        scheduler._update_from_firebase = false;
+      });
+    }
 
-				scheduler._update_from_firebase = false;
-			});
-		}
+    function toFirebaseData(event) {
+      var res = {};
+      for (var key in event) {
+        if (key !== "id" && key[0] !== "_") {
+          res[key] = event[key];
+        }
+      }
 
-		function toFirebaseData(event){
-			
-			var res = {};
-			for (var key in event){
-				if (key !== "id" && key[0] !== "_"){
-					res[key] = event[key];
-				}
-			}
+      return res;
+    }
 
-			return res;
-		}
+    function fromFirebaseData(event) {
+      var data = event.data();
+      var obj = { id: event.id };
+      for (var key in data) {
+        var test = data[key];
+        if (typeof test === "object" && test && test.seconds) {
+          obj[key] = new Date(test.seconds * 1000);
+        } else {
+          obj[key] = test;
+        }
+      }
 
-		function fromFirebaseData(event){
-			var data = event.data();
-			var obj = { id:event.id };
-			for (var key in data){
-				var test = data[key];
-				if (typeof test === "object" && test && test.seconds){
-					obj[key] = new Date(test.seconds*1000);
-				} else {
-					obj[key] = test;
-				}
-			}
+      return obj;
+    }
 
-			return obj;
-		}
+    function error_handler(err) {
+      scheduler.callEvent("onFirebaseError", err);
+    }
 
-		function error_handler(err){
-			scheduler.callEvent("onFirebaseError", err);
-		}
+    function save_end() {
+      scheduler.callEvent("onFirebaseSaveEnd", data);
+    }
+    function save_start(eventId) {
+      scheduler.callEvent("onFirebaseSaveStart", eventId);
+    }
 
-		function save_end(){
-			scheduler.callEvent("onFirebaseSaveEnd", data);
-		}
-		function save_start(eventId){
-			scheduler.callEvent("onFirebaseSaveStart", eventId);
-		}
+    scheduler.firebase = function(data) {
+      // unsubscribe previous collection
+      scheduler.clearAll();
+      scheduler.firebaseStop();
 
-		scheduler.firebase = function(data){
-			// unsubscribe previous collection
-			scheduler.clearAll();
-			scheduler.firebaseStop();
+      init_loading(data);
+      init_saving(data);
+    };
 
-			init_loading(data);
-			init_saving(data);
-		};
+    scheduler.firebaseStop = function() {
+      // detach scheduler's events
+      if (events)
+        for (var i = 0; i < events.length; i++)
+          scheduler.detachEvent(events[i]);
 
-		scheduler.firebaseStop = function(){
-			// detach scheduler's events
-			if (events)
-				for (var i=0; i<events.length; i++)
-					scheduler.detachEvent(events[i]);
+      // detach firebase events
+      if (unsubscr) unsubscr();
 
-			// detach firebase events
-			if (unsubscr)
-				unsubscr();
+      events = unsubscr = null;
+    };
+  }
 
-			events = unsubscr = null;
-		}
-	  
-	}
-
-	if (window.scheduler)
-		init(scheduler);
-	if (window.Scheduler && Scheduler.plugin)
-		Scheduler.plugin(init);
-
+  if (window.scheduler) init(scheduler);
+  if (window.Scheduler && Scheduler.plugin) Scheduler.plugin(init);
 })();
