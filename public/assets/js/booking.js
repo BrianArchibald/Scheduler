@@ -39,7 +39,7 @@ let newDay = weekday[d.getDay()];
 let currentYear = new Date().getFullYear();
 
 function initWeekCalendar(x) {
-  var weekHtml = "";
+  let weekHtml = "";
   n = n + x;
   n = n < 0 ? 0 : n;
   for (let i = n * 7; i < n * 7 + 7; i++) {
@@ -69,11 +69,9 @@ let dateLeftArrow = undefined;
 let dateRightArrow = undefined;
 
 $(".fa-arrow-left").click(function() {
-  // Need to have date - 7 days
   Date.prototype.addDays = function(days) {
     let date = new Date(this.valueOf());
     date.setDate(date.getDate() + days);
-    // Return date;
     let dateLeftArrow = date.addDays(-7);
     return dateLeftArrow;
   };
@@ -81,11 +79,9 @@ $(".fa-arrow-left").click(function() {
 });
 
 $(".fa-arrow-right").click(function() {
-  // Need to have date + 7 days
   Date.prototype.addDays = function(days) {
     let date = new Date(this.valueOf());
     date.setDate(date.getDate() + days);
-    // Return date;
     let dateRightArrow = date.addDays(7);
     return dateRightArrow;
   };
@@ -181,7 +177,6 @@ function runModal() {
     $(".pre-confirm-modal").css("display", "grid");
     $(".booking-wrapper").css("opacity", ".4");
   }
-  // Add date/time of meeting to modal
   $(".pre-confirm-time").html(
     "Your meeting is on " + totalDateClicked + " at " + clickedTimeButton
   );
@@ -359,7 +354,6 @@ function activeClass(el, target) {
         startTimes = doc.data().start_date.seconds - interval;
         endTimes = doc.data().end_date.seconds;
 
-        // Run function to populate drop down times
         populateTimes(startTimes, endTimes, interval);
       });
     })

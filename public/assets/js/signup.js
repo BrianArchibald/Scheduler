@@ -8,7 +8,6 @@ const demoButtom = document.getElementById("demo-button");
 
 // Add login event
 signUpButton.addEventListener("click", e => {
-  // Get email and password
   const email = txtEmail.value;
   const pass = txtPassword.value;
   const auth = firebase.auth();

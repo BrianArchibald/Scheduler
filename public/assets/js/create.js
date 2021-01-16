@@ -22,14 +22,12 @@ $(".create-duration-times").click(function() {
   }
 });
 
-var userID;
+let userID;
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
-    // Signed in
     userID = user.uid;
     console.log(userID, "userID");
   } else {
-    // No user is signed in.
     console.log("signed out", user);
   }
 });

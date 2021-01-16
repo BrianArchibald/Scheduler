@@ -5,7 +5,6 @@ const signInForm = document.getElementById("signin-form");
 
 // Add login event
 signInButton.addEventListener("click", e => {
-  // Get email and password
   const email = txtEmail.value;
   const pass = txtPassword.value;
   const auth = firebase.auth();

@@ -2,7 +2,6 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     console.log("signed in");
   } else {
-    // No user is signed in.
     console.log("signed out", user);
   }
 });
@@ -82,7 +81,7 @@ db.collection("events")
     });
 
     // Copy link to clipboard
-    var clipboard = new ClipboardJS(".copy-meeting-link");
+    let clipboard = new ClipboardJS(".copy-meeting-link");
     clipboard.on("success", function(e) {
       alert("Link Copied");
       e.clearSelection();
