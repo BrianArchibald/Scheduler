@@ -151,12 +151,9 @@ $(".booking-time-selector").click(function() {
 
 let clickedTimeButton;
 
-// Add active class to specific time button
 function activeClassSpecificTime(el) {
   let clicked = $(el);
-  // Get specific time of meeting for Modal
   clickedTimeButton = clicked[0].innerHTML;
-  // Add active class to button clicked
   if (clicked.hasClass("active-button")) {
     $(".booking-time-selector").removeClass("disabled"); // Enable all again
     clicked.removeClass("active-button");
@@ -209,14 +206,12 @@ $(".modal-signup-button").click(function() {
   sendOwnerEmail();
   addMeetingToFirebase();
 
-  // Change Modal text after submit to success.
   $("#booking-modal").html(
     "Congratulations on scheduling your meeting!  Both parties will receive email confirmations with the details"
   );
   $(".pre-confirm-modal").addClass("modalSuccess");
 });
 
-// Use emailjs to send user confirmation email
 function sendUserEmail() {
   let template_params = {
     ownerEmail: ownerEmail,
@@ -232,7 +227,6 @@ function sendUserEmail() {
   emailjs.send(service_id, template_id, template_params);
 }
 
-// Use emailjs to send owner confirmation email
 function sendOwnerEmail() {
   let template_params = {
     ownerEmail: ownerEmail,
@@ -251,7 +245,6 @@ function sendOwnerEmail() {
 function addMeetingToFirebase() {
   let userID = `#${window.location.href.split("#")[1]}`;
   interval = interval / 60 + " mins";
-  // Send meeting details to firebase
   db.collection("booked")
     .add({
       title: meetingTitle,
@@ -272,14 +265,12 @@ function addMeetingToFirebase() {
     });
 }
 
-// Get name on modal
 $(".modal-name-input")
   .keyup(function() {
     return (modalName = $(this).val());
   })
   .keyup();
 
-// Get email on modal
 $(".modal-email-input")
   .keyup(function() {
     return (modalEmail = $(this).val());

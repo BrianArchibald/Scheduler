@@ -26,23 +26,18 @@ function changeMobileNav() {
 mobileNavIcon.addEventListener("click", changeMobileNav);
 closeMenu.addEventListener("click", changeMobileNav);
 
-// Create Meeting click
 $(".create-link-button").click(function() {
   window.location.href = "createMeeting.html";
 });
 
-// Sign Out User
 $("#main-sign-out").click(function() {
-  console.log("sign out clicked");
   firebase
     .auth()
     .signOut()
     .then(function() {
-      console.log("sign out successful");
       window.location.href = "index.html";
     })
     .catch(function(error) {
-      console.log("error happened");
     });
 });
 
@@ -59,7 +54,7 @@ db.collection("events")
       let data = (doc.id, " => ", doc.data());
       dataArray.push(data, doc.id);
     });
-    // Makes a new Set array with only unique elements
+
     const uniqueTitles = [...new Set(dataArray.map(item => item.title))];
     uniqueTitles.forEach(function(element) {
       if (element != undefined) {
@@ -80,7 +75,6 @@ db.collection("events")
       }
     });
 
-    // Copy link to clipboard
     let clipboard = new ClipboardJS(".copy-meeting-link");
     clipboard.on("success", function(e) {
       alert("Link Copied");
@@ -88,26 +82,21 @@ db.collection("events")
     });
     clipboard.on("error", function(e) {});
 
-    // Send user to booking page
     $(".visit-meeting-link").click(function() {
       window.location.href = `booking.html${userID}`;
     });
 
-    // Send user to calendar to Edit Times
     $(".edit-meeting-link").click(function() {
       window.location.href = `calendar.html${userID}`;
     });
 
-    // Get meeting ID of element when user clicks cancel meeting
     $(".delete-meeting").click(function(event) {
       let clicked = $(this);
-      // Hide Meeting link without DB refresh
       $(this)
         .closest(".link-li-container")
         .hide();
       let linkUserId = clicked.attr("data-userid");
       let linkElement = clicked.attr("data-element");
-      // Delete the entries from DB.
       let eventTitleDelete = db
         .collection("events")
         .where("title", "==", linkElement)
@@ -161,7 +150,6 @@ db.collection("booked")
     // Get meeting ID of element when user clicks cancel meeting
     $(".cancel-booked").click(function(event) {
       let clicked = $(this);
-      console.log(this);
       // Hides the meeting when clicked cancel without DB refresh
       $(this)
         .closest(".scheduled-meetings-list")
@@ -195,8 +183,6 @@ db.collection("booked")
       }
 
       let bookedID = clicked.attr("data-id");
-      console.log(bookedID, "booked ID");
-      // Deletes item from DB
       db.collection("booked")
         .doc(bookedID)
         .delete()

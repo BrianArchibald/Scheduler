@@ -3,12 +3,11 @@ const txtPassword = document.getElementById("signup-password");
 const signInButton = document.getElementById("sign-in-button");
 const signInForm = document.getElementById("signin-form");
 
-// Add login event
 signInButton.addEventListener("click", e => {
   const email = txtEmail.value;
   const pass = txtPassword.value;
   const auth = firebase.auth();
-  // Sign in
+
   const promise = auth.signInWithEmailAndPassword(email, pass);
   promise.catch(e => alert(e.message));
 });

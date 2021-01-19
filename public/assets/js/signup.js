@@ -6,24 +6,20 @@ const signUpButton = document.getElementById("sign-up-button");
 const signUpForm = document.getElementById("signup-form");
 const demoButtom = document.getElementById("demo-button");
 
-// Add login event
 signUpButton.addEventListener("click", e => {
   const email = txtEmail.value;
   const pass = txtPassword.value;
   const auth = firebase.auth();
-  // Sign in
+
   const promise = auth.createUserWithEmailAndPassword(email, pass);
   promise.catch(e => console.log(e.message));
 });
 
-// Demo button
 demoButtom.addEventListener("click", e => {
-  console.log("demo clicked");
-  // Get email and password
   const email = "demo@email.com";
   const pass = "password";
   const auth = firebase.auth();
-  // Sign in
+
   const promise = auth.signInWithEmailAndPassword(email, pass);
   promise.catch(e => alert(e.message));
 });

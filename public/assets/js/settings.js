@@ -7,7 +7,6 @@ timeZoneSubmit.addEventListener("click", e => {
   ).value);
 });
 
-//Sign Out User
 $(".settings-sign-out").click(function() {
   console.log("sign out clicked");
   firebase

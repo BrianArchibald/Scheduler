@@ -3,14 +3,12 @@ let createTitle = "";
 let createLocation = "";
 let createDescription = "";
 
-// Meeting Duration Buttons
 $(".create-duration-times").click(function() {
   let clicked = $(this);
-  // Get data attr from clicked time
   clickedDuration = clicked.data("create-sec");
   localStorage.setItem("clickedDuration", clickedDuration);
   if (clicked.hasClass("active-button")) {
-    $(".create-duration-times").removeClass("disabled"); // Enable all again
+    $(".create-duration-times").removeClass("disabled");
     clicked.removeClass("active-button");
   } else {
     $(".create-duration-times").removeClass("active-button");
@@ -18,7 +16,7 @@ $(".create-duration-times").click(function() {
     clicked.removeClass("disabled");
     $(".create-duration-times")
       .not(clicked)
-      .addClass("disabled"); // Disable everything except clicked element
+      .addClass("disabled");
   }
 });
 
@@ -34,7 +32,6 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 // Click on availability to show calendar
 $("#create-save").click(function() {
-  // Generate unique ID when save is clicked
   let uniqueID = (
     Date.now().toString(36) +
     Math.random()
@@ -46,12 +43,10 @@ $("#create-save").click(function() {
   window.location.href = `calendar.html#${userID}`;
 });
 
-// Cancel button back to main page.
 $(".create-cancel").click(function() {
   window.location.href = "main.html";
 });
 
-// Get value of title input
 $("#create-title-input")
   .keyup(function() {
     createTitle = $(this).val();
