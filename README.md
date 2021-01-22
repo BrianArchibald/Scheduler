@@ -12,8 +12,6 @@ The site is live at:
 
 ## Built With
 
-* HTML
-* CSS
 * JavaScript
 * DHTMLX Scheduler (for calendar)
 * EmailJS
